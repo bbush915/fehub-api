@@ -1,0 +1,1455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccessoryType_Hair_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AccessoryType_Hair_Name" xml:space="preserve">
+    <value>Hair</value>
+  </data>
+  <data name="AccessoryType_Hat_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AccessoryType_Hat_Name" xml:space="preserve">
+    <value>Hat</value>
+  </data>
+  <data name="AccessoryType_Mask_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AccessoryType_Mask_Name" xml:space="preserve">
+    <value>Mask</value>
+  </data>
+  <data name="AccessoryType_Tiara_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AccessoryType_Tiara_Name" xml:space="preserve">
+    <value>Tiara</value>
+  </data>
+  <data name="Accessory_AccessoryType_Description" xml:space="preserve">
+    <value>The type of the accessory.</value>
+  </data>
+  <data name="Accessory_AccessoryType_Name" xml:space="preserve">
+    <value>Accessory Type</value>
+  </data>
+  <data name="Accessory_CreatedAt_Description" xml:space="preserve">
+    <value>The timestamp at which the accessory was created.</value>
+  </data>
+  <data name="Accessory_CreatedAt_Name" xml:space="preserve">
+    <value>Created At</value>
+  </data>
+  <data name="Accessory_CreatedBy_Description" xml:space="preserve">
+    <value>The user who created the accessory.</value>
+  </data>
+  <data name="Accessory_CreatedBy_Name" xml:space="preserve">
+    <value>Created By</value>
+  </data>
+  <data name="Accessory_Description" xml:space="preserve">
+    <value>An equippable cosmetic. It does not alter the skills or statistics of a hero.</value>
+  </data>
+  <data name="Accessory_Description_Description" xml:space="preserve">
+    <value>The description associated with the accessory.</value>
+  </data>
+  <data name="Accessory_Description_Name" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Accessory_Id_Description" xml:space="preserve">
+    <value>The ID of the accessory.</value>
+  </data>
+  <data name="Accessory_Id_Name" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Accessory_ModifiedAt_Description" xml:space="preserve">
+    <value>The timestamp at which the accessory was last modified.</value>
+  </data>
+  <data name="Accessory_ModifiedAt_Name" xml:space="preserve">
+    <value>Modified At</value>
+  </data>
+  <data name="Accessory_ModifiedBy_Description" xml:space="preserve">
+    <value>The user who last modified the accessory.</value>
+  </data>
+  <data name="Accessory_ModifiedBy_Name" xml:space="preserve">
+    <value>Modified By</value>
+  </data>
+  <data name="Accessory_Name" xml:space="preserve">
+    <value>Accessory</value>
+  </data>
+  <data name="Accessory_Name_Description" xml:space="preserve">
+    <value>The name of the accessory.</value>
+  </data>
+  <data name="Accessory_Name_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Accessory_Tag_Description" xml:space="preserve">
+    <value>The tag associated with the accessory.</value>
+  </data>
+  <data name="Accessory_Tag_Name" xml:space="preserve">
+    <value>Tag</value>
+  </data>
+  <data name="Accessory_Version_Description" xml:space="preserve">
+    <value>The version number associated with the accessory.</value>
+  </data>
+  <data name="Accessory_Version_Name" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="AllySupportRank_A_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AllySupportRank_A_Name" xml:space="preserve">
+    <value>A</value>
+  </data>
+  <data name="AllySupportRank_B_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AllySupportRank_B_Name" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="AllySupportRank_C_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AllySupportRank_C_Name" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="AllySupportRank_S_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AllySupportRank_S_Name" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="Artist_Company_Description" xml:space="preserve">
+    <value>The company, if any, to which the artist is associated.</value>
+  </data>
+  <data name="Artist_Company_Name" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="Artist_CreatedAt_Description" xml:space="preserve">
+    <value>The timestamp at which the artist was created.</value>
+  </data>
+  <data name="Artist_CreatedAt_Name" xml:space="preserve">
+    <value>Created At</value>
+  </data>
+  <data name="Artist_CreatedBy_Description" xml:space="preserve">
+    <value>The user who created the artist.</value>
+  </data>
+  <data name="Artist_CreatedBy_Name" xml:space="preserve">
+    <value>Created By</value>
+  </data>
+  <data name="Artist_Description" xml:space="preserve">
+    <value>An artist.</value>
+  </data>
+  <data name="Artist_Id_Description" xml:space="preserve">
+    <value>The ID of the artist.</value>
+  </data>
+  <data name="Artist_Id_Name" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Artist_ModifiedAt_Description" xml:space="preserve">
+    <value>The timestamp at which the artist was last modified.</value>
+  </data>
+  <data name="Artist_ModifiedAt_Name" xml:space="preserve">
+    <value>Modified At</value>
+  </data>
+  <data name="Artist_ModifiedBy_Description" xml:space="preserve">
+    <value>The user who last modified the artist.</value>
+  </data>
+  <data name="Artist_ModifiedBy_Name" xml:space="preserve">
+    <value>Modified By</value>
+  </data>
+  <data name="Artist_Name" xml:space="preserve">
+    <value>Artist</value>
+  </data>
+  <data name="Artist_NameKanji_Description" xml:space="preserve">
+    <value>The name of the artist using Kanji characters.</value>
+  </data>
+  <data name="Artist_NameKanji_Name" xml:space="preserve">
+    <value>Name (Kanji)</value>
+  </data>
+  <data name="Artist_Name_Description" xml:space="preserve">
+    <value>The name of the artist.</value>
+  </data>
+  <data name="Artist_Name_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Artist_Version_Description" xml:space="preserve">
+    <value>The version number associated with the artist.</value>
+  </data>
+  <data name="Artist_Version_Name" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Color_Blue_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Color_Blue_Name" xml:space="preserve">
+    <value>Blue</value>
+  </data>
+  <data name="Color_Colorless_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Color_Colorless_Name" xml:space="preserve">
+    <value>Colorless</value>
+  </data>
+  <data name="Color_Green_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Color_Green_Name" xml:space="preserve">
+    <value>Green</value>
+  </data>
+  <data name="Color_Red_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Color_Red_Name" xml:space="preserve">
+    <value>Red</value>
+  </data>
+  <data name="CombatType_Melee_Description" xml:space="preserve">
+    <value>Range: 1.</value>
+  </data>
+  <data name="CombatType_Melee_Name" xml:space="preserve">
+    <value>Melee</value>
+  </data>
+  <data name="CombatType_Ranged_Description" xml:space="preserve">
+    <value>Range: 2.</value>
+  </data>
+  <data name="CombatType_Ranged_Name" xml:space="preserve">
+    <value>Ranged</value>
+  </data>
+  <data name="DamageType_Magical_Description" xml:space="preserve">
+    <value>Magical weapon. Damage reduced by target's Res.</value>
+  </data>
+  <data name="DamageType_Magical_Name" xml:space="preserve">
+    <value>Magical</value>
+  </data>
+  <data name="DamageType_Physical_Description" xml:space="preserve">
+    <value>Physical weapon. Damage reduced by target's Def.</value>
+  </data>
+  <data name="DamageType_Physical_Name" xml:space="preserve">
+    <value>Physical</value>
+  </data>
+  <data name="Element_Anima_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Element_Anima_Name" xml:space="preserve">
+    <value>Anima</value>
+  </data>
+  <data name="Element_Astra_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Element_Astra_Name" xml:space="preserve">
+    <value>Astra</value>
+  </data>
+  <data name="Element_Dark_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Element_Dark_Name" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="Element_Earth_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Element_Earth_Name" xml:space="preserve">
+    <value>Earth</value>
+  </data>
+  <data name="Element_Fire_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Element_Fire_Name" xml:space="preserve">
+    <value>Fire</value>
+  </data>
+  <data name="Element_Light_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Element_Light_Name" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Element_Water_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Element_Water_Name" xml:space="preserve">
+    <value>Water</value>
+  </data>
+  <data name="Element_Wind_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Element_Wind_Name" xml:space="preserve">
+    <value>Wind</value>
+  </data>
+  <data name="FavoriteMark_Mark1_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FavoriteMark_Mark1_Name" xml:space="preserve">
+    <value>Mark 1</value>
+  </data>
+  <data name="FavoriteMark_Mark2_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FavoriteMark_Mark2_Name" xml:space="preserve">
+    <value>Mark 2</value>
+  </data>
+  <data name="FavoriteMark_Mark3_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FavoriteMark_Mark3_Name" xml:space="preserve">
+    <value>Mark 3</value>
+  </data>
+  <data name="FavoriteMark_Mark4_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FavoriteMark_Mark4_Name" xml:space="preserve">
+    <value>Mark 4</value>
+  </data>
+  <data name="FavoriteMark_Mark5_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FavoriteMark_Mark5_Name" xml:space="preserve">
+    <value>Mark 5</value>
+  </data>
+  <data name="FavoriteMark_Mark6_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FavoriteMark_Mark6_Name" xml:space="preserve">
+    <value>Mark 6</value>
+  </data>
+  <data name="FavoriteMark_Mark7_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FavoriteMark_Mark7_Name" xml:space="preserve">
+    <value>Mark 7</value>
+  </data>
+  <data name="FavoriteMark_Mark8_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FavoriteMark_Mark8_Name" xml:space="preserve">
+    <value>Mark 8</value>
+  </data>
+  <data name="Gender_Female_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Gender_Female_Name" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="Gender_Male_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Gender_Male_Name" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="Gender_None_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Gender_None_Name" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="HeroSkill_DefaultRarity_Description" xml:space="preserve">
+    <value>The default rarity associated with the hero skill.</value>
+  </data>
+  <data name="HeroSkill_DefaultRarity_Name" xml:space="preserve">
+    <value>Default Rarity</value>
+  </data>
+  <data name="HeroSkill_Description" xml:space="preserve">
+    <value>A skill associated with a hero.</value>
+  </data>
+  <data name="HeroSkill_HeroId_Description" xml:space="preserve">
+    <value>The ID of the hero to which the hero skill is associated.</value>
+  </data>
+  <data name="HeroSkill_HeroId_Name" xml:space="preserve">
+    <value>Hero ID</value>
+  </data>
+  <data name="HeroSkill_Id_Description" xml:space="preserve">
+    <value>The ID of the hero skill.</value>
+  </data>
+  <data name="HeroSkill_Id_Name" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="HeroSkill_Name" xml:space="preserve">
+    <value>Hero Skill</value>
+  </data>
+  <data name="HeroSkill_SkillId_Description" xml:space="preserve">
+    <value>The ID of the skill associated with the hero skill.</value>
+  </data>
+  <data name="HeroSkill_SkillId_Name" xml:space="preserve">
+    <value>Skill ID</value>
+  </data>
+  <data name="HeroSkill_SkillPosition_Description" xml:space="preserve">
+    <value>The skill position associated with the hero skill.</value>
+  </data>
+  <data name="HeroSkill_SkillPosition_Name" xml:space="preserve">
+    <value>Skill Position</value>
+  </data>
+  <data name="HeroSkill_Skill_Description" xml:space="preserve">
+    <value>The skill associated with the hero skill.</value>
+  </data>
+  <data name="HeroSkill_Skill_Name" xml:space="preserve">
+    <value>Skill</value>
+  </data>
+  <data name="HeroSkill_UnlockRarity_Description" xml:space="preserve">
+    <value>The unlock rarity associated with the hero skill.</value>
+  </data>
+  <data name="HeroSkill_UnlockRarity_Name" xml:space="preserve">
+    <value>Unlock Rarity</value>
+  </data>
+  <data name="HeroVoiceActor_Description" xml:space="preserve">
+    <value>A voice actor for a hero.</value>
+  </data>
+  <data name="HeroVoiceActor_HeroId_Description" xml:space="preserve">
+    <value>The ID of the hero to which the hero voice actor is associated.</value>
+  </data>
+  <data name="HeroVoiceActor_HeroId_Name" xml:space="preserve">
+    <value>Hero ID</value>
+  </data>
+  <data name="HeroVoiceActor_Id_Description" xml:space="preserve">
+    <value>The ID of the hero voice actor.</value>
+  </data>
+  <data name="HeroVoiceActor_Id_Name" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="HeroVoiceActor_Language_Description" xml:space="preserve">
+    <value>The language associated with the hero voice actor.</value>
+  </data>
+  <data name="HeroVoiceActor_Language_Name" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="HeroVoiceActor_Name" xml:space="preserve">
+    <value>Hero Voice Actor</value>
+  </data>
+  <data name="HeroVoiceActor_Sort_Description" xml:space="preserve">
+    <value>The sort value associated with the hero voice actor.</value>
+  </data>
+  <data name="HeroVoiceActor_Sort_Name" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="HeroVoiceActor_VoiceActorId_Description" xml:space="preserve">
+    <value>The ID of the voice actor associated with the hero voice actor.</value>
+  </data>
+  <data name="HeroVoiceActor_VoiceActorId_Name" xml:space="preserve">
+    <value>Voice Actor ID</value>
+  </data>
+  <data name="HeroVoiceActor_VoiceActor_Description" xml:space="preserve">
+    <value>The voice actor associated with the hero voice actor.</value>
+  </data>
+  <data name="HeroVoiceActor_VoiceActor_Name" xml:space="preserve">
+    <value>Voice Actor</value>
+  </data>
+  <data name="Hero_AdditionDate_Description" xml:space="preserve">
+    <value>The date at which the hero was added to the game.</value>
+  </data>
+  <data name="Hero_AdditionDate_Name" xml:space="preserve">
+    <value>Addition Date</value>
+  </data>
+  <data name="Hero_ArtistId_Description" xml:space="preserve">
+    <value>The ID of the artist to which the hero is associated.</value>
+  </data>
+  <data name="Hero_ArtistId_Name" xml:space="preserve">
+    <value>Artist ID</value>
+  </data>
+  <data name="Hero_Artist_Description" xml:space="preserve">
+    <value>The artist to which the hero is associated,</value>
+  </data>
+  <data name="Hero_Artist_Name" xml:space="preserve">
+    <value>Artist</value>
+  </data>
+  <data name="Hero_AttackGrowthRate_Description" xml:space="preserve">
+    <value>The growth rate of the attack (Atk) statistic for the hero.</value>
+  </data>
+  <data name="Hero_AttackGrowthRate_Name" xml:space="preserve">
+    <value>Attack Growth Rate</value>
+  </data>
+  <data name="Hero_BaseAttack_Description" xml:space="preserve">
+    <value>The base attack (Atk) value of the hero.</value>
+  </data>
+  <data name="Hero_BaseAttack_Name" xml:space="preserve">
+    <value>Base Attack</value>
+  </data>
+  <data name="Hero_BaseDefense_Description" xml:space="preserve">
+    <value>The base defense (Def) value of the hero.</value>
+  </data>
+  <data name="Hero_BaseDefense_Name" xml:space="preserve">
+    <value>Base Defense</value>
+  </data>
+  <data name="Hero_BaseHitPoints_Description" xml:space="preserve">
+    <value>The base hit points (HP) value of the hero.</value>
+  </data>
+  <data name="Hero_BaseHitPoints_Name" xml:space="preserve">
+    <value>Base Hit Points</value>
+  </data>
+  <data name="Hero_BaseResistance_Description" xml:space="preserve">
+    <value>The base resistance (Res) value of the hero.</value>
+  </data>
+  <data name="Hero_BaseResistance_Name" xml:space="preserve">
+    <value>Base Resistance</value>
+  </data>
+  <data name="Hero_BaseSpeed_Description" xml:space="preserve">
+    <value>The base speed (Spd) value of the hero.</value>
+  </data>
+  <data name="Hero_BaseSpeed_Name" xml:space="preserve">
+    <value>Base Speed</value>
+  </data>
+  <data name="Hero_BVID_Description" xml:space="preserve">
+    <value>The Base Vector ID associated with the hero. Used to calculate statistic growth,.</value>
+  </data>
+  <data name="Hero_BVID_Name" xml:space="preserve">
+    <value>BVID</value>
+  </data>
+  <data name="Hero_Color_Description" xml:space="preserve">
+    <value>The color associated with the hero.</value>
+  </data>
+  <data name="Hero_Color_Name" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="Hero_CreatedAt_Description" xml:space="preserve">
+    <value>The timestamp at which the hero was created.</value>
+  </data>
+  <data name="Hero_CreatedAt_Name" xml:space="preserve">
+    <value>Created At</value>
+  </data>
+  <data name="Hero_CreatedBy_Description" xml:space="preserve">
+    <value>The user who created the hero.</value>
+  </data>
+  <data name="Hero_CreatedBy_Name" xml:space="preserve">
+    <value>Created By</value>
+  </data>
+  <data name="Hero_DefenseGrowthRate_Description" xml:space="preserve">
+    <value>The growth rate of the defense (Def) statistic for the hero.</value>
+  </data>
+  <data name="Hero_DefenseGrowthRate_Name" xml:space="preserve">
+    <value>Defense Growth Rate</value>
+  </data>
+  <data name="Hero_Description" xml:space="preserve">
+    <value>A hero.</value>
+  </data>
+  <data name="Hero_Description_Description" xml:space="preserve">
+    <value>The description associated with the hero.</value>
+  </data>
+  <data name="Hero_Description_Name" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Hero_Element_Description" xml:space="preserve">
+    <value>The element, if any, associated with the hero.</value>
+  </data>
+  <data name="Hero_Element_Name" xml:space="preserve">
+    <value>Element</value>
+  </data>
+  <data name="Hero_Gender_Description" xml:space="preserve">
+    <value>The gender of the hero.</value>
+  </data>
+  <data name="Hero_Gender_Name" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="Hero_HeroSkills_Description" xml:space="preserve">
+    <value>The skills associated with the hero.</value>
+  </data>
+  <data name="Hero_HeroSkills_Name" xml:space="preserve">
+    <value>Hero Skills</value>
+  </data>
+  <data name="Hero_HeroVoiceActors_Description" xml:space="preserve">
+    <value>The voice actors associated with the hero.</value>
+  </data>
+  <data name="Hero_HeroVoiceActors_Name" xml:space="preserve">
+    <value>Hero Voice Actors</value>
+  </data>
+  <data name="Hero_HitPointsGrowthRate_Description" xml:space="preserve">
+    <value>The growth rate of the hit points (HP) statistic for the hero.</value>
+  </data>
+  <data name="Hero_HitPointsGrowthRate_Name" xml:space="preserve">
+    <value>Hit Points Growth Rate</value>
+  </data>
+  <data name="Hero_Id_Description" xml:space="preserve">
+    <value>The ID of the hero.</value>
+  </data>
+  <data name="Hero_Id_Name" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Hero_IsDuoHero_Description" xml:space="preserve">
+    <value>A value indicating whether the hero is a duo hero.</value>
+  </data>
+  <data name="Hero_IsDuoHero_Name" xml:space="preserve">
+    <value>Is Duo Hero</value>
+  </data>
+  <data name="Hero_IsLegendaryHero_Description" xml:space="preserve">
+    <value>A value indicating whether the hero is a legendary hero.</value>
+  </data>
+  <data name="Hero_IsLegendaryHero_Name" xml:space="preserve">
+    <value>Is Legendary Hero</value>
+  </data>
+  <data name="Hero_IsMythicHero_Description" xml:space="preserve">
+    <value>A value indicating whether the hero is a mythic hero.</value>
+  </data>
+  <data name="Hero_IsMythicHero_Name" xml:space="preserve">
+    <value>Is Mythic Hero</value>
+  </data>
+  <data name="Hero_IsResplendentHero_Description" xml:space="preserve">
+    <value>A value indicating whether the hero is a resplendent hero.</value>
+  </data>
+  <data name="Hero_IsResplendentHero_Name" xml:space="preserve">
+    <value>Is Resplendent Hero</value>
+  </data>
+  <data name="Hero_LegendaryHeroBoostType_Description" xml:space="preserve">
+    <value>The legendary hero boost type, if any, associated with the hero.</value>
+  </data>
+  <data name="Hero_LegendaryHeroBoostType_Name" xml:space="preserve">
+    <value>Legendary Hero Boost Type</value>
+  </data>
+  <data name="Hero_ModifiedAt_Description" xml:space="preserve">
+    <value>The timestamp at which the hero was last modified.</value>
+  </data>
+  <data name="Hero_ModifiedAt_Name" xml:space="preserve">
+    <value>Modified At</value>
+  </data>
+  <data name="Hero_ModifiedBy_Description" xml:space="preserve">
+    <value>The user who last modified the hero.</value>
+  </data>
+  <data name="Hero_ModifiedBy_Name" xml:space="preserve">
+    <value>Modified By</value>
+  </data>
+  <data name="Hero_MovementType_Description" xml:space="preserve">
+    <value>The movement type associated with the hero.</value>
+  </data>
+  <data name="Hero_MovementType_Name" xml:space="preserve">
+    <value>Movement Type</value>
+  </data>
+  <data name="Hero_MythicHeroBoostType_Description" xml:space="preserve">
+    <value>The mythic hero boost type, if any, associated with the hero.</value>
+  </data>
+  <data name="Hero_MythicHeroBoostType_Name" xml:space="preserve">
+    <value>Mythic Hero Boost Type</value>
+  </data>
+  <data name="Hero_Name" xml:space="preserve">
+    <value>Hero</value>
+  </data>
+  <data name="Hero_Name_Description" xml:space="preserve">
+    <value>The name of the hero.</value>
+  </data>
+  <data name="Hero_Name_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Hero_Origin_Description" xml:space="preserve">
+    <value>The game from which the hero originated.</value>
+  </data>
+  <data name="Hero_Origin_Name" xml:space="preserve">
+    <value>Origin</value>
+  </data>
+  <data name="Hero_ReleaseDate_Description" xml:space="preserve">
+    <value>The date at which the hero was available within the game.</value>
+  </data>
+  <data name="Hero_ReleaseDate_Name" xml:space="preserve">
+    <value>Release Date</value>
+  </data>
+  <data name="Hero_ResistanceGrowthRate_Description" xml:space="preserve">
+    <value>The growth rate of the resistance (Res) statistic for the hero.</value>
+  </data>
+  <data name="Hero_ResistanceGrowthRate_Name" xml:space="preserve">
+    <value>Resistance Growth Rate</value>
+  </data>
+  <data name="Hero_SpeedGrowthRate_Description" xml:space="preserve">
+    <value>The growth rate of the speed (Spd) statistic for the hero.</value>
+  </data>
+  <data name="Hero_SpeedGrowthRate_Name" xml:space="preserve">
+    <value>Speed Growth Rate</value>
+  </data>
+  <data name="Hero_Tag_Description" xml:space="preserve">
+    <value>The tag associataed with the hero.</value>
+  </data>
+  <data name="Hero_Tag_Name" xml:space="preserve">
+    <value>Tag</value>
+  </data>
+  <data name="Hero_Title_Description" xml:space="preserve">
+    <value>The title associated with the hero.</value>
+  </data>
+  <data name="Hero_Title_Name" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Hero_Version_Description" xml:space="preserve">
+    <value>The version number associated with the hero.</value>
+  </data>
+  <data name="Hero_Version_Name" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Hero_Weapon_Description" xml:space="preserve">
+    <value>The weapon associated with the hero.</value>
+  </data>
+  <data name="Hero_Weapon_Name" xml:space="preserve">
+    <value>Weapon</value>
+  </data>
+  <data name="Item_CreatedAt_Description" xml:space="preserve">
+    <value>The timestamp at which the item was created.</value>
+  </data>
+  <data name="Item_CreatedAt_Name" xml:space="preserve">
+    <value>Created At</value>
+  </data>
+  <data name="Item_CreatedBy_Description" xml:space="preserve">
+    <value>The user who created the item.</value>
+  </data>
+  <data name="Item_CreatedBy_Name" xml:space="preserve">
+    <value>Created By</value>
+  </data>
+  <data name="Item_Description" xml:space="preserve">
+    <value>A consumable item.</value>
+  </data>
+  <data name="Item_Description_Description" xml:space="preserve">
+    <value>The description associated with the item.</value>
+  </data>
+  <data name="Item_Description_Name" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Item_Id_Description" xml:space="preserve">
+    <value>The ID of the item.</value>
+  </data>
+  <data name="Item_Id_Name" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Item_ModifiedAt_Description" xml:space="preserve">
+    <value>The timestamp at which the item was last modified.</value>
+  </data>
+  <data name="Item_ModifiedAt_Name" xml:space="preserve">
+    <value>Modified At</value>
+  </data>
+  <data name="Item_ModifiedBy_Description" xml:space="preserve">
+    <value>The user who last modified the item.</value>
+  </data>
+  <data name="Item_ModifiedBy_Name" xml:space="preserve">
+    <value>Modified By</value>
+  </data>
+  <data name="Item_Name" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="Item_Name_Description" xml:space="preserve">
+    <value>The name of the item.</value>
+  </data>
+  <data name="Item_Name_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Item_Version_Description" xml:space="preserve">
+    <value>The version number associated with the item.</value>
+  </data>
+  <data name="Item_Version_Name" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Language_English_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Language_English_Name" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Language_Japanese_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Language_Japanese_Name" xml:space="preserve">
+    <value>Japanese</value>
+  </data>
+  <data name="LegendaryHeroBoostType_Attack_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LegendaryHeroBoostType_Attack_Name" xml:space="preserve">
+    <value>Attack</value>
+  </data>
+  <data name="LegendaryHeroBoostType_Defense_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LegendaryHeroBoostType_Defense_Name" xml:space="preserve">
+    <value>Defense</value>
+  </data>
+  <data name="LegendaryHeroBoostType_PairUp_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LegendaryHeroBoostType_PairUp_Name" xml:space="preserve">
+    <value>Pair Up</value>
+  </data>
+  <data name="LegendaryHeroBoostType_Resistance_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LegendaryHeroBoostType_Resistance_Name" xml:space="preserve">
+    <value>Resistance</value>
+  </data>
+  <data name="LegendaryHeroBoostType_Speed_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LegendaryHeroBoostType_Speed_Name" xml:space="preserve">
+    <value>Speed</value>
+  </data>
+  <data name="MovementType_Armored_Description" xml:space="preserve">
+    <value>Armored unit. Can move one space.</value>
+  </data>
+  <data name="MovementType_Armored_Name" xml:space="preserve">
+    <value>Armored</value>
+  </data>
+  <data name="MovementType_Cavalry_Description" xml:space="preserve">
+    <value>Cavalry unit. Can move three spaces. Cannot move through forests.</value>
+  </data>
+  <data name="MovementType_Cavalry_Name" xml:space="preserve">
+    <value>Cavalry</value>
+  </data>
+  <data name="MovementType_Flying_Description" xml:space="preserve">
+    <value>Flying unit. Can move two spaces. Ignores forests, mountains, rivers, etc., when moving.</value>
+  </data>
+  <data name="MovementType_Flying_Name" xml:space="preserve">
+    <value>Flying</value>
+  </data>
+  <data name="MovementType_Infantry_Description" xml:space="preserve">
+    <value>Infantry unit. Can move two spaces. Slowed by forests, etc.</value>
+  </data>
+  <data name="MovementType_Infantry_Name" xml:space="preserve">
+    <value>Infantry</value>
+  </data>
+  <data name="MythicHeroBoostType_Attack_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MythicHeroBoostType_Attack_Name" xml:space="preserve">
+    <value>Attack</value>
+  </data>
+  <data name="MythicHeroBoostType_Defense_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MythicHeroBoostType_Defense_Name" xml:space="preserve">
+    <value>Defense</value>
+  </data>
+  <data name="MythicHeroBoostType_Resistance_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MythicHeroBoostType_Resistance_Name" xml:space="preserve">
+    <value>Resistance</value>
+  </data>
+  <data name="MythicHeroBoostType_Speed_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MythicHeroBoostType_Speed_Name" xml:space="preserve">
+    <value>Speed</value>
+  </data>
+  <data name="SkillMovementType_Description" xml:space="preserve">
+    <value>A permissible movement type associated with a skill.</value>
+  </data>
+  <data name="SkillMovementType_Id_Description" xml:space="preserve">
+    <value>The ID of the skill movement type.</value>
+  </data>
+  <data name="SkillMovementType_Id_Name" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="SkillMovementType_MovementType_Description" xml:space="preserve">
+    <value>The movement type associated with the skill movement type.</value>
+  </data>
+  <data name="SkillMovementType_MovementType_Name" xml:space="preserve">
+    <value>Movement Type</value>
+  </data>
+  <data name="SkillMovementType_Name" xml:space="preserve">
+    <value>Skill Movement Type</value>
+  </data>
+  <data name="SkillMovementType_SkillId_Description" xml:space="preserve">
+    <value>The ID of the skill to which the skill movement type is associated.</value>
+  </data>
+  <data name="SkillMovementType_SkillId_Name" xml:space="preserve">
+    <value>Skill ID</value>
+  </data>
+  <data name="SkillType_Assist_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SkillType_Assist_Name" xml:space="preserve">
+    <value>Assist</value>
+  </data>
+  <data name="SkillType_PassiveA_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SkillType_PassiveA_Name" xml:space="preserve">
+    <value>Passive A</value>
+  </data>
+  <data name="SkillType_PassiveB_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SkillType_PassiveB_Name" xml:space="preserve">
+    <value>Passive B</value>
+  </data>
+  <data name="SkillType_PassiveC_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SkillType_PassiveC_Name" xml:space="preserve">
+    <value>Passive C</value>
+  </data>
+  <data name="SkillType_SacredSeal_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SkillType_SacredSeal_Name" xml:space="preserve">
+    <value>Sacred Seal</value>
+  </data>
+  <data name="SkillType_Special_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SkillType_Special_Name" xml:space="preserve">
+    <value>Special</value>
+  </data>
+  <data name="SkillType_Weapon_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SkillType_Weapon_Name" xml:space="preserve">
+    <value>Weapon</value>
+  </data>
+  <data name="SkillWeaponEffectiveness_DamageType_Description" xml:space="preserve">
+    <value>The damage type, if any, associated with the skill weapon effectiveness.</value>
+  </data>
+  <data name="SkillWeaponEffectiveness_DamageType_Name" xml:space="preserve">
+    <value>Damage Type</value>
+  </data>
+  <data name="SkillWeaponEffectiveness_Description" xml:space="preserve">
+    <value>The weapon effectivenesses associated with a skill.</value>
+  </data>
+  <data name="SkillWeaponEffectiveness_Id_Description" xml:space="preserve">
+    <value>The ID of the skill weapon effectiveness.</value>
+  </data>
+  <data name="SkillWeaponEffectiveness_Id_Name" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="SkillWeaponEffectiveness_MovementType_Description" xml:space="preserve">
+    <value>The movement type, if any, associated with the skill weapon effectiveness.</value>
+  </data>
+  <data name="SkillWeaponEffectiveness_MovementType_Name" xml:space="preserve">
+    <value>Movement Type</value>
+  </data>
+  <data name="SkillWeaponEffectiveness_Name" xml:space="preserve">
+    <value>Skill Weapon Effectiveness</value>
+  </data>
+  <data name="SkillWeaponEffectiveness_SkillId_Description" xml:space="preserve">
+    <value>The ID of the skill to which the skill weapon effectiveness is associated.</value>
+  </data>
+  <data name="SkillWeaponEffectiveness_SkillId_Name" xml:space="preserve">
+    <value>Skill ID</value>
+  </data>
+  <data name="SkillWeaponEffectiveness_WeaponEffectivenessType_Description" xml:space="preserve">
+    <value>The type of the weapon effectiveness associated with the skill weapon effectiveness.</value>
+  </data>
+  <data name="SkillWeaponEffectiveness_WeaponEffectivenessType_Name" xml:space="preserve">
+    <value>Weapon Effectiveness Type</value>
+  </data>
+  <data name="SkillWeaponEffectiveness_Weapon_Description" xml:space="preserve">
+    <value>The weapon, if any, associated with the skill weapon effectiveness.</value>
+  </data>
+  <data name="SkillWeaponEffectiveness_Weapon_Name" xml:space="preserve">
+    <value>Weapon</value>
+  </data>
+  <data name="SkillWeaponType_Color_Description" xml:space="preserve">
+    <value>The color associated with the skill weapon type.</value>
+  </data>
+  <data name="SkillWeaponType_Color_Name" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="SkillWeaponType_Description" xml:space="preserve">
+    <value>A permissible weapon type associated with a skill.</value>
+  </data>
+  <data name="SkillWeaponType_Id_Description" xml:space="preserve">
+    <value>The ID of the skill weapon type.</value>
+  </data>
+  <data name="SkillWeaponType_Id_Name" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="SkillWeaponType_Name" xml:space="preserve">
+    <value>Skill Weapon Type</value>
+  </data>
+  <data name="SkillWeaponType_SkillId_Description" xml:space="preserve">
+    <value>The ID of the skill to which the skill weapon type is associated.</value>
+  </data>
+  <data name="SkillWeaponType_SkillId_Name" xml:space="preserve">
+    <value>Skill ID</value>
+  </data>
+  <data name="SkillWeaponType_Weapon_Description" xml:space="preserve">
+    <value>The weapon associated with the skill weapon type.</value>
+  </data>
+  <data name="SkillWeaponType_Weapon_Name" xml:space="preserve">
+    <value>Weapon</value>
+  </data>
+  <data name="Skill_AttackModifier_Description" xml:space="preserve">
+    <value>The attack (Atk) modifier, if any, associated with the skill.</value>
+  </data>
+  <data name="Skill_AttackModifier_Name" xml:space="preserve">
+    <value>Attack Modifier</value>
+  </data>
+  <data name="Skill_Cooldown_Description" xml:space="preserve">
+    <value>The cooldown, if any, associated with the skill.</value>
+  </data>
+  <data name="Skill_Cooldown_Name" xml:space="preserve">
+    <value>Cooldown</value>
+  </data>
+  <data name="Skill_CreatedAt_Description" xml:space="preserve">
+    <value>The timestamp at which the skill was created.</value>
+  </data>
+  <data name="Skill_CreatedAt_Name" xml:space="preserve">
+    <value>Created At</value>
+  </data>
+  <data name="Skill_CreatedBy_Description" xml:space="preserve">
+    <value>The user who created the skill.</value>
+  </data>
+  <data name="Skill_CreatedBy_Name" xml:space="preserve">
+    <value>Created By</value>
+  </data>
+  <data name="Skill_DefenseModifier_Description" xml:space="preserve">
+    <value>The defense (Def) modifier, if any, associated with the skill.</value>
+  </data>
+  <data name="Skill_DefenseModifier_Name" xml:space="preserve">
+    <value>Defense Modifier</value>
+  </data>
+  <data name="Skill_Description" xml:space="preserve">
+    <value>A skill that can be learned by a hero.</value>
+  </data>
+  <data name="Skill_Description_Description" xml:space="preserve">
+    <value>The description associated with the skill.</value>
+  </data>
+  <data name="Skill_Description_Name" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Skill_GroupName_Description" xml:space="preserve">
+    <value>The name of the skill group to which the skill is associated.</value>
+  </data>
+  <data name="Skill_GroupName_Name" xml:space="preserve">
+    <value>Group Name</value>
+  </data>
+  <data name="Skill_HitPointsModifier_Description" xml:space="preserve">
+    <value>The hit points (HP) modifier, if any, associated with the skill.</value>
+  </data>
+  <data name="Skill_HitPointsModifier_Name" xml:space="preserve">
+    <value>Hit Points Modifier</value>
+  </data>
+  <data name="Skill_Id_Description" xml:space="preserve">
+    <value>The ID of the skill.</value>
+  </data>
+  <data name="Skill_Id_Name" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Skill_IsExclusive_Description" xml:space="preserve">
+    <value>A value indicating whether the skill is exclusive to a single hero.</value>
+  </data>
+  <data name="Skill_IsExclusive_Name" xml:space="preserve">
+    <value>Is Exclusive</value>
+  </data>
+  <data name="Skill_Might_Description" xml:space="preserve">
+    <value>The might, if any, associated with the skill.</value>
+  </data>
+  <data name="Skill_Might_Name" xml:space="preserve">
+    <value>Might</value>
+  </data>
+  <data name="Skill_ModifiedAt_Description" xml:space="preserve">
+    <value>The timestamp at which the skill was last modified.</value>
+  </data>
+  <data name="Skill_ModifiedAt_Name" xml:space="preserve">
+    <value>Modified At</value>
+  </data>
+  <data name="Skill_ModifiedBy_Description" xml:space="preserve">
+    <value>The user who last modified the skill.</value>
+  </data>
+  <data name="Skill_ModifiedBy_Name" xml:space="preserve">
+    <value>Modified By</value>
+  </data>
+  <data name="Skill_Name" xml:space="preserve">
+    <value>Skill</value>
+  </data>
+  <data name="Skill_Name_Description" xml:space="preserve">
+    <value>The name of the skill.</value>
+  </data>
+  <data name="Skill_Name_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Skill_Range_Description" xml:space="preserve">
+    <value>The range, if any, associated with the skill.</value>
+  </data>
+  <data name="Skill_Range_Name" xml:space="preserve">
+    <value>Range</value>
+  </data>
+  <data name="Skill_ResistanceModifier_Description" xml:space="preserve">
+    <value>The resistance (Res) modifier, if any, associated with the skill.</value>
+  </data>
+  <data name="Skill_ResistanceModifier_Name" xml:space="preserve">
+    <value>Resistance Modifier</value>
+  </data>
+  <data name="Skill_SkillMovementTypes_Description" xml:space="preserve">
+    <value>The permissible movement types for the skill.</value>
+  </data>
+  <data name="Skill_SkillMovementTypes_Name" xml:space="preserve">
+    <value>Skill Movement Types</value>
+  </data>
+  <data name="Skill_SkillPoints_Description" xml:space="preserve">
+    <value>The skill points required to learn the skill.</value>
+  </data>
+  <data name="Skill_SkillPoints_Name" xml:space="preserve">
+    <value>Skill Points</value>
+  </data>
+  <data name="Skill_SkillType_Description" xml:space="preserve">
+    <value>The type of the skill.</value>
+  </data>
+  <data name="Skill_SkillType_Name" xml:space="preserve">
+    <value>Skill Type</value>
+  </data>
+  <data name="Skill_SkillWeaponEffectivenesses_Description" xml:space="preserve">
+    <value>The weapon effectivenesses associated with the skill.</value>
+  </data>
+  <data name="Skill_SkillWeaponEffectivenesses_Name" xml:space="preserve">
+    <value>Skill Weapon Effectivenesses</value>
+  </data>
+  <data name="Skill_SkillWeaponTypes_Description" xml:space="preserve">
+    <value>The permissible weapon types for the skill.</value>
+  </data>
+  <data name="Skill_SkillWeaponTypes_Name" xml:space="preserve">
+    <value>Skill Weapon Types</value>
+  </data>
+  <data name="Skill_SpeedModifier_Description" xml:space="preserve">
+    <value>The speed (Spd) modifier, if any, associated with the skill.</value>
+  </data>
+  <data name="Skill_SpeedModifier_Name" xml:space="preserve">
+    <value>Speed Modifier</value>
+  </data>
+  <data name="Skill_Tag_Description" xml:space="preserve">
+    <value>The tag associated with the skill.</value>
+  </data>
+  <data name="Skill_Tag_Name" xml:space="preserve">
+    <value>Tag</value>
+  </data>
+  <data name="Skill_Version_Description" xml:space="preserve">
+    <value>The version number associated with the skill.</value>
+  </data>
+  <data name="Skill_Version_Name" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Skill_WeaponRefineType_Description" xml:space="preserve">
+    <value>The type of the weapon refinement, if any, applied to the skill.</value>
+  </data>
+  <data name="Skill_WeaponRefineType_Name" xml:space="preserve">
+    <value>Weapon Refine Type</value>
+  </data>
+  <data name="Statistic_Attack_Description" xml:space="preserve">
+    <value>The higher a unit's Attack, the more damage it will inflict on foes.</value>
+  </data>
+  <data name="Statistic_Attack_Name" xml:space="preserve">
+    <value>Attack</value>
+  </data>
+  <data name="Statistic_Attack_ShortName" xml:space="preserve">
+    <value>Atk</value>
+  </data>
+  <data name="Statistic_Defense_Description" xml:space="preserve">
+    <value>The higher a unit's Defense is, the less damage they take from physical attacks (swords, axes, lances, etc.).</value>
+  </data>
+  <data name="Statistic_Defense_Name" xml:space="preserve">
+    <value>Defense</value>
+  </data>
+  <data name="Statistic_Defense_ShortName" xml:space="preserve">
+    <value>Def</value>
+  </data>
+  <data name="Statistic_HitPoints_Description" xml:space="preserve">
+    <value>A unit is defeated if its Hit Points reach 0.</value>
+  </data>
+  <data name="Statistic_HitPoints_Name" xml:space="preserve">
+    <value>Hit Points</value>
+  </data>
+  <data name="Statistic_HitPoints_ShortName" xml:space="preserve">
+    <value>HP</value>
+  </data>
+  <data name="Statistic_Resistance_Description" xml:space="preserve">
+    <value>The higher a unit's Resistance is, the less damage they take from magical attacks (spells, staves, breath effects, etc.).</value>
+  </data>
+  <data name="Statistic_Resistance_Name" xml:space="preserve">
+    <value>Resistance</value>
+  </data>
+  <data name="Statistic_Resistance_ShortName" xml:space="preserve">
+    <value>Res</value>
+  </data>
+  <data name="Statistic_Speed_Description" xml:space="preserve">
+    <value>A unit will attack twice if its Speed is at least 5 more than its foe's Speed.</value>
+  </data>
+  <data name="Statistic_Speed_Name" xml:space="preserve">
+    <value>Speed</value>
+  </data>
+  <data name="Statistic_Speed_ShortName" xml:space="preserve">
+    <value>Spd</value>
+  </data>
+  <data name="SummonerSupportRank_A_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SummonerSupportRank_A_Name" xml:space="preserve">
+    <value>A</value>
+  </data>
+  <data name="SummonerSupportRank_B_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SummonerSupportRank_B_Name" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="SummonerSupportRank_C_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SummonerSupportRank_C_Name" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="SummonerSupportRank_S_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SummonerSupportRank_S_Name" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="VoiceActor_CreatedAt_Description" xml:space="preserve">
+    <value>The timestamp at which the voice actor was created.</value>
+  </data>
+  <data name="VoiceActor_CreatedAt_Name" xml:space="preserve">
+    <value>Created At</value>
+  </data>
+  <data name="VoiceActor_CreatedBy_Description" xml:space="preserve">
+    <value>The user who created the voice actor.</value>
+  </data>
+  <data name="VoiceActor_CreatedBy_Name" xml:space="preserve">
+    <value>Created By</value>
+  </data>
+  <data name="VoiceActor_Description" xml:space="preserve">
+    <value>A voice actor.</value>
+  </data>
+  <data name="VoiceActor_Id_Description" xml:space="preserve">
+    <value>The ID of with the voice actor.</value>
+  </data>
+  <data name="VoiceActor_Id_Name" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="VoiceActor_ModifiedAt_Description" xml:space="preserve">
+    <value>The timestamp at which the voice actor was last modified.</value>
+  </data>
+  <data name="VoiceActor_ModifiedAt_Name" xml:space="preserve">
+    <value>Modified At</value>
+  </data>
+  <data name="VoiceActor_ModifiedBy_Description" xml:space="preserve">
+    <value>The user who last modified the voice actor.</value>
+  </data>
+  <data name="VoiceActor_ModifiedBy_Name" xml:space="preserve">
+    <value>Modified By</value>
+  </data>
+  <data name="VoiceActor_Name" xml:space="preserve">
+    <value>Voice Actor</value>
+  </data>
+  <data name="VoiceActor_NameKanji_Description" xml:space="preserve">
+    <value>The name of the voice actor using Kanji characters.</value>
+  </data>
+  <data name="VoiceActor_NameKanji_Name" xml:space="preserve">
+    <value>Name (Kanji)</value>
+  </data>
+  <data name="VoiceActor_Name_Description" xml:space="preserve">
+    <value>The name of the voice actor.</value>
+  </data>
+  <data name="VoiceActor_Name_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="VoiceActor_Version_Description" xml:space="preserve">
+    <value>The version number associated with the voice actor.</value>
+  </data>
+  <data name="VoiceActor_Version_Name" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="WeaponEffectivenessType_DamageType_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="WeaponEffectivenessType_DamageType_Name" xml:space="preserve">
+    <value>Damage Type</value>
+  </data>
+  <data name="WeaponEffectivenessType_MovementType_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="WeaponEffectivenessType_MovementType_Name" xml:space="preserve">
+    <value>Movement Type</value>
+  </data>
+  <data name="WeaponEffectivenessType_Weapon_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="WeaponEffectivenessType_Weapon_Name" xml:space="preserve">
+    <value>Weapon</value>
+  </data>
+  <data name="WeaponRefineType_Attack_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="WeaponRefineType_Attack_Name" xml:space="preserve">
+    <value>Attack</value>
+  </data>
+  <data name="WeaponRefineType_Defense_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="WeaponRefineType_Defense_Name" xml:space="preserve">
+    <value>Defense</value>
+  </data>
+  <data name="WeaponRefineType_Effect1_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="WeaponRefineType_Effect1_Name" xml:space="preserve">
+    <value>Effect 1</value>
+  </data>
+  <data name="WeaponRefineType_Effect2_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="WeaponRefineType_Effect2_Name" xml:space="preserve">
+    <value>Effect 2</value>
+  </data>
+  <data name="WeaponRefineType_Resistance_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="WeaponRefineType_Resistance_Name" xml:space="preserve">
+    <value>Resistance</value>
+  </data>
+  <data name="WeaponRefineType_Speed_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="WeaponRefineType_Speed_Name" xml:space="preserve">
+    <value>Speed</value>
+  </data>
+  <data name="Weapon_Axe_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Weapon_Axe_Name" xml:space="preserve">
+    <value>Axe</value>
+  </data>
+  <data name="Weapon_Beaststone_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Weapon_Beaststone_Name" xml:space="preserve">
+    <value>Beaststone</value>
+  </data>
+  <data name="Weapon_Bow_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Weapon_Bow_Name" xml:space="preserve">
+    <value>Bow</value>
+  </data>
+  <data name="Weapon_Dagger_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Weapon_Dagger_Name" xml:space="preserve">
+    <value>Dagger</value>
+  </data>
+  <data name="Weapon_Dragonstone_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Weapon_Dragonstone_Name" xml:space="preserve">
+    <value>Dragonstone</value>
+  </data>
+  <data name="Weapon_Lance_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Weapon_Lance_Name" xml:space="preserve">
+    <value>Lance</value>
+  </data>
+  <data name="Weapon_Staff_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Weapon_Staff_Name" xml:space="preserve">
+    <value>Staff</value>
+  </data>
+  <data name="Weapon_Sword_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Weapon_Sword_Name" xml:space="preserve">
+    <value>Sword</value>
+  </data>
+  <data name="Weapon_Tome_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Weapon_Tome_Name" xml:space="preserve">
+    <value>Tome</value>
+  </data>
+</root>
