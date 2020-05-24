@@ -28,8 +28,8 @@ namespace FEHub.Entity.Models
         public Skill()
         {
             this.SkillMovementTypes = new List<SkillMovementType>();
-            this.SkillWeaponTypes = new List<SkillWeaponType>();
             this.SkillWeaponEffectivenesses = new List<SkillWeaponEffectiveness>();
+            this.SkillWeaponTypes = new List<SkillWeaponType>();
         }
         #endregion
 
@@ -258,12 +258,12 @@ namespace FEHub.Entity.Models
                 .HasConversion<int>();
 
             entityTypeBuilder
-                .HasMany(x => x.SkillWeaponTypes)
+                .HasMany(x => x.SkillWeaponEffectivenesses)
                 .WithOne()
                 .HasForeignKey(x => x.SkillId);
 
             entityTypeBuilder
-                .HasMany(x => x.SkillWeaponEffectivenesses)
+                .HasMany(x => x.SkillWeaponTypes)
                 .WithOne()
                 .HasForeignKey(x => x.SkillId);
 

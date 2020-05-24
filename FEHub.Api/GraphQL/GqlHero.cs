@@ -58,7 +58,7 @@ namespace FEHub.Api.GraphQL
             this.Field(nameof(Hero.Title), x => x.Title);
             this.Field(nameof(Hero.Version), x => x.Version);
 
-            /* Date Loader */
+            /* Data Loader */
 
             this
                 .Field<GqlArtist, Artist>()
