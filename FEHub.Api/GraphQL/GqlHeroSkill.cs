@@ -40,7 +40,7 @@ namespace FEHub.Api.GraphQL
                         var service = new SkillService(dbContextFactory.CreateDbContext());
 
                         var loader = accessor.Context.GetOrAddBatchLoader<Guid, Skill>(
-                            nameof(SkillService.GetByIdsAsync),
+                            $"{nameof(Skill)}_{nameof(SkillService.GetByIdsAsync)}",
                             service.GetByIdsAsync
                         );
 

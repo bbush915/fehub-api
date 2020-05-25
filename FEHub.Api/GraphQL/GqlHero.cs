@@ -31,7 +31,8 @@ namespace FEHub.Api.GraphQL
             this.Field(nameof(Hero.BaseHitPoints), x => x.BaseHitPoints);
             this.Field(nameof(Hero.BaseResistance), x => x.BaseResistance);
             this.Field(nameof(Hero.BaseSpeed), x => x.BaseSpeed);
-            this.Field(nameof(Hero.BVID), x => x.BVID);
+            this.Field(nameof(Hero.BVID).ToLowerInvariant(), x => x.BVID);
+            this.Field(nameof(Hero.Color), x => (int)x.Color);
             this.Field(nameof(Hero.CreatedAt), x => x.CreatedAt, type: typeof(DateTimeGraphType));
             this.Field(nameof(Hero.CreatedBy), x => x.CreatedBy);
             this.Field(nameof(Hero.DefenseGrowthRate), x => x.DefenseGrowthRate);
@@ -57,6 +58,7 @@ namespace FEHub.Api.GraphQL
             this.Field(nameof(Hero.Tag), x => x.Tag);
             this.Field(nameof(Hero.Title), x => x.Title);
             this.Field(nameof(Hero.Version), x => x.Version);
+            this.Field(nameof(Hero.Weapon), x => (int)x.Weapon);
 
             /* Data Loader */
 
@@ -69,7 +71,7 @@ namespace FEHub.Api.GraphQL
                         var service = new ArtistService(dbContextFactory.CreateDbContext());
 
                         var loader = accessor.Context.GetOrAddBatchLoader<int, Artist>(
-                            nameof(ArtistService.GetByIdsAsync), 
+                            $"{nameof(Artist)}_{nameof(ArtistService.GetByIdsAsync)}",
                             service.GetByIdsAsync
                         );
 
@@ -86,7 +88,7 @@ namespace FEHub.Api.GraphQL
                         var service = new HeroSkillService(dbContextFactory.CreateDbContext());
 
                         var loader = accessor.Context.GetOrAddCollectionBatchLoader<Guid, HeroSkill>(
-                            nameof(HeroSkillService.GetByHeroIdsAsync),
+                            $"{nameof(HeroSkill)}_{nameof(HeroSkillService.GetByHeroIdsAsync)}",
                             service.GetByHeroIdsAsync
                         );
 
@@ -103,7 +105,7 @@ namespace FEHub.Api.GraphQL
                         var service = new HeroVoiceActorService(dbContextFactory.CreateDbContext());
 
                         var loader = accessor.Context.GetOrAddCollectionBatchLoader<Guid, HeroVoiceActor>(
-                            nameof(HeroVoiceActorService.GetByHeroIdsAsync),
+                            $"{nameof(HeroVoiceActor)}_{nameof(HeroVoiceActorService.GetByHeroIdsAsync)}",
                             service.GetByHeroIdsAsync
                         );
 

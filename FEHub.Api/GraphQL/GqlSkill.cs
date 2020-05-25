@@ -57,7 +57,7 @@ namespace FEHub.Api.GraphQL
                         var service = new SkillMovementTypeService(dbContextFactory.CreateDbContext());
 
                         var loader = accessor.Context.GetOrAddCollectionBatchLoader<Guid, SkillMovementType>(
-                            nameof(SkillMovementTypeService.GetBySkillIdsAsync),
+                            $"{nameof(SkillMovementType)}_{nameof(SkillMovementTypeService.GetBySkillIdsAsync)}",
                             service.GetBySkillIdsAsync
                         );
 
@@ -74,7 +74,7 @@ namespace FEHub.Api.GraphQL
                         var service = new SkillWeaponEffectivenessService(dbContextFactory.CreateDbContext());
 
                         var loader = accessor.Context.GetOrAddCollectionBatchLoader<Guid, SkillWeaponEffectiveness>(
-                            nameof(SkillWeaponEffectivenessService.GetBySkillIdsAsync),
+                            $"{nameof(SkillWeaponEffectiveness)}_{nameof(SkillWeaponEffectivenessService.GetBySkillIdsAsync)}",
                             service.GetBySkillIdsAsync
                         );
 
@@ -91,7 +91,7 @@ namespace FEHub.Api.GraphQL
                         var service = new SkillWeaponTypeService(dbContextFactory.CreateDbContext());
 
                         var loader = accessor.Context.GetOrAddCollectionBatchLoader<Guid, SkillWeaponType>(
-                            nameof(SkillWeaponTypeService.GetBySkillIdsAsync),
+                            $"{nameof(SkillWeaponType)}_{nameof(SkillWeaponTypeService.GetBySkillIdsAsync)}",
                             service.GetBySkillIdsAsync
                         );
 
