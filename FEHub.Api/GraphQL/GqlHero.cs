@@ -9,8 +9,10 @@ using System.Collections.Generic;
 
 using FEHub.Api.Services;
 using FEHub.Entity;
+using FEHub.Entity.Common.Enumerations;
 using FEHub.Entity.Models;
 
+using GraphQL;
 using GraphQL.DataLoader;
 using GraphQL.Types;
 
@@ -99,14 +101,17 @@ namespace FEHub.Api.GraphQL
             this
                 .Field<ListGraphType<GqlHeroVoiceActor>, IEnumerable<HeroVoiceActor>>()
                 .Name(nameof(Hero.HeroVoiceActors))
+                .Argument<NonNullGraphType<IntGraphType>>("language")
                 .ResolveAsync(
                     (context) =>
                     {
                         var service = new HeroVoiceActorService(dbContextFactory.CreateDbContext());
 
-                        var loader = accessor.Context.GetOrAddCollectionBatchLoader<Guid, HeroVoiceActor>(
+                        var language = (Languages)context.GetArgument<int>("language");
+
+                        var loader = accessor.Context.GetOrAddCollectionBatchLoader(
                             $"{nameof(HeroVoiceActor)}_{nameof(HeroVoiceActorService.GetByHeroIdsAsync)}",
-                            service.GetByHeroIdsAsync
+                            service.GetByHeroIdsAsync(language)
                         );
 
                         return loader.LoadAsync(context.Source.Id);
