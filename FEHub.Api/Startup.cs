@@ -73,8 +73,6 @@ namespace FEHub.Api
             applicationBuilder.UseGraphQL<FehSchema>();
             applicationBuilder.UseGraphQLPlayground();
             applicationBuilder.UseGraphQLVoyager();
-
-            applicationBuilder.UseStaticFiles();
         }
         #endregion
     }
