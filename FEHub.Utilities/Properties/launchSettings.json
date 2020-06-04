@@ -2,7 +2,7 @@
   "profiles": {
     "FEHub.Utilities": {
       "commandName": "Project",
-      "commandLineArgs": "--importHeroSkills -s \"C:\\Users\\bryan\\Documents\\Projects\\FEH\\Data\\Wiki\\Data.xlsx\"",
+      "commandLineArgs": "--importHeroVoiceActors --importHeroSkills -s \"C:\\Users\\bryan\\Documents\\Projects\\FEH\\Data\\Wiki\\Data.xlsx\"",
       "workingDirectory": "C:\\Source\\FEHub\\fehub\\fehub-api\\FEHub.Utilities"
     }
   }

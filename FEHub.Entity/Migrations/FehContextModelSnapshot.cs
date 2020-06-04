@@ -389,6 +389,9 @@ namespace FEHub.Entity.Migrations
                     b.Property<int?>("HitPointsModifier")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsAvailableAsSacredSeal")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsExclusive")
                         .HasColumnType("bit");
 

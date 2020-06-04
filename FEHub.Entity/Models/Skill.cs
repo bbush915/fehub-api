@@ -105,6 +105,13 @@ namespace FEHub.Entity.Models
         public bool IsExclusive { get; set; }
 
         [Display(
+            Name = nameof(Resources.Skill_IsAvailableAsSacredSeal_Name),
+            Description = nameof(Resources.Skill_IsAvailableAsSacredSeal_Description),
+            ResourceType = typeof(Resources)
+        )]
+        public bool IsAvailableAsSacredSeal { get; set; }
+
+        [Display(
             Name = nameof(Resources.Skill_SkillPoints_Name),
             Description = nameof(Resources.Skill_SkillPoints_Description),
             ResourceType = typeof(Resources)

@@ -32,6 +32,7 @@ namespace FEHub.Api.GraphQL
             this.Field(nameof(Skill.GroupName), x => x.GroupName);
             this.Field(nameof(Skill.HitPointsModifier), x => x.HitPointsModifier, nullable: true);
             this.Field(nameof(Skill.Id), x => x.Id);
+            this.Field(nameof(Skill.IsAvailableAsSacredSeal), x => x.IsAvailableAsSacredSeal);
             this.Field(nameof(Skill.IsExclusive), x => x.IsExclusive);
             this.Field(nameof(Skill.Might), x => x.Might, nullable: true);
             this.Field(nameof(Skill.ModifiedAt), x => x.ModifiedAt, type: typeof(DateTimeGraphType));

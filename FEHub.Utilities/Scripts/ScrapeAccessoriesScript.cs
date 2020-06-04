@@ -77,6 +77,7 @@ namespace FEHub.Utilities.Scripts
         #region Classes
         private sealed class AccessoryRecord
         {
+            #region Constructors
             public AccessoryRecord(JToken accessory)
             {
                 this.Name = accessory["Name"].Value<string>();
@@ -84,11 +85,14 @@ namespace FEHub.Utilities.Scripts
                 this.Type = accessory["Type"].Value<string>();
                 this.TagID = accessory["TagID"].Value<string>();
             }
+            #endregion
 
+            #region Properties
             public string Name { get; set; }
             public string Description { get; set; }
             public string Type { get; set; }
             public string TagID { get; set; }
+            #endregion
         }
         #endregion
     }

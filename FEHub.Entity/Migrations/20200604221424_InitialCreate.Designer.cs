@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FEHub.Entity.Migrations
 {
     [DbContext(typeof(FehContext))]
-    [Migration("20200523031905_InitialCreate")]
+    [Migration("20200604221424_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -390,6 +390,9 @@ namespace FEHub.Entity.Migrations
 
                     b.Property<int?>("HitPointsModifier")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsAvailableAsSacredSeal")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsExclusive")
                         .HasColumnType("bit");

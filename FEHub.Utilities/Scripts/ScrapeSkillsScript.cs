@@ -26,7 +26,6 @@ namespace FEHub.Utilities.Scripts
         private readonly string _targetDirectory;
         #endregion
 
-
         #region Constructors
         public ScrapeSkillsScript(string targetDirectory)
         {

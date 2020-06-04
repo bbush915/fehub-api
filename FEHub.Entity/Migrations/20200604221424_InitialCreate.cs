@@ -80,6 +80,7 @@ namespace FEHub.Entity.Migrations
                     GroupName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     IsExclusive = table.Column<bool>(type: "bit", nullable: false),
+                    IsAvailableAsSacredSeal = table.Column<bool>(type: "bit", nullable: false),
                     SkillPoints = table.Column<int>(type: "int", nullable: false),
                     SkillType = table.Column<int>(type: "int", nullable: false),
                     WeaponRefineType = table.Column<int>(type: "int", nullable: true),

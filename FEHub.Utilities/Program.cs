@@ -142,6 +142,12 @@ namespace FEHub.Utilities
                 CommandOptionType.NoValue
             );
 
+            var scrapeSacredSealCosts = application.Option(
+                 "--scrapeSacredSealCosts",
+                 "Scrape sacred seal cost data from the wiki.",
+                 CommandOptionType.NoValue
+             );
+
             var scrapeSkills = application.Option(
                 "--scrapeSkills",
                 "Scrape skill data from the wiki.",
@@ -292,6 +298,13 @@ namespace FEHub.Utilities
                     if (scrapeItems.HasValue())
                     {
                         await new ScrapeItemsScript(
+                            targetDirectory: targetPath.Value()
+                        ).RunAsync();
+                    }
+
+                    if (scrapeSacredSealCosts.HasValue())
+                    {
+                        await new ScrapeSacredSealCostsScript(
                             targetDirectory: targetPath.Value()
                         ).RunAsync();
                     }
