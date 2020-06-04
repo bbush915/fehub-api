@@ -27,6 +27,7 @@ namespace FEHub.Api.GraphQL
             this.Field(nameof(HeroSkill.Id), x => x.Id);
             this.Field(nameof(HeroSkill.SkillId), x => x.SkillId);
             this.Field(nameof(HeroSkill.SkillPosition), x => x.SkillPosition);
+            this.Field(nameof(Skill.SkillType), x => (int)x.Skill.SkillType);
             this.Field(nameof(HeroSkill.UnlockRarity), x => x.UnlockRarity);
 
             /* Data Loader */

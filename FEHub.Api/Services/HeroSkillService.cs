@@ -36,6 +36,7 @@ namespace FEHub.Api.Services
             return Task.FromResult(
                 this._dbContext
                     .HeroSkills
+                    .Include(x => x.Skill)
                     .Where(x => ids.Contains(x.HeroId))
                     .ToLookup(x => x.HeroId)
             );

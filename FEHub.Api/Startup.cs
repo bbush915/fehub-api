@@ -28,22 +28,20 @@ namespace FEHub.Api
 
         #region Properties
         public IConfiguration Configuration { get; }
-
-        public IWebHostEnvironment Environment { get; }
         #endregion
 
         #region Methods
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<FehContextFactory>();
-
+            services.AddSingleton<FehSchema>();
+            
             services
-                .AddSingleton<FehSchema>()
                 .AddGraphQL()
+                .AddGraphTypes(typeof(FehSchema))
                 .AddSystemTextJson()
                 .AddUserContextBuilder((httpContext) => new FehUserContext() { User = httpContext.User })
-                .AddDataLoader()
-                .AddGraphTypes(typeof(FehSchema));
+                .AddDataLoader();
 
             services.AddCors(
                 (configuration) =>
