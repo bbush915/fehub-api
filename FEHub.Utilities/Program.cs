@@ -162,6 +162,22 @@ namespace FEHub.Utilities
 
             #endregion
 
+            #region Upload
+
+            var uploadHeroAssets = application.Option(
+                "--uploadHeroAssets",
+                "Uploads hero assets to AWS S3.",
+                CommandOptionType.NoValue
+            );
+
+            var uploadSkillAssets = application.Option(
+                "--uploadSkillAssets",
+                "Uploads skill assets to AWS S3.",
+                CommandOptionType.NoValue
+            );
+
+            #endregion
+
             application.OnExecuteAsync(
                 async (cancellationToken) =>
                 {
@@ -320,6 +336,24 @@ namespace FEHub.Utilities
                     {
                         await new ScrapeVoiceActorsScript(
                             targetDirectory: targetPath.Value()
+                        ).RunAsync();
+                    }
+
+                    #endregion
+
+                    #region Upload
+
+                    if (uploadHeroAssets.HasValue())
+                    {
+                        await new UploadHeroAssetsScript(
+                            sourceDirectory: sourcePath.Value()
+                        ).RunAsync();
+                    }
+
+                    if (uploadSkillAssets.HasValue())
+                    {
+                        await new UploadSkillAssetsScript(
+                            sourceDirectory: sourcePath.Value()
                         ).RunAsync();
                     }
 
