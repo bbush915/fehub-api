@@ -46,11 +46,25 @@ namespace FEHub.Api
             services.AddCors(
                 (configuration) =>
                 {
-                    configuration.AddDefaultPolicy(
+                    configuration.AddPolicy(
+                        "production",
                         (policyBuilder) =>
                         {
                             policyBuilder
-                                .AllowAnyOrigin()
+                                .WithOrigins(
+                                    Configuration.GetValue<string>("ProductionHost")
+                                )
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                        }
+                    );
+
+                    configuration.AddPolicy(
+                        "default",
+                        (policyBuilder) =>
+                        {
+                            policyBuilder
+                                .WithOrigins("http://localhost:3000")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                         }
@@ -65,12 +79,20 @@ namespace FEHub.Api
             {
                 applicationBuilder.UseDeveloperExceptionPage();
             }
-
-            applicationBuilder.UseCors();
+                
+            applicationBuilder.UseCors(
+                webHostEnvironment.IsDevelopment() 
+                    ? "default" 
+                    : "production"
+            );
 
             applicationBuilder.UseGraphQL<FehSchema>();
-            applicationBuilder.UseGraphQLPlayground();
-            applicationBuilder.UseGraphQLVoyager();
+
+            if (webHostEnvironment.IsDevelopment())
+            {
+                applicationBuilder.UseGraphQLPlayground();
+                applicationBuilder.UseGraphQLVoyager();
+            }
         }
         #endregion
     }

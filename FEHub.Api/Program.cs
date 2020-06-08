@@ -23,9 +23,11 @@ namespace FEHub.Api
             Host
                 .CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(
-                    (webBuilder) =>
+                    (webHostBuilder) =>
                     {
-                        webBuilder.UseStartup<Startup>();
+                        webHostBuilder
+                            .UseKestrel()
+                            .UseStartup<Startup>();
                     }
                 );
         #endregion
