@@ -18,8 +18,8 @@ namespace FEHub.Entity
         private static readonly ILoggerFactory _loggerFactory = LoggerFactory.Create(builder => { builder.AddDebug(); });
 
         private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["FEHub"]?.ConnectionString 
-            ?? "Data Source=localhost;Initial Catalog=FEHub;Integrated Security=true";
-            //?? @"Data Source=C:\Source\FEHub\fehub\fehub-api\FEHub.sqlite3;";
+            //?? "Data Source=localhost;Initial Catalog=FEHub;Integrated Security=true";
+            ?? @"Data Source=C:\Source\FEHub\fehub\fehub-api\FEHub.sqlite3;";
         #endregion
 
         #region Methods
@@ -33,9 +33,8 @@ namespace FEHub.Entity
             var optionsBuilder = new DbContextOptionsBuilder();
 
             optionsBuilder
-                .UseLoggerFactory(_loggerFactory)
-                .UseSqlServer(_connectionString);
-                //.UseSqlite(_connectionString);
+                //.UseSqlServer(_connectionString);
+                .UseSqlite(_connectionString);
 
             return new FehContext(optionsBuilder.Options);
         }
