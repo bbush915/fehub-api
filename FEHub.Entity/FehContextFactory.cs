@@ -16,7 +16,7 @@ namespace FEHub.Entity
         #region Fields
         private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["FEHub"]?.ConnectionString 
             //?? "Data Source=localhost;Initial Catalog=FEHub;Integrated Security=true";
-            ?? @"Data Source=C:\Source\FEHub\fehub\fehub-api\FEHub.sqlite3;";
+            ?? @"Data Source=/app/FEHub.sqlite3;";
         #endregion
 
         #region Methods

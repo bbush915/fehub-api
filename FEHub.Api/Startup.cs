@@ -64,7 +64,7 @@ namespace FEHub.Api
                         (policyBuilder) =>
                         {
                             policyBuilder
-                                .WithOrigins("http://localhost:3000")
+                                .WithOrigins("http://localhost:5000")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                         }
