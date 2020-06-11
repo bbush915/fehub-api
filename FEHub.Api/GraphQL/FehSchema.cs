@@ -16,7 +16,7 @@ namespace FEHub.Api.GraphQL
         public FehSchema(IServiceProvider serviceProvider)
         : base(serviceProvider)
         {
-            this.Query = (IObjectGraphType)serviceProvider.GetService(typeof(FehQuery));
+            this.Query = (IObjectGraphType)serviceProvider.GetService(typeof(GqlQuery));
         }
         #endregion
     }

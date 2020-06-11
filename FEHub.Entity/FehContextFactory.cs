@@ -14,9 +14,27 @@ namespace FEHub.Entity
     public class FehContextFactory : IDesignTimeDbContextFactory<FehContext>
     {
         #region Fields
-        private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["FEHub"]?.ConnectionString 
-            //?? "Data Source=localhost;Initial Catalog=FEHub;Integrated Security=true";
-            ?? @"Data Source=/app/FEHub.sqlite3;";
+        private static string _connectionString;
+        #endregion
+
+        #region Properties
+        public static string ConnectionString
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_connectionString))
+                {
+                    return @"Data Source=C:\Source\FEHub\fehub\fehub-api\FEHub.sqlite3;";
+                }
+
+                return _connectionString;
+            }
+
+            set
+            {
+                _connectionString = value;
+            }
+        }
         #endregion
 
         #region Methods
@@ -29,9 +47,7 @@ namespace FEHub.Entity
         {
             var optionsBuilder = new DbContextOptionsBuilder();
 
-            optionsBuilder
-                //.UseSqlServer(_connectionString);
-                .UseSqlite(_connectionString);
+            optionsBuilder.UseSqlite(ConnectionString);
 
             return new FehContext(optionsBuilder.Options);
         }

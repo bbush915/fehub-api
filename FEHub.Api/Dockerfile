@@ -1,7 +1,5 @@
-ARG REPO=mcr.microsoft.com/dotnet/core/runtime
-FROM $REPO:5.0-alpine3.11
+FROM mcr.microsoft.com/dotnet/core/runtime:5.0-alpine3.11
 
-# Install ASP.NET Core
 ENV ASPNET_VERSION 5.0.0-preview.4.20257.10
 
 RUN wget -O aspnetcore.tar.gz https://dotnetcli.azureedge.net/dotnet/aspnetcore/Runtime/$ASPNET_VERSION/aspnetcore-runtime-$ASPNET_VERSION-linux-musl-x64.tar.gz \

@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------------
-// <copyright file="FehQuery.cs">
+// <copyright file="GqlQuery.cs">
 //     Copyright (c) 2020 by Bryan Bush. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------------
@@ -16,10 +16,10 @@ using GraphQL.Types;
 
 namespace FEHub.Api.GraphQL
 {
-    internal sealed class FehQuery : ObjectGraphType
+    internal sealed class GqlQuery : ObjectGraphType
     {
         #region Constructors
-        public FehQuery(FehContextFactory dbContextFactory)
+        public GqlQuery(FehContextFactory dbContextFactory)
         {
             this
                 .Field<ListGraphType<GqlAccessory>, List<Accessory>>()

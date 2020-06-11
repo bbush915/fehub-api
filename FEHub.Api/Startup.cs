@@ -33,6 +33,8 @@ namespace FEHub.Api
         #region Methods
         public void ConfigureServices(IServiceCollection services)
         {
+            FehContextFactory.ConnectionString = this.Configuration.GetConnectionString("FEHub");
+
             services.AddSingleton<FehContextFactory>();
             services.AddSingleton<FehSchema>();
             
@@ -47,24 +49,22 @@ namespace FEHub.Api
                 (configuration) =>
                 {
                     configuration.AddPolicy(
-                        "production",
+                        "default",
                         (policyBuilder) =>
                         {
                             policyBuilder
-                                .WithOrigins(
-                                    Configuration.GetValue<string>("ProductionHost")
-                                )
+                                .AllowAnyOrigin()
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                         }
                     );
 
                     configuration.AddPolicy(
-                        "default",
+                        "production",
                         (policyBuilder) =>
                         {
                             policyBuilder
-                                .WithOrigins("http://localhost:5000")
+                                .WithOrigins(this.Configuration.GetValue<string>("Origins"))
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                         }
