@@ -64,7 +64,8 @@ namespace FEHub.Api
                         (policyBuilder) =>
                         {
                             policyBuilder
-                                .WithOrigins(this.Configuration.GetValue<string>("Origins"))
+                                //.WithOrigins(this.Configuration.GetValue<string>("Origins"))
+                                .AllowAnyOrigin()
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                         }
@@ -87,10 +88,10 @@ namespace FEHub.Api
             );
 
             applicationBuilder.UseGraphQL<FehSchema>();
+            applicationBuilder.UseGraphQLPlayground();
 
             if (webHostEnvironment.IsDevelopment())
             {
-                applicationBuilder.UseGraphQLPlayground();
                 applicationBuilder.UseGraphQLVoyager();
             }
         }
