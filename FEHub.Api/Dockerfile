@@ -8,7 +8,9 @@ RUN wget -O aspnetcore.tar.gz https://dotnetcli.azureedge.net/dotnet/aspnetcore/
   && tar -ozxf aspnetcore.tar.gz -C /usr/share/dotnet ./shared/Microsoft.AspNetCore.App \
   && rm aspnetcore.tar.gz
 
-COPY bin/Release/netcoreapp5.0/publish/ /app
+COPY . /app
 WORKDIR /app
+
 EXPOSE 5000
-ENTRYPOINT ["dotnet", "FEHub.Api.dll", "--urls", "http://0.0.0.0:5000"]
+
+ENTRYPOINT ["dotnet", "FEHub.Api.dll"]
