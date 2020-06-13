@@ -24,7 +24,7 @@ namespace FEHub.Entity
             {
                 if (string.IsNullOrEmpty(_connectionString))
                 {
-                    return @"Data Source=C:\Source\FEHub\fehub\fehub-api\FEHub.sqlite3;";
+                    return "Data Source=C:\\Source\\FEHub\\fehub\\fehub-api\\FEHub.sqlite3;";
                 }
 
                 return _connectionString;

@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\FEHub.sqlite3" Link="FEHub.sqlite3" />
+    <None Include="..\FEHub.sqlite3" Link="FEHub.sqlite3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

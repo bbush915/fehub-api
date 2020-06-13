@@ -36,13 +36,12 @@ namespace FEHub.Api
             FehContextFactory.ConnectionString = this.Configuration.GetConnectionString("FEHub");
 
             services.AddSingleton<FehContextFactory>();
-            services.AddSingleton<FehSchema>();
             
             services
+                .AddSingleton<FehSchema>()
                 .AddGraphQL()
                 .AddGraphTypes(typeof(FehSchema))
                 .AddSystemTextJson()
-                .AddUserContextBuilder((httpContext) => new FehUserContext() { User = httpContext.User })
                 .AddDataLoader();
 
             services.AddCors(
@@ -64,8 +63,7 @@ namespace FEHub.Api
                         (policyBuilder) =>
                         {
                             policyBuilder
-                                //.WithOrigins(this.Configuration.GetValue<string>("Origins"))
-                                .AllowAnyOrigin()
+                                .WithOrigins(this.Configuration.GetValue<string>("AllowedHosts").Split(";"))
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                         }
