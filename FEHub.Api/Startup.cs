@@ -4,6 +4,8 @@
 // </copyright>
 //-----------------------------------------------------------------------------
 
+using System.Linq;
+
 using FEHub.Api.GraphQL;
 using FEHub.Entity;
 
@@ -63,7 +65,7 @@ namespace FEHub.Api
                         (policyBuilder) =>
                         {
                             policyBuilder
-                                .WithOrigins(this.Configuration.GetValue<string>("AllowedHosts").Split(";"))
+                                .WithOrigins(this.Configuration.GetValue<string>("AllowedHosts").Split(";").Select(x => $"http://{x}").ToArray())
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                         }
