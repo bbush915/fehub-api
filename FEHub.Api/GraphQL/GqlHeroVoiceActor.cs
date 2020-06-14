@@ -37,7 +37,7 @@ namespace FEHub.Api.GraphQL
                         var service = new VoiceActorService(dbContextFactory.CreateDbContext());
 
                         var loader = accessor.Context.GetOrAddBatchLoader<int, VoiceActor>(
-                            nameof(VoiceActorService.GetByIdsAsync),
+                            $"{nameof(VoiceActor)}_{nameof(VoiceActorService.GetByIdsAsync)}",
                             service.GetByIdsAsync
                         );
 

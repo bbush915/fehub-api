@@ -32,6 +32,7 @@ namespace FEHub.Api.GraphQL
             this.Field(nameof(Skill.GroupName), x => x.GroupName);
             this.Field(nameof(Skill.HitPointsModifier), x => x.HitPointsModifier, nullable: true);
             this.Field(nameof(Skill.Id), x => x.Id);
+            this.Field(nameof(Skill.IsAvailableAsSacredSeal), x => x.IsAvailableAsSacredSeal);
             this.Field(nameof(Skill.IsExclusive), x => x.IsExclusive);
             this.Field(nameof(Skill.Might), x => x.Might, nullable: true);
             this.Field(nameof(Skill.ModifiedAt), x => x.ModifiedAt, type: typeof(DateTimeGraphType));
@@ -57,7 +58,7 @@ namespace FEHub.Api.GraphQL
                         var service = new SkillMovementTypeService(dbContextFactory.CreateDbContext());
 
                         var loader = accessor.Context.GetOrAddCollectionBatchLoader<Guid, SkillMovementType>(
-                            nameof(SkillMovementTypeService.GetBySkillIdsAsync),
+                            $"{nameof(SkillMovementType)}_{nameof(SkillMovementTypeService.GetBySkillIdsAsync)}",
                             service.GetBySkillIdsAsync
                         );
 
@@ -74,7 +75,7 @@ namespace FEHub.Api.GraphQL
                         var service = new SkillWeaponEffectivenessService(dbContextFactory.CreateDbContext());
 
                         var loader = accessor.Context.GetOrAddCollectionBatchLoader<Guid, SkillWeaponEffectiveness>(
-                            nameof(SkillWeaponEffectivenessService.GetBySkillIdsAsync),
+                            $"{nameof(SkillWeaponEffectiveness)}_{nameof(SkillWeaponEffectivenessService.GetBySkillIdsAsync)}",
                             service.GetBySkillIdsAsync
                         );
 
@@ -91,7 +92,7 @@ namespace FEHub.Api.GraphQL
                         var service = new SkillWeaponTypeService(dbContextFactory.CreateDbContext());
 
                         var loader = accessor.Context.GetOrAddCollectionBatchLoader<Guid, SkillWeaponType>(
-                            nameof(SkillWeaponTypeService.GetBySkillIdsAsync),
+                            $"{nameof(SkillWeaponType)}_{nameof(SkillWeaponTypeService.GetBySkillIdsAsync)}",
                             service.GetBySkillIdsAsync
                         );
 

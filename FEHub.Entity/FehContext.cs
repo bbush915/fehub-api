@@ -64,8 +64,7 @@ namespace FEHub.Entity
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder
-                .UseLazyLoadingProxies();
+            optionsBuilder.UseLazyLoadingProxies();
         }
 
         private void UpdateTrackables()

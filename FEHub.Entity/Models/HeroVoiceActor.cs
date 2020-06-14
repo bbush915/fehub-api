@@ -77,21 +77,17 @@ namespace FEHub.Entity.Models
         public void Configure(EntityTypeBuilder<HeroVoiceActor> entityTypeBuilder)
         {
             entityTypeBuilder
-                .ToTable(TABLE_NAME);
-
-            entityTypeBuilder
+                .ToTable(TABLE_NAME)
                 .HasKey(x => x.Id);
-
-            #region Navigation Properties
-            entityTypeBuilder
-                .HasOne(x => x.VoiceActor)
-                .WithMany()
-                .HasForeignKey(x => x.VoiceActorId);
-            #endregion
 
             entityTypeBuilder
                 .Property(x => x.Language)
                 .HasConversion<int>();
+
+            entityTypeBuilder
+                .HasOne(x => x.VoiceActor)
+                .WithMany()
+                .HasForeignKey(x => x.VoiceActorId);
         }
         #endregion
     }

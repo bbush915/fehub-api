@@ -142,6 +142,12 @@ namespace FEHub.Utilities
                 CommandOptionType.NoValue
             );
 
+            var scrapeSacredSealCosts = application.Option(
+                 "--scrapeSacredSealCosts",
+                 "Scrape sacred seal cost data from the wiki.",
+                 CommandOptionType.NoValue
+             );
+
             var scrapeSkills = application.Option(
                 "--scrapeSkills",
                 "Scrape skill data from the wiki.",
@@ -151,6 +157,22 @@ namespace FEHub.Utilities
             var scrapeVoiceActors = application.Option(
                 "--scrapeVoiceActors",
                 "Scrape voice actor data from the wiki.",
+                CommandOptionType.NoValue
+            );
+
+            #endregion
+
+            #region Upload
+
+            var uploadHeroAssets = application.Option(
+                "--uploadHeroAssets",
+                "Uploads hero assets to AWS S3.",
+                CommandOptionType.NoValue
+            );
+
+            var uploadSkillAssets = application.Option(
+                "--uploadSkillAssets",
+                "Uploads skill assets to AWS S3.",
                 CommandOptionType.NoValue
             );
 
@@ -296,6 +318,13 @@ namespace FEHub.Utilities
                         ).RunAsync();
                     }
 
+                    if (scrapeSacredSealCosts.HasValue())
+                    {
+                        await new ScrapeSacredSealCostsScript(
+                            targetDirectory: targetPath.Value()
+                        ).RunAsync();
+                    }
+
                     if (scrapeSkills.HasValue())
                     {
                         await new ScrapeSkillsScript(
@@ -307,6 +336,24 @@ namespace FEHub.Utilities
                     {
                         await new ScrapeVoiceActorsScript(
                             targetDirectory: targetPath.Value()
+                        ).RunAsync();
+                    }
+
+                    #endregion
+
+                    #region Upload
+
+                    if (uploadHeroAssets.HasValue())
+                    {
+                        await new UploadHeroAssetsScript(
+                            sourceDirectory: sourcePath.Value()
+                        ).RunAsync();
+                    }
+
+                    if (uploadSkillAssets.HasValue())
+                    {
+                        await new UploadSkillAssetsScript(
+                            sourceDirectory: sourcePath.Value()
                         ).RunAsync();
                     }
 

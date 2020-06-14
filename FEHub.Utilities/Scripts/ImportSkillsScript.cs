@@ -67,6 +67,7 @@ namespace FEHub.Utilities.Scripts
                         Name = worksheet.Cells[i, 4].GetValue<string>(),
                         Description = worksheet.Cells[i, 5].GetValue<string>(),
                         GroupName = worksheet.Cells[i, 6].GetValue<string>(),
+                        IsAvailableAsSacredSeal = worksheet.Cells[i, 20].GetValue<bool>(),
                         IsExclusive = worksheet.Cells[i, 7].GetValue<bool>(),
                         SkillType = (SkillTypes)Enum.Parse(typeof(SkillTypes), worksheet.Cells[i, 2].GetValue<string>()),
                         WeaponRefineType = string.IsNullOrEmpty(worksheet.Cells[i, 3].GetValue<string>()) ? (WeaponRefineTypes?)null : (WeaponRefineTypes)Enum.Parse(typeof(WeaponRefineTypes), worksheet.Cells[i, 3].GetValue<string>()),

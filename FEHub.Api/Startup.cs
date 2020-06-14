@@ -4,6 +4,8 @@
 // </copyright>
 //-----------------------------------------------------------------------------
 
+using System.Linq;
+
 using FEHub.Api.GraphQL;
 using FEHub.Entity;
 
@@ -28,31 +30,42 @@ namespace FEHub.Api
 
         #region Properties
         public IConfiguration Configuration { get; }
-
-        public IWebHostEnvironment Environment { get; }
         #endregion
 
         #region Methods
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<FehContextFactory>();
+            FehContextFactory.ConnectionString = this.Configuration.GetConnectionString("FEHub");
 
+            services.AddSingleton<FehContextFactory>();
+            
             services
                 .AddSingleton<FehSchema>()
                 .AddGraphQL()
+                .AddGraphTypes(typeof(FehSchema))
                 .AddSystemTextJson()
-                .AddUserContextBuilder((httpContext) => new FehUserContext() { User = httpContext.User })
-                .AddDataLoader()
-                .AddGraphTypes(typeof(FehSchema));
+                .AddDataLoader();
 
             services.AddCors(
                 (configuration) =>
                 {
-                    configuration.AddDefaultPolicy(
+                    configuration.AddPolicy(
+                        "default",
                         (policyBuilder) =>
                         {
                             policyBuilder
                                 .AllowAnyOrigin()
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                        }
+                    );
+
+                    configuration.AddPolicy(
+                        "production",
+                        (policyBuilder) =>
+                        {
+                            policyBuilder
+                                .WithOrigins(this.Configuration.GetValue<string>("AllowedHosts").Split(";").Select(x => $"http://{x}").ToArray())
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                         }
@@ -67,14 +80,20 @@ namespace FEHub.Api
             {
                 applicationBuilder.UseDeveloperExceptionPage();
             }
-
-            applicationBuilder.UseCors();
+                
+            applicationBuilder.UseCors(
+                webHostEnvironment.IsDevelopment() 
+                    ? "default" 
+                    : "production"
+            );
 
             applicationBuilder.UseGraphQL<FehSchema>();
             applicationBuilder.UseGraphQLPlayground();
-            applicationBuilder.UseGraphQLVoyager();
 
-            applicationBuilder.UseStaticFiles();
+            if (webHostEnvironment.IsDevelopment())
+            {
+                applicationBuilder.UseGraphQLVoyager();
+            }
         }
         #endregion
     }

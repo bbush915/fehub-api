@@ -8,18 +8,33 @@ using System.Configuration;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Logging;
 
 namespace FEHub.Entity
 {
     public class FehContextFactory : IDesignTimeDbContextFactory<FehContext>
     {
         #region Fields
-        private static readonly ILoggerFactory _loggerFactory = LoggerFactory.Create(builder => { builder.AddDebug(); });
+        private static string _connectionString;
+        #endregion
 
-        private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["FEHub"]?.ConnectionString 
-            ?? "Data Source=localhost;Initial Catalog=FEHub;Integrated Security=true";
-            //?? @"Data Source=C:\Source\FEHub\fehub\fehub-api\FEHub.sqlite3;";
+        #region Properties
+        public static string ConnectionString
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_connectionString))
+                {
+                    return "Data Source=C:\\Source\\FEHub\\fehub\\fehub-api\\FEHub.sqlite3;";
+                }
+
+                return _connectionString;
+            }
+
+            set
+            {
+                _connectionString = value;
+            }
+        }
         #endregion
 
         #region Methods
@@ -32,10 +47,7 @@ namespace FEHub.Entity
         {
             var optionsBuilder = new DbContextOptionsBuilder();
 
-            optionsBuilder
-                .UseLoggerFactory(_loggerFactory)
-                .UseSqlServer(_connectionString);
-                //.UseSqlite(_connectionString);
+            optionsBuilder.UseSqlite(ConnectionString);
 
             return new FehContext(optionsBuilder.Options);
         }
