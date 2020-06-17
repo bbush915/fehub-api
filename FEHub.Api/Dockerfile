@@ -11,6 +11,9 @@ RUN wget -O aspnetcore.tar.gz https://dotnetcli.azureedge.net/dotnet/aspnetcore/
 COPY . /app
 WORKDIR /app
 
+RUN apk add --no-cache icu-libs
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+
 EXPOSE 5000
 
 ENTRYPOINT ["dotnet", "FEHub.Api.dll"]
