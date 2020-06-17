@@ -65,8 +65,7 @@ namespace FEHub.Api
                         (policyBuilder) =>
                         {
                             policyBuilder
-                                //.WithOrigins(this.Configuration.GetValue<string>("AllowedHosts").Split(";").Select(x => $"http://{x}").ToArray())
-                                .AllowAnyOrigin()
+                                .WithOrigins(this.Configuration.GetValue<string>("AllowedHosts").Split(";").Select(x => $"http://{x}").ToArray())
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                         }
