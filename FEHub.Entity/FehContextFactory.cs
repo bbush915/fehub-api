@@ -4,8 +4,6 @@
 // </copyright>
 //-----------------------------------------------------------------------------
 
-using System.Configuration;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
@@ -24,7 +22,7 @@ namespace FEHub.Entity
             {
                 if (string.IsNullOrEmpty(_connectionString))
                 {
-                    return "Data Source=C:\\Source\\FEHub\\fehub\\fehub-api\\FEHub.sqlite3;";
+                    return @"Server=DESKTOP-02BDJKR;Database=FEHub;Trusted_Connection=True";
                 }
 
                 return _connectionString;
@@ -47,7 +45,7 @@ namespace FEHub.Entity
         {
             var optionsBuilder = new DbContextOptionsBuilder();
 
-            optionsBuilder.UseSqlite(ConnectionString);
+            optionsBuilder.UseSqlServer(ConnectionString);
 
             return new FehContext(optionsBuilder.Options);
         }
