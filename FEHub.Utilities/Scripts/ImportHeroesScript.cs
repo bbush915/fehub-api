@@ -33,9 +33,9 @@ namespace FEHub.Utilities.Scripts
         #endregion
 
         #region Constructors
-        public ImportHeroesScript(FehContextFactory dbContextFactory, string sourceFile)
+        public ImportHeroesScript(FehContext dbContext, string sourceFile)
         {
-            this._dbContext = dbContextFactory.CreateDbContext();
+            this._dbContext = dbContext;
 
             this._sourceFiile = sourceFile;
 

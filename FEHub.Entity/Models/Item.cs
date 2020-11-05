@@ -20,9 +20,8 @@ namespace FEHub.Entity.Models
         Description = nameof(Resources.Item_Description),
         ResourceType = typeof(Resources)
     )]
-    public class Item : ITrackable
+    public sealed class Item : ITrackable
     {
-        #region Properties
         [Display(
             Name = nameof(Resources.Item_Id_Name),
             Description = nameof(Resources.Item_Id_Description),
@@ -78,16 +77,12 @@ namespace FEHub.Entity.Models
             ResourceType = typeof(Resources)
         )]
         public string Description { get; set; }
-        #endregion
     }
 
     internal sealed class ItemTypeConfiguration : IEntityTypeConfiguration<Item>
     {
-        #region Fields
         private const string TABLE_NAME = "Items";
-        #endregion
 
-        #region Methods
         public void Configure(EntityTypeBuilder<Item> entityTypeBuilder)
         {
             entityTypeBuilder
@@ -118,6 +113,5 @@ namespace FEHub.Entity.Models
                 .IsRequired()
                 .HasMaxLength(100);
         }
-        #endregion
     }
 }

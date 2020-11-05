@@ -22,17 +22,14 @@ namespace FEHub.Entity.Models
         Description = nameof(Resources.Hero_Description),
         ResourceType = typeof(Resources)
     )]
-    public class Hero : ITrackable
+    public sealed class Hero : ITrackable
     {
-        #region Constructors
         public Hero()
         {
             this.HeroSkills = new List<HeroSkill>();
             this.HeroVoiceActors = new List<HeroVoiceActor>();
         }
-        #endregion
 
-        #region Properties
         [Display(
             Name = nameof(Resources.Hero_Id_Name),
             Description = nameof(Resources.Hero_Id_Description),
@@ -290,24 +287,22 @@ namespace FEHub.Entity.Models
             Description = nameof(Resources.Hero_Artist_Description),
             ResourceType = typeof(Resources)
         )]
-        public virtual Artist Artist { get; set; }
+        public Artist Artist { get; set; }
 
         [Display(
             Name = nameof(Resources.Hero_HeroSkills_Name),
             Description = nameof(Resources.Hero_HeroSkills_Description),
             ResourceType = typeof(Resources)
         )]
-        public virtual List<HeroSkill> HeroSkills { get; set; }
+        public List<HeroSkill> HeroSkills { get; set; }
 
         [Display(
             Name = nameof(Resources.Hero_HeroVoiceActors_Name),
             Description = nameof(Resources.Hero_HeroVoiceActors_Description),
             ResourceType = typeof(Resources)
         )]
-        public virtual List<HeroVoiceActor> HeroVoiceActors { get; set; }
-        #endregion
+        public List<HeroVoiceActor> HeroVoiceActors { get; set; }
 
-        #region Methods
         public DamageTypes GetDamageType()
         {
             switch (this.Weapon)
@@ -318,21 +313,21 @@ namespace FEHub.Entity.Models
                 case Weapons.BOW:
                 case Weapons.DAGGER:
                 case Weapons.BEASTSTONE:
-                {
-                    return DamageTypes.PHYSICAL;
-                }
+                    {
+                        return DamageTypes.PHYSICAL;
+                    }
 
                 case Weapons.TOME:
                 case Weapons.STAFF:
                 case Weapons.DRAGONSTONE:
-                {
-                    return DamageTypes.MAGICAL;
-                }
+                    {
+                        return DamageTypes.MAGICAL;
+                    }
 
                 default:
-                {
-                    throw new Exception($"Unexpected weapon encountered: [{this.Weapon}]");
-                }
+                    {
+                        throw new Exception($"Unexpected weapon encountered: [{this.Weapon}]");
+                    }
             }
         }
 
@@ -345,34 +340,30 @@ namespace FEHub.Entity.Models
                 case Weapons.AXE:
                 case Weapons.DRAGONSTONE:
                 case Weapons.BEASTSTONE:
-                {
-                    return CombatTypes.MELEE;
-                }
+                    {
+                        return CombatTypes.MELEE;
+                    }
 
                 case Weapons.BOW:
                 case Weapons.DAGGER:
                 case Weapons.TOME:
                 case Weapons.STAFF:
-                {
-                    return CombatTypes.RANGED;
-                }
+                    {
+                        return CombatTypes.RANGED;
+                    }
 
                 default:
-                {
-                    throw new Exception($"Unexpected weapon encountered: [{this.Weapon}]");
-                }
+                    {
+                        throw new Exception($"Unexpected weapon encountered: [{this.Weapon}]");
+                    }
             }
         }
-        #endregion
     }
 
     internal sealed class HeroTypeConfiguration : IEntityTypeConfiguration<Hero>
     {
-        #region Fields
         private const string TABLE_NAME = "Heroes";
-        #endregion
 
-        #region Methods
         public void Configure(EntityTypeBuilder<Hero> entityTypeBuilder)
         {
             entityTypeBuilder
@@ -469,6 +460,5 @@ namespace FEHub.Entity.Models
                 .Property(x => x.Weapon)
                 .HasConversion<int>();
         }
-        #endregion
     }
 }

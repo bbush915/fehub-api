@@ -12,12 +12,10 @@ namespace FEHub.Api.GraphQL
 {
     internal sealed class FehSchema : Schema
     {
-        #region Constructors
         public FehSchema(IServiceProvider serviceProvider)
         : base(serviceProvider)
         {
             this.Query = (IObjectGraphType)serviceProvider.GetService(typeof(GqlQuery));
         }
-        #endregion
     }
 }

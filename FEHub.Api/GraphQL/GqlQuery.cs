@@ -7,19 +7,18 @@
 using System;
 using System.Collections.Generic;
 
-using FEHub.Api.Services;
-using FEHub.Entity;
+using FEHub.Api.Services.Interfaces;
 using FEHub.Entity.Models;
 
 using GraphQL;
 using GraphQL.Types;
+using GraphQL.Utilities;
 
 namespace FEHub.Api.GraphQL
 {
     internal sealed class GqlQuery : ObjectGraphType
     {
-        #region Constructors
-        public GqlQuery(FehContextFactory dbContextFactory)
+        public GqlQuery()
         {
             this
                 .Field<ListGraphType<GqlAccessory>, List<Accessory>>()
@@ -27,9 +26,8 @@ namespace FEHub.Api.GraphQL
                 .ResolveAsync(
                     (context) =>
                     {
-                        var service = new AccessoryService(dbContextFactory.CreateDbContext());
-
-                        return service.GetAllAsync();
+                        var accessoryService = context.RequestServices.GetRequiredService<IAccessoryService>();
+                        return accessoryService.GetAllAsync();
                     }
                 );
 
@@ -42,9 +40,8 @@ namespace FEHub.Api.GraphQL
                     {
                         var id = context.GetArgument<Guid>("id");
 
-                        var service = new AccessoryService(dbContextFactory.CreateDbContext());
-
-                        return service.GetByIdAsync(id);
+                        var accessoryService = context.RequestServices.GetRequiredService<IAccessoryService>();
+                        return accessoryService.GetByIdAsync(id);
                     }
                 );
 
@@ -54,9 +51,8 @@ namespace FEHub.Api.GraphQL
                 .ResolveAsync(
                     (context) =>
                     {
-                        var service = new ArtistService(dbContextFactory.CreateDbContext());
-
-                        return service.GetAllAsync();
+                        var artistService = context.RequestServices.GetRequiredService<IArtistService>();
+                        return artistService.GetAllAsync();
                     }
                 );
 
@@ -69,9 +65,8 @@ namespace FEHub.Api.GraphQL
                     {
                         var id = context.GetArgument<int>("id");
 
-                        var service = new ArtistService(dbContextFactory.CreateDbContext());
-
-                        return service.GetByIdAsync(id);
+                        var artistService = context.RequestServices.GetRequiredService<IArtistService>();
+                        return artistService.GetByIdAsync(id);
                     }
                 );
 
@@ -86,9 +81,8 @@ namespace FEHub.Api.GraphQL
                 .ResolveAsync(
                     (context) =>
                     {
-                        var service = new HeroService(dbContextFactory.CreateDbContext());
-
-                        return service.GetAllAsync();
+                        var heroService = context.RequestServices.GetRequiredService<IHeroService>();
+                        return heroService.GetAllAsync();
                     }
                 );
 
@@ -101,9 +95,8 @@ namespace FEHub.Api.GraphQL
                     {
                         var id = context.GetArgument<Guid>("id");
 
-                        var service = new HeroService(dbContextFactory.CreateDbContext());
-
-                        return service.GetByIdAsync(id);
+                        var heroService = context.RequestServices.GetRequiredService<IHeroService>();
+                        return heroService.GetByIdAsync(id);
                     }
                 );
 
@@ -113,9 +106,8 @@ namespace FEHub.Api.GraphQL
                 .ResolveAsync(
                     (context) =>
                     {
-                        var service = new ItemService(dbContextFactory.CreateDbContext());
-
-                        return service.GetAllAsync();
+                        var itemService = context.RequestServices.GetRequiredService<IItemService>();
+                        return itemService.GetAllAsync();
                     }
                 );
 
@@ -128,9 +120,8 @@ namespace FEHub.Api.GraphQL
                     {
                         var id = context.GetArgument<Guid>("id");
 
-                        var service = new ItemService(dbContextFactory.CreateDbContext());
-
-                        return service.GetByIdAsync(id);
+                        var itemService = context.RequestServices.GetRequiredService<IItemService>();
+                        return itemService.GetByIdAsync(id);
                     }
                 );
 
@@ -140,9 +131,8 @@ namespace FEHub.Api.GraphQL
                 .ResolveAsync(
                     (context) =>
                     {
-                        var service = new SkillService(dbContextFactory.CreateDbContext());
-
-                        return service.GetAllAsync();
+                        var skillService = context.RequestServices.GetRequiredService<ISkillService>();
+                        return skillService.GetAllAsync();
                     }
                 );
 
@@ -155,9 +145,8 @@ namespace FEHub.Api.GraphQL
                     {
                         var id = context.GetArgument<Guid>("id");
 
-                        var service = new SkillService(dbContextFactory.CreateDbContext());
-
-                        return service.GetByIdAsync(id);
+                        var skillService = context.RequestServices.GetRequiredService<ISkillService>();
+                        return skillService.GetByIdAsync(id);
                     }
                 );
 
@@ -167,9 +156,8 @@ namespace FEHub.Api.GraphQL
                 .ResolveAsync(
                     (context) =>
                     {
-                        var service = new VoiceActorService(dbContextFactory.CreateDbContext());
-
-                        return service.GetAllAsync();
+                        var voiceActorService = context.RequestServices.GetRequiredService<IVoiceActorService>();
+                        return voiceActorService.GetAllAsync();
                     }
                 );
 
@@ -182,12 +170,10 @@ namespace FEHub.Api.GraphQL
                     {
                         var id = context.GetArgument<int>("id");
 
-                        var service = new VoiceActorService(dbContextFactory.CreateDbContext());
-
-                        return service.GetByIdAsync(id);
+                        var voiceActorService = context.RequestServices.GetRequiredService<IVoiceActorService>();
+                        return voiceActorService.GetByIdAsync(id);
                     }
                 );
         }
-        #endregion
     }
 }

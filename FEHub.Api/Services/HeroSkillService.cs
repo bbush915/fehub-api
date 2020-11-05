@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using FEHub.Api.Services.Interfaces;
 using FEHub.Entity;
 using FEHub.Entity.Models;
 
@@ -17,30 +18,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FEHub.Api.Services
 {
-    internal sealed class HeroSkillService
+    public sealed class HeroSkillService : IHeroSkillService
     {
-        #region Fields
         private readonly FehContext _dbContext;
-        #endregion
 
-        #region Constructors
         public HeroSkillService(FehContext dbContext)
         {
             this._dbContext = dbContext;
         }
-        #endregion
 
-        #region Methods
-        public Task<ILookup<Guid, HeroSkill>> GetByHeroIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken)
+        public Task<ILookup<Guid, HeroSkill>> GetByHeroIdsAsync(IEnumerable<Guid> heroIds, CancellationToken cancellationToken = default)
         {
             return Task.FromResult(
                 this._dbContext
                     .HeroSkills
-                    .Include(x => x.Skill)
-                    .Where(x => ids.Contains(x.HeroId))
+                    .Where(x => heroIds.Contains(x.HeroId))
                     .ToLookup(x => x.HeroId)
             );
         }
-        #endregion
     }
 }

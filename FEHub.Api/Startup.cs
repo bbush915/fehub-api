@@ -4,74 +4,80 @@
 // </copyright>
 //-----------------------------------------------------------------------------
 
-using System.Linq;
-
 using FEHub.Api.GraphQL;
+using FEHub.Api.Options;
+using FEHub.Api.Services;
+using FEHub.Api.Services.Interfaces;
 using FEHub.Entity;
 
 using GraphQL.Server;
-
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace FEHub.Api
 {
-    internal sealed class Startup
+    public sealed class Startup
     {
-        #region Constructors
         public Startup(IConfiguration configuration)
         {
             this.Configuration = configuration;
         }
-        #endregion
 
-        #region Properties
         public IConfiguration Configuration { get; }
-        #endregion
 
-        #region Methods
         public void ConfigureServices(IServiceCollection services)
         {
-            FehContextFactory.ConnectionString = this.Configuration.GetConnectionString("FEHub");
+            services.AddCors(
+              (corsOptions) =>
+                  corsOptions.AddDefaultPolicy(
+                      (corsPolicyBuilder) =>
+                          corsPolicyBuilder
+                              .AllowAnyOrigin()
+                              .AllowAnyHeader()
+                              .AllowAnyMethod()
+                  )
+            );
 
-            services.AddSingleton<FehContextFactory>();
-            
+            var connectionString = this.Configuration.GetConnectionString("FEHub");
+
+            services.Configure<DatabaseOptions>(
+                (databaseOptions) =>
+                {
+                    databaseOptions.ConnectionString = connectionString;
+                }
+            );
+
+            services.AddDbContext<FehContext>(
+                (dbContextOptionsBuilder) => 
+                    dbContextOptionsBuilder.UseSqlServer(connectionString)
+            );
+
+            services.AddControllers();
+
+            services.AddScoped<IAccessoryService, Services.Ado.AccessoryService>();
+            services.AddScoped<IArtistService, Services.Ado.ArtistService>();
+            services.AddScoped(typeof(IEnumerationService<>), typeof(EnumerationService<>));
+            services.AddScoped<IHeroService, Services.Ado.HeroService>();
+            services.AddScoped<IHeroSkillService, Services.Ado.HeroSkillService>();
+            services.AddScoped<IHeroVoiceActorService, Services.Ado.HeroVoiceActorService>();
+            services.AddScoped<IItemService, Services.Ado.ItemService>();
+            services.AddScoped<ISkillMovementTypeService, Services.Ado.SkillMovementTypeService>();
+            services.AddScoped<ISkillService, Services.Ado.SkillService>();
+            services.AddScoped<ISkillWeaponEffectivenessService, Services.Ado.SkillWeaponEffectivenessService>();
+            services.AddScoped<ISkillWeaponTypeService, Services.Ado.SkillWeaponTypeService>();
+            services.AddScoped<IStatisticService, StatisticService>();
+            services.AddScoped<IVoiceActorService, Services.Ado.VoiceActorService>();
+
             services
                 .AddSingleton<FehSchema>()
                 .AddGraphQL()
                 .AddGraphTypes(typeof(FehSchema))
                 .AddSystemTextJson()
                 .AddDataLoader();
-
-            services.AddCors(
-                (configuration) =>
-                {
-                    configuration.AddPolicy(
-                        "default",
-                        (policyBuilder) =>
-                        {
-                            policyBuilder
-                                .AllowAnyOrigin()
-                                .AllowAnyHeader()
-                                .AllowAnyMethod();
-                        }
-                    );
-
-                    configuration.AddPolicy(
-                        "production",
-                        (policyBuilder) =>
-                        {
-                            policyBuilder
-                                .WithOrigins(this.Configuration.GetValue<string>("AllowedHosts").Split(";").Select(x => $"http://{x}").ToArray())
-                                .AllowAnyHeader()
-                                .AllowAnyMethod();
-                        }
-                    );
-                }
-            );
         }
 
         public void Configure(IApplicationBuilder applicationBuilder, IWebHostEnvironment webHostEnvironment)
@@ -80,12 +86,8 @@ namespace FEHub.Api
             {
                 applicationBuilder.UseDeveloperExceptionPage();
             }
-                
-            applicationBuilder.UseCors(
-                webHostEnvironment.IsDevelopment() 
-                    ? "default" 
-                    : "production"
-            );
+
+            applicationBuilder.UseCors();
 
             applicationBuilder.UseGraphQL<FehSchema>();
             applicationBuilder.UseGraphQLPlayground();
@@ -94,7 +96,15 @@ namespace FEHub.Api
             {
                 applicationBuilder.UseGraphQLVoyager();
             }
+
+            applicationBuilder.UseRouting();
+
+            applicationBuilder.UseEndpoints(
+                (endpointRouteBuilder) =>
+                {
+                    endpointRouteBuilder.MapControllers();
+                }
+            );
         }
-        #endregion
     }
 }

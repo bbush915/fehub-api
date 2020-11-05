@@ -29,9 +29,9 @@ namespace FEHub.Utilities.Scripts
         #endregion
 
         #region Constructors
-        public ImportAccessoriesScript(FehContextFactory dbContextFactory, string sourceFile)
+        public ImportAccessoriesScript(FehContext dbContext, string sourceFile)
         {
-            this._dbContext = dbContextFactory.CreateDbContext();
+            this._dbContext = dbContext;
 
             this._sourceFiile = sourceFile;
         }

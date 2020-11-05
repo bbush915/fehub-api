@@ -20,7 +20,7 @@ namespace FEHub.Entity.Models
         Description = nameof(Resources.SkillWeaponType_Description),
         ResourceType = typeof(Resources)
     )]
-    public class SkillWeaponType
+    public sealed class SkillWeaponType
     {
         [Display(
             Name = nameof(Resources.SkillWeaponType_Id_Name),
@@ -53,11 +53,8 @@ namespace FEHub.Entity.Models
 
     internal sealed class SkillWeaponTypeTypeConfiguration : IEntityTypeConfiguration<SkillWeaponType>
     {
-        #region Fields
         private const string TABLE_NAME = "SkillWeaponTypes";
-        #endregion
 
-        #region Methods
         public void Configure(EntityTypeBuilder<SkillWeaponType> entityTypeBuilder)
         {
             entityTypeBuilder
@@ -72,6 +69,5 @@ namespace FEHub.Entity.Models
                 .Property(x => x.Weapon)
                 .HasConversion<int>();
         }
-        #endregion
     }
 }

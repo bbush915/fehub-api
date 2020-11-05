@@ -15,9 +15,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FEHub.Entity.Models
 {
-    public class VoiceActor : ITrackable
+    public sealed class VoiceActor : ITrackable
     {
-        #region Properties
         [Display(
             Name = nameof(Resources.VoiceActor_Id_Name),
             Description = nameof(Resources.VoiceActor_Id_Description),
@@ -73,16 +72,12 @@ namespace FEHub.Entity.Models
             ResourceType = typeof(Resources)
         )]
         public string NameKanji { get; set; }
-        #endregion
     }
 
     internal sealed class VoiceActorTypeConfiguration : IEntityTypeConfiguration<VoiceActor>
     {
-        #region Fields
         private const string TABLE_NAME = "VoiceActors";
-        #endregion
 
-        #region Methods
         public void Configure(EntityTypeBuilder<VoiceActor> entityTypeBuilder)
         {
             entityTypeBuilder
@@ -108,6 +103,5 @@ namespace FEHub.Entity.Models
                 .Property(x => x.NameKanji)
                 .HasMaxLength(100);
         }
-        #endregion
     }
 }

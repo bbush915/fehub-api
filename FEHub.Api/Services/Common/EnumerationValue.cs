@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------------
-// <copyright file="Enumeration.cs">
+// <copyright file="EnumerationValue.cs">
 //     Copyright (c) 2020 by Bryan Bush. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------------
@@ -10,9 +10,8 @@ using System.Reflection;
 
 namespace FEHub.Api.Services.Common
 {
-    internal sealed class EnumerationValue
+    public sealed class EnumerationValue
     {
-        #region Constructors
         public EnumerationValue(Enum value)
         {
             this.Name = value.ToString();
@@ -26,13 +25,10 @@ namespace FEHub.Api.Services.Common
             this.Description = displayInfo.GetDescription();
             this.DisplayValue = displayInfo.GetName();
         }
-        #endregion
 
-        #region Properties
-        public string Name { get; private set; }
-        public string Description { get; private set; }
-        public string DisplayValue { get; private set; }
-        public int Value { get; private set; }
-        #endregion
+        public string Name { get; }
+        public string Description { get; }
+        public string DisplayValue { get; }
+        public int Value { get; }
     }
 }

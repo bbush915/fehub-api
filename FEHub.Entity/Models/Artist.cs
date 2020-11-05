@@ -20,9 +20,8 @@ namespace FEHub.Entity.Models
         Description = nameof(Resources.Artist_Description),
         ResourceType = typeof(Resources)
     )]
-    public class Artist : ITrackable
+    public sealed class Artist : ITrackable
     {
-        #region Properties
         [Display(
             Name = nameof(Resources.Artist_Id_Name),
             Description = nameof(Resources.Artist_Id_Description),
@@ -85,16 +84,12 @@ namespace FEHub.Entity.Models
             ResourceType = typeof(Resources)
         )]
         public string Company { get; set; }
-        #endregion
     }
 
     internal sealed class ArtistTypeConfiguration : IEntityTypeConfiguration<Artist>
     {
-        #region Fields
         private const string TABLE_NAME = "Artists";
-        #endregion
 
-        #region Methods
         public void Configure(EntityTypeBuilder<Artist> entityTypeBuilder)
         {
             entityTypeBuilder
@@ -124,6 +119,5 @@ namespace FEHub.Entity.Models
                 .Property(x => x.NameKanji)
                 .HasMaxLength(100);
         }
-        #endregion
     }
 }

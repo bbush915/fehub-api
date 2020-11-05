@@ -11,7 +11,6 @@ namespace FEHub.Api
 {
     public static class Program
     {
-        #region Methods
         public static void Main(string[] args)
         {
             CreateHostBuilder(args)
@@ -30,6 +29,5 @@ namespace FEHub.Api
                             .UseStartup<Startup>();
                     }
                 );
-        #endregion
     }
 }

@@ -9,8 +9,10 @@ using System.ComponentModel.DataAnnotations;
 
 using FEHub.Entity.Common.Enumerations;
 using FEHub.Entity.Interfaces;
+using FEHub.Entity.Models;
 using FEHub.Entity.Properties;
 
+using Bogus;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -21,9 +23,8 @@ namespace FEHub.Entity.Models
         Description = nameof(Resources.Accessory_Description),
         ResourceType = typeof(Resources)
     )]
-    public class Accessory : ITrackable
+    public sealed class Accessory : ITrackable
     {
-        #region Properties
         [Display(
             Name = nameof(Resources.Accessory_Id_Name),
             Description = nameof(Resources.Accessory_Id_Description),
@@ -93,16 +94,12 @@ namespace FEHub.Entity.Models
             ResourceType = typeof(Resources)
         )]
         public string Tag { get; set; }
-        #endregion
     }
 
     internal sealed class AccessoryTypeConfiguration : IEntityTypeConfiguration<Accessory>
     {
-        #region Fields
         private const string TABLE_NAME = "Accessories";
-        #endregion
 
-        #region Methods
         public void Configure(EntityTypeBuilder<Accessory> entityTypeBuilder)
         {
             entityTypeBuilder
@@ -142,6 +139,39 @@ namespace FEHub.Entity.Models
                 .IsRequired()
                 .HasMaxLength(100);
         }
-        #endregion
+    }
+}
+
+namespace FEHub.Entity.Common.Helpers
+{
+    public static partial class FakeHelpers
+    {
+        public static Faker<Accessory> Accessory(
+            Guid? id = null,
+            DateTime? createdAt = null,
+            string createdBy = null,
+            DateTime? modifiedAt = null,
+            string modifiedBy = null,
+            int? version = null,
+            string name = null,
+            string description = null,
+            AccessoryTypes? accessoryType = null,
+            string tag = null
+        )
+        {
+            var accessoryFaker = new Faker<Accessory>()
+                .RuleFor(x => x.Id, () => id ?? Guid.NewGuid())
+                .RuleFor(x => x.CreatedAt, (faker) => createdAt ?? faker.Date.Past())
+                .RuleFor(x => x.CreatedBy, (faker) => createdBy ?? faker.Random.Utf16String())
+                .RuleFor(x => x.ModifiedAt, (faker) => modifiedAt ?? faker.Date.Past())
+                .RuleFor(x => x.ModifiedBy, (faker) => modifiedBy ?? faker.Random.Utf16String())
+                .RuleFor(x => x.Version, (faker) => version ?? faker.Random.Int(1))
+                .RuleFor(x => x.Name, (faker) => name ?? faker.Random.Utf16String())
+                .RuleFor(x => x.Description, (faker) => description ?? faker.Random.Utf16String())
+                .RuleFor(x => x.AccessoryType, (faker) => accessoryType ?? faker.PickRandom<AccessoryTypes>())
+                .RuleFor(x => x.Tag, (faker) => tag ?? faker.Random.Utf16String());
+
+            return accessoryFaker;
+        }
     }
 }

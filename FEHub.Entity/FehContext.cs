@@ -8,6 +8,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
+using FEHub.Entity.Common;
 using FEHub.Entity.Interfaces;
 using FEHub.Entity.Models;
 
@@ -17,18 +18,11 @@ namespace FEHub.Entity
 {
     public class FehContext : DbContext
     {
-        #region Fields
-        private const string DEFAULT_USER = "SYSTEM";
-        #endregion
-
-        #region Constructors
         public FehContext(DbContextOptions dbContextOptions)
         : base(dbContextOptions)
         {
         }
-        #endregion
 
-        #region Properties
         public DbSet<Accessory> Accessories { get; set; }
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Hero> Heroes { get; set; }
@@ -40,9 +34,7 @@ namespace FEHub.Entity
         public DbSet<SkillWeaponEffectiveness> SkillWeaponEffectivenesses { get; set; }
         public DbSet<SkillWeaponType> SkillWeaponTypes { get; set; }
         public DbSet<VoiceActor> VoiceActors { get; set; }
-        #endregion
 
-        #region Methods
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
             this.UpdateTrackables();
@@ -62,11 +54,6 @@ namespace FEHub.Entity
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(FehContext).Assembly);
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseLazyLoadingProxies();
-        }
-
         private void UpdateTrackables()
         {
             var entries = this.ChangeTracker.Entries();
@@ -82,10 +69,10 @@ namespace FEHub.Entity
                         case EntityState.Added:
                         {
                             trackable.CreatedAt = utcNow;
-                            trackable.CreatedBy = DEFAULT_USER;
+                            trackable.CreatedBy = Constants.DefaultUser;
 
                             trackable.ModifiedAt = utcNow;
-                            trackable.ModifiedBy = DEFAULT_USER;
+                            trackable.ModifiedBy = Constants.DefaultUser;
 
                             trackable.Version = 1;
 
@@ -95,7 +82,7 @@ namespace FEHub.Entity
                         case EntityState.Modified:
                         {
                             trackable.ModifiedAt = utcNow;
-                            trackable.ModifiedBy = DEFAULT_USER;
+                            trackable.ModifiedBy = Constants.DefaultUser;
 
                             trackable.Version += 1;
 
@@ -105,6 +92,5 @@ namespace FEHub.Entity
                 }
             }
         }
-        #endregion
     }
 }

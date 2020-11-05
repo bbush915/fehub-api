@@ -9,20 +9,21 @@ using System.Collections.Generic;
 using System.Linq;
 
 using FEHub.Api.Services.Common;
+using FEHub.Api.Services.Interfaces;
 
 namespace FEHub.Api.Services
 {
-    internal sealed class EnumerationService<T>
+    public sealed class EnumerationService<T> : IEnumerationService<T>
     {
-        #region Methods
         public List<EnumerationValue> GetAll()
         {
-            return Enum
+            var enumerationValues = Enum
                 .GetValues(typeof(T))
                 .Cast<Enum>()
                 .Select(x => new EnumerationValue(x))
                 .ToList();
+
+            return enumerationValues;
         }
-        #endregion
     }
 }

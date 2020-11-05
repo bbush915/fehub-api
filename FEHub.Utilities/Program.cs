@@ -8,6 +8,8 @@ using FEHub.Entity;
 using FEHub.Utilities.Scripts;
 
 using McMaster.Extensions.CommandLineUtils;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace FEHub.Utilities
 {
@@ -181,14 +183,22 @@ namespace FEHub.Utilities
             application.OnExecuteAsync(
                 async (cancellationToken) =>
                 {
-                    var dbContextFactory = new FehContextFactory();
+                    var configurationBuilder = new ConfigurationBuilder();
+                    var configuration = configurationBuilder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).Build();
+
+                    var connectionString = configuration.GetConnectionString("FEHub");
+
+                    var dbContextOptionsBuilder = new DbContextOptionsBuilder();
+                    var dbContextOptions = dbContextOptionsBuilder.UseSqlServer(connectionString).Options;
+
+                    var dbContext = new FehContext(dbContextOptions);
 
                     #region Import
 
                     if (importAccessories.HasValue())
                     {
                         await new ImportAccessoriesScript(
-                            dbContextFactory,
+                            dbContext,
                             sourceFile: sourcePath.Value()
                         ).RunAsync();
                     }
@@ -196,7 +206,7 @@ namespace FEHub.Utilities
                     if (importArtists.HasValue())
                     {
                         await new ImportArtistsScript(
-                            dbContextFactory,
+                            dbContext,
                             sourceFile: sourcePath.Value()
                         ).RunAsync();
                     }
@@ -204,7 +214,7 @@ namespace FEHub.Utilities
                     if (importHeroes.HasValue())
                     {
                         await new ImportHeroesScript(
-                            dbContextFactory,
+                            dbContext,
                             sourceFile: sourcePath.Value()
                         ).RunAsync();
                     }
@@ -212,7 +222,7 @@ namespace FEHub.Utilities
                     if (importHeroSkills.HasValue())
                     {
                         await new ImportHeroSkillsScript(
-                            dbContextFactory,
+                            dbContext,
                             sourceFile: sourcePath.Value()
                         ).RunAsync();
                     }
@@ -220,7 +230,7 @@ namespace FEHub.Utilities
                     if (importHeroVoiceActors.HasValue())
                     {
                         await new ImportHeroVoiceActorsScript(
-                            dbContextFactory,
+                            dbContext,
                             sourceFile: sourcePath.Value()
                         ).RunAsync();
                     }
@@ -228,7 +238,7 @@ namespace FEHub.Utilities
                     if (importItems.HasValue())
                     {
                         await new ImportItemsScript(
-                            dbContextFactory,
+                            dbContext,
                             sourceFile: sourcePath.Value()
                         ).RunAsync();
                     }
@@ -236,7 +246,7 @@ namespace FEHub.Utilities
                     if (importSkills.HasValue())
                     {
                         await new ImportSkillsScript(
-                            dbContextFactory,
+                            dbContext,
                             sourceFile: sourcePath.Value()
                         ).RunAsync();
                     }
@@ -244,7 +254,7 @@ namespace FEHub.Utilities
                     if (importVoiceActors.HasValue())
                     {
                         await new ImportVoiceActorsScript(
-                            dbContextFactory,
+                            dbContext,
                             sourceFile: sourcePath.Value()
                         ).RunAsync();
                     }
@@ -256,7 +266,7 @@ namespace FEHub.Utilities
                     if (extractHeroAssets.HasValue())
                     {
                         await new ExtractHeroAssetsScript(
-                            dbContextFactory,
+                            dbContext,
                             sourceDirectory: sourcePath.Value(),
                             targetDirectory: targetPath.Value()
                         ).RunAsync();
@@ -265,7 +275,7 @@ namespace FEHub.Utilities
                     if (extractSkillAssets.HasValue())
                     {
                         await new ExtractSkillAssetsScript(
-                            dbContextFactory,
+                            dbContext,
                             sourceDirectory: sourcePath.Value(),
                             targetDirectory: targetPath.Value()
                         ).RunAsync();

@@ -19,9 +19,8 @@ namespace FEHub.Entity.Models
         Description = nameof(Resources.HeroSkill_Description),
         ResourceType = typeof(Resources)
     )]
-    public class HeroSkill
+    public sealed class HeroSkill
     {
-        #region Properties
         [Display(
             Name = nameof(Resources.HeroSkill_Id_Name),
             Description = nameof(Resources.HeroSkill_Id_Description),
@@ -69,17 +68,13 @@ namespace FEHub.Entity.Models
             Description = nameof(Resources.HeroSkill_Skill_Description),
             ResourceType = typeof(Resources)
         )]
-        public virtual Skill Skill { get; set; }
-        #endregion
+        public Skill Skill { get; set; }
     }
 
     internal sealed class HeroSkillTypeConfiguration : IEntityTypeConfiguration<HeroSkill>
     {
-        #region Fields
         private const string TABLE_NAME = "HeroSkills";
-        #endregion
 
-        #region Methods
         public void Configure(EntityTypeBuilder<HeroSkill> entityTypeBuilder)
         {
             entityTypeBuilder
@@ -91,6 +86,5 @@ namespace FEHub.Entity.Models
                 .WithMany()
                 .HasForeignKey(x => x.SkillId);
         }
-        #endregion
     }
 }

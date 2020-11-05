@@ -7,10 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.S3" Version="3.5.0" />
-    <PackageReference Include="CsvHelper" Version="15.0.5" />
-    <PackageReference Include="EPPlus" Version="5.3.0" />
-    <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="3.0.0" />
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.S3" Version="3.5.3.11" />
+    <PackageReference Include="CsvHelper" Version="15.0.9" />
+    <PackageReference Include="EPPlus" Version="5.4.0" />
+    <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="3.1.0-beta.356" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0-rc.2.20475.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0-rc.2.20475.5" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 

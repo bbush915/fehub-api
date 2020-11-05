@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using FEHub.Api.Services.Interfaces;
 using FEHub.Entity;
 using FEHub.Entity.Models;
 
@@ -16,44 +17,35 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FEHub.Api.Services
 {
-    internal sealed class VoiceActorService
+    public sealed class VoiceActorService : IVoiceActorService
     {
-        #region Fields
         private readonly FehContext _dbContext;
-        #endregion
 
-        #region Constructors
         public VoiceActorService(FehContext dbContext)
         {
             this._dbContext = dbContext;
         }
-        #endregion
 
-        #region Methods
-        public async Task<List<VoiceActor>> GetAllAsync()
+        public Task<List<VoiceActor>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            return await this._dbContext
+            return this._dbContext
                 .VoiceActors
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
         }
 
-        public async Task<IDictionary<int, VoiceActor>> GetByIdsAsync(IEnumerable<int> ids, CancellationToken cancellationToken)
+        public async Task<IDictionary<int, VoiceActor>> GetByIdsAsync(IEnumerable<int> ids, CancellationToken cancellationToken = default)
         {
             return await this._dbContext
                 .VoiceActors
                 .Where(x => ids.Contains(x.Id))
-                .ToDictionaryAsync(
-                    x => x.Id,
-                    y => y
-                );
+                .ToDictionaryAsync(k => k.Id, v => v, cancellationToken);
         }
 
-        public async Task<VoiceActor> GetByIdAsync(int id)
+        public Task<VoiceActor> GetByIdAsync(int id, CancellationToken cancellationToken = default)
         {
-            return await this._dbContext
+            return this._dbContext
                 .VoiceActors
-                .SingleOrDefaultAsync(x => x.Id == id);
+                .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
-        #endregion
     }
 }

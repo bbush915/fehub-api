@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using FEHub.Api.Services.Interfaces;
 using FEHub.Entity;
 using FEHub.Entity.Models;
 
@@ -17,44 +18,35 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FEHub.Api.Services
 {
-    internal sealed class SkillService
+    public sealed class SkillService : ISkillService
     {
-        #region Fields
         private readonly FehContext _dbContext;
-        #endregion
 
-        #region Constructors
         public SkillService(FehContext dbContext)
         {
             this._dbContext = dbContext;
         }
-        #endregion
 
-        #region Methods
-        public async Task<List<Skill>> GetAllAsync()
+        public Task<List<Skill>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            return await this._dbContext
+            return this._dbContext
                 .Skills
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
         }
 
-        public async Task<IDictionary<Guid, Skill>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken)
+        public async Task<IDictionary<Guid, Skill>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken = default)
         {
             return await this._dbContext
                 .Skills
                 .Where(x => ids.Contains(x.Id))
-                .ToDictionaryAsync(
-                    x => x.Id,
-                    y => y
-                );
+                .ToDictionaryAsync(k => k.Id, v => v, cancellationToken);
         }
 
-        public async Task<Skill> GetByIdAsync(Guid id)
+        public Task<Skill> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            return await this._dbContext
+            return this._dbContext
                 .Skills
-                .SingleOrDefaultAsync(x => x.Id == id);
+                .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
-        #endregion
     }
 }

@@ -6,8 +6,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
+using FEHub.Api.Services.Interfaces;
 using FEHub.Entity;
 using FEHub.Entity.Models;
 
@@ -15,33 +17,27 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FEHub.Api.Services
 {
-    internal sealed class ItemService
+    public sealed class ItemService : IItemService
     {
-        #region Fields
         private readonly FehContext _dbContext;
-        #endregion
 
-        #region Constructors
         public ItemService(FehContext dbContext)
         {
             this._dbContext = dbContext;
         }
-        #endregion
 
-        #region Methods
-        public async Task<List<Item>> GetAllAsync()
+        public Task<List<Item>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            return await this._dbContext
+            return this._dbContext
                 .Items
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
         }
 
-        public async Task<Item> GetByIdAsync(Guid id)
+        public Task<Item> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            return await this._dbContext
+            return this._dbContext
                 .Items
-                .SingleOrDefaultAsync(x => x.Id == id);
+                .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
-        #endregion
     }
 }

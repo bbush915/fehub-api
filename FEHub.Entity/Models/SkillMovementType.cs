@@ -20,7 +20,7 @@ namespace FEHub.Entity.Models
         Description = nameof(Resources.SkillMovementType_Description),
         ResourceType = typeof(Resources)
     )]
-    public class SkillMovementType
+    public sealed class SkillMovementType
     {
         [Display(
             Name = nameof(Resources.SkillMovementType_Id_Name),
@@ -46,11 +46,8 @@ namespace FEHub.Entity.Models
 
     internal sealed class SkillMovementTypeTypeConfiguration : IEntityTypeConfiguration<SkillMovementType>
     {
-        #region Fields
         private const string TABLE_NAME = "SkillMovementTypes";
-        #endregion
 
-        #region Methods
         public void Configure(EntityTypeBuilder<SkillMovementType> entityTypeBuilder)
         {
             entityTypeBuilder
@@ -61,6 +58,5 @@ namespace FEHub.Entity.Models
                 .Property(x => x.MovementType)
                 .HasConversion<int>();
         }
-        #endregion
     }
 }

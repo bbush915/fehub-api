@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using FEHub.Api.Services.Interfaces;
 using FEHub.Entity;
 using FEHub.Entity.Common.Enumerations;
 using FEHub.Entity.Models;
@@ -18,45 +19,27 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FEHub.Api.Services
 {
-    internal sealed class HeroVoiceActorService
+    public sealed class HeroVoiceActorService : IHeroVoiceActorService
     {
-        #region Fields
         private readonly FehContext _dbContext;
-        #endregion
 
-        #region Constructors
         public HeroVoiceActorService(FehContext dbContext)
         {
             this._dbContext = dbContext;
         }
-        #endregion
 
-        #region Methods
-        /// <summary>
-        ///     Gets a curried <see cref="GetByHeroIds(IEnumerable{Guid}, Languages)"/> to filter by the given language.
-        /// </summary>
-        /// <param name="language">
-        ///     The language filter.
-        /// </param>
-        /// <returns>
-        ///     A curried version of <see cref="GetByHeroIds(IEnumerable{Guid}, Languages)"/>.
-        /// </returns>
-        public Func<IEnumerable<Guid>, CancellationToken, Task<ILookup<Guid, HeroVoiceActor>>> GetByHeroIdsAsync(Languages language)
+        public Task<ILookup<Guid, HeroVoiceActor>> GetByHeroIdsAsync(IEnumerable<Guid> heroIds, Languages language, CancellationToken cancellationToken = default)
         {
-            return (IEnumerable<Guid> ids, CancellationToken cancellationToken) => Task.FromResult(this.GetByHeroIds(ids, language));
+            return Task.FromResult(
+                this._dbContext
+                    .HeroVoiceActors
+                    .Where(
+                        x =>
+                            heroIds.Contains(x.HeroId) &&
+                            (x.Language == language)
+                    )
+                    .ToLookup(x => x.HeroId)
+            );
         }
-
-        public ILookup<Guid, HeroVoiceActor> GetByHeroIds(IEnumerable<Guid> ids, Languages language)
-        {
-            return this._dbContext
-                .HeroVoiceActors
-                .Where(
-                    x =>
-                        ids.Contains(x.HeroId) &&
-                        (x.Language == language)
-                )
-                .ToLookup(x => x.HeroId);
-        }
-        #endregion
     }
 }

@@ -22,18 +22,15 @@ namespace FEHub.Entity.Models
         Description = nameof(Resources.Skill_Description),
         ResourceType = typeof(Resources)
     )]
-    public class Skill : ITrackable
+    public sealed class Skill : ITrackable
     {
-        #region Constructors
         public Skill()
         {
             this.SkillMovementTypes = new List<SkillMovementType>();
             this.SkillWeaponEffectivenesses = new List<SkillWeaponEffectiveness>();
             this.SkillWeaponTypes = new List<SkillWeaponType>();
         }
-        #endregion
 
-        #region Properties
         [Display(
             Name = nameof(Resources.Skill_Id_Name),
             Description = nameof(Resources.Skill_Id_Description),
@@ -200,31 +197,27 @@ namespace FEHub.Entity.Models
             Description = nameof(Resources.Skill_SkillMovementTypes_Description),
             ResourceType = typeof(Resources)
         )]
-        public virtual List<SkillMovementType> SkillMovementTypes { get; set; }
+        public List<SkillMovementType> SkillMovementTypes { get; set; }
 
         [Display(
             Name = nameof(Resources.Skill_SkillWeaponEffectivenesses_Name),
             Description = nameof(Resources.Skill_SkillWeaponEffectivenesses_Description),
             ResourceType = typeof(Resources)
         )]
-        public virtual List<SkillWeaponEffectiveness> SkillWeaponEffectivenesses { get; set; }
+        public List<SkillWeaponEffectiveness> SkillWeaponEffectivenesses { get; set; }
 
         [Display(
             Name = nameof(Resources.Skill_SkillWeaponTypes_Name),
             Description = nameof(Resources.Skill_SkillWeaponTypes_Description),
             ResourceType = typeof(Resources)
         )]
-        public virtual List<SkillWeaponType> SkillWeaponTypes { get; set; }
-        #endregion
+        public List<SkillWeaponType> SkillWeaponTypes { get; set; }
     }
 
     internal sealed class SkillTypeConfiguration : IEntityTypeConfiguration<Skill>
     {
-        #region Fields
         private const string TABLE_NAME = "Skills";
-        #endregion
 
-        #region Methods
         public void Configure(EntityTypeBuilder<Skill> entityTypeBuilder)
         {
             entityTypeBuilder
@@ -283,6 +276,5 @@ namespace FEHub.Entity.Models
                 .Property(x => x.WeaponRefineType)
                 .HasConversion<int?>();
         }
-        #endregion
     }
 }

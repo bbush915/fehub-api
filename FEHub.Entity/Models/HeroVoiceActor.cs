@@ -20,9 +20,8 @@ namespace FEHub.Entity.Models
         Description = nameof(Resources.HeroVoiceActor_Description),
         ResourceType = typeof(Resources)
     )]
-    public class HeroVoiceActor
+    public sealed class HeroVoiceActor
     {
-        #region Properties
         [Display(
             Name = nameof(Resources.HeroVoiceActor_Id_Name),
             Description = nameof(Resources.HeroVoiceActor_Id_Description),
@@ -63,17 +62,13 @@ namespace FEHub.Entity.Models
             Description = nameof(Resources.HeroVoiceActor_VoiceActor_Description),
             ResourceType = typeof(Resources)
         )]
-        public virtual VoiceActor VoiceActor { get; set; }
-        #endregion
+        public VoiceActor VoiceActor { get; set; }
     }
 
     internal sealed class HeroVoiceActorTypeConfiguration : IEntityTypeConfiguration<HeroVoiceActor>
     {
-        #region Fields
         private const string TABLE_NAME = "HeroVoiceActors";
-        #endregion
 
-        #region Methods
         public void Configure(EntityTypeBuilder<HeroVoiceActor> entityTypeBuilder)
         {
             entityTypeBuilder
@@ -89,6 +84,5 @@ namespace FEHub.Entity.Models
                 .WithMany()
                 .HasForeignKey(x => x.VoiceActorId);
         }
-        #endregion
     }
 }

@@ -27,9 +27,9 @@ namespace FEHub.Utilities.Scripts
         #endregion
 
         #region Constructors
-        public ExtractSkillAssetsScript(FehContextFactory dbContextFactory, string sourceDirectory, string targetDirectory, bool overwrite = false) 
+        public ExtractSkillAssetsScript(FehContext dbContext, string sourceDirectory, string targetDirectory, bool overwrite = false) 
         {
-            this._dbContext = dbContextFactory.CreateDbContext();
+            this._dbContext = dbContext;
 
             this._sourceDirectory = sourceDirectory;
             this._targetDirectory = targetDirectory;
