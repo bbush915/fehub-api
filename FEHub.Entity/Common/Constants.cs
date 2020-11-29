@@ -57,7 +57,7 @@ namespace FEHub.Entity.Common
                     public const string GetAll = "[dbo].[Skill_GetAll]";
                     public const string GetByIds = "[dbo].[Skill_GetByIds]";
                     public const string GetById = "[dbo].[Skill_GetById]";
-                    public const string QueryByName = "[dbo].[Skill_QueryByName]";
+                    public const string QueryByNameAndSkillType = "[dbo].[Skill_QueryByNameAndSkillType]";
                 }
 
                 public static class SkillMovementType

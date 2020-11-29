@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[Skill_QueryByName]
+﻿CREATE PROCEDURE [dbo].[Skill_QueryByNameAndSkillType]
 	@Name nvarchar(max),
 	@SkillType int = NULL
 AS
@@ -32,7 +32,7 @@ AS
 		WHERE
 			1 = 1
 			AND (CONVERT(varchar, S.[Name]) COLLATE SQL_Latin1_General_CP1_CI_AI LIKE '%' + @Name + '%')
-			AND ((@SkillType = 7) OR (S.[IsAvailableAsSacredSeal] = 1))
+			AND ((S.[SkillType] = @SkillType) OR (S.[IsAvailableAsSacredSeal] = 1))
 	ELSE
 		SELECT 
 			S.[Id],

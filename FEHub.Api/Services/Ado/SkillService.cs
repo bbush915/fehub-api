@@ -116,7 +116,7 @@ namespace FEHub.Api.Services.Ado
             using var command = connection.CreateCommand();
 
             command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = Constants.Database.StoredProcedures.Skill.QueryByName;
+            command.CommandText = Constants.Database.StoredProcedures.Skill.QueryByNameAndSkillType;
 
             command.Parameters.Add("Name", SqlDbType.NVarChar).Value = name;
             command.Parameters.Add("SkillType", SqlDbType.Int).Value = skillType;
