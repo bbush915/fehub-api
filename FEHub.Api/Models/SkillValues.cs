@@ -6,7 +6,7 @@
 
 namespace FEHub.Api.Models
 {
-    public struct SkillValues
+    public sealed class SkillValues
     {
         public int HitPointsModifier { get; set; }
         public int AttackModifier { get; set; }

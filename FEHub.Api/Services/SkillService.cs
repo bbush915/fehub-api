@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 using FEHub.Api.Services.Interfaces;
 using FEHub.Entity;
+using FEHub.Entity.Common.Enumerations;
 using FEHub.Entity.Models;
 
 using Microsoft.EntityFrameworkCore;
@@ -47,6 +48,30 @@ namespace FEHub.Api.Services
             return this._dbContext
                 .Skills
                 .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
+        }
+
+        public Task<List<Skill>> QueryByNameAndSkillTypeAsync(string name, SkillTypes? skillType = null, CancellationToken cancellationToken = default)
+        {
+            if (skillType == SkillTypes.SACRED_SEAL)
+            {
+                return this._dbContext
+                    .Skills
+                    .Where(
+                        x => 
+                            x.Name.Contains(name) && 
+                            (x.SkillType == skillType || x.IsAvailableAsSacredSeal)
+                    )
+                    .ToListAsync(cancellationToken);
+            }
+
+            return this._dbContext
+                .Skills
+                .Where(
+                    x => 
+                        x.Name.Contains(name) &&
+                        ((skillType == null) || (x.SkillType == skillType))
+                )
+                .ToListAsync(cancellationToken);
         }
     }
 }

@@ -6,7 +6,7 @@
 
 namespace FEHub.Api.Models
 {
-    public struct HeroValues
+    public sealed class HeroValues
     {
         public int BVID { get; set; }
         public int BaseHitPoints { get; set; }

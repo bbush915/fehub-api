@@ -2535,12 +2535,12 @@ namespace FEHub.Api.Services
             var baseStatisticValue = GetBaseValue(context, statistic);
 
             return baseStatisticValue.AdjustedBaseValue
+                + GetSummonerSupportBonus(context, statistic)
                 + GetRarityBonus(context, statistic)
                 + GetLevelBonus(context, statistic)
                 + GetMergeBonus(context, statistic)
                 + GetDragonflowerBonus(context, statistic)
-                + GetSkillBonus(context, statistic)
-                + GetSummonerSupportBonus(context, statistic);
+                + GetSkillBonus(context, statistic);
         }
 
         private static BaseStatisticValue[] GetBaseValues(StatisticValueContext context)
@@ -2723,7 +2723,7 @@ namespace FEHub.Api.Services
 
             for (var i = 0; i < 9; i++)
             {
-                growthVector[i + 32] = Convert.ToBoolean((hiBytes >> i) & 1);
+                growthVector[(i - 1) + 32] = Convert.ToBoolean((hiBytes >> i) & 1);
             }
 
             return growthVector;
@@ -2790,117 +2790,9 @@ namespace FEHub.Api.Services
             }
         }
 
-        private static int GetMergeBonus(StatisticValueContext context, Statistics statistic)
-        {
-            if (context.Merges == 0)
-            {
-                return 0;
-            }
-
-            var baseStatisticValues = GetBaseValues(context);
-
-            var statisticValueOrdinal = baseStatisticValues
-                .OrderByDescending(x => x.AdjustedBaseValue)
-                .ThenBy(x => x.Ordinal)
-                .ToList()
-                .FindIndex(x => x.Statistic == statistic);
-
-            var mergeBonus = (int)Math.Floor((2 * context.Merges - statisticValueOrdinal) / 5.0) + 1;
-
-            if (!context.Flaw.HasValue && statisticValueOrdinal < 4)
-            {
-                mergeBonus++;
-            }
-
-            return mergeBonus;
-        }
-
-        private static int GetDragonflowerBonus(StatisticValueContext context, Statistics statistic)
-        {
-            if (context.Dragonflowers == 0)
-            {
-                return 0;
-            }
-
-            var baseStatisticValues = GetBaseValues(context);
-
-            var statisticValueOrdinal = baseStatisticValues
-                .OrderByDescending(x => x.AdjustedBaseValue)
-                .ThenBy(x => x.Ordinal)
-                .ToList()
-                .FindIndex(x => x.Statistic == statistic);
-
-            var dragonflowerBonus = (int)Math.Floor((2 * context.Dragonflowers - statisticValueOrdinal) / 5.0) + 1;
-
-            return dragonflowerBonus;
-        }
-
-        private static int GetSkillBonus(StatisticValueContext context, Statistics statistic)
-        {
-            if (!context.IncludeSkillBonuses)
-            {
-                return 0;
-            }
-
-            var skillBonus = 0;
-
-            if (context.Weapon.HasValue)
-            {
-                skillBonus += GetSkillBonusHelper(context.Weapon.Value, statistic);
-            }
-
-            if (context.PassiveA.HasValue)
-            {
-                skillBonus += GetSkillBonusHelper(context.PassiveA.Value, statistic);
-            }
-
-            if (context.SacredSeal.HasValue)
-            {
-                skillBonus += GetSkillBonusHelper(context.SacredSeal.Value, statistic);
-            }
-
-            return skillBonus;
-        }
-
-        private static int GetSkillBonusHelper(SkillValues skillValues, Statistics statistic)
-        {
-            switch (statistic)
-            {
-                case Statistics.HIT_POINTS:
-                {
-                    return skillValues.HitPointsModifier;
-                }
-
-                case Statistics.ATTACK:
-                {
-                    return skillValues.AttackModifier;
-                }
-
-                case Statistics.SPEED:
-                {
-                    return skillValues.SpeedModifier;
-                }
-
-                case Statistics.DEFENSE:
-                {
-                    return skillValues.DefenseModifier;
-                }
-
-                case Statistics.RESISTANCE:
-                {
-                    return skillValues.ResistanceModifier;
-                }
-
-                default:
-                {
-                    throw new Exception($"Unexpected statistic encountered: [{statistic}]");
-                }
-            }
-        }
-
         private static int GetSummonerSupportBonus(StatisticValueContext context, Statistics statistic)
         {
-            if (context.SummonerSupportRank.HasValue)
+            if (!context.SummonerSupportRank.HasValue)
             {
                 return 0;
             }
@@ -3014,6 +2906,114 @@ namespace FEHub.Api.Services
             }
 
             return 0;
+        }
+
+        private static int GetMergeBonus(StatisticValueContext context, Statistics statistic)
+        {
+            if (context.Merges == 0)
+            {
+                return 0;
+            }
+
+            var baseStatisticValues = GetBaseValues(context);
+
+            var statisticValueOrdinal = baseStatisticValues
+                .OrderByDescending(x => x.AdjustedBaseValue)
+                .ThenBy(x => x.Ordinal)
+                .ToList()
+                .FindIndex(x => x.Statistic == statistic);
+
+            var mergeBonus = (int)Math.Floor((2 * context.Merges - statisticValueOrdinal) / 5.0) + 1;
+
+            if (!context.Flaw.HasValue && statisticValueOrdinal < 4)
+            {
+                mergeBonus++;
+            }
+
+            return mergeBonus;
+        }
+
+        private static int GetDragonflowerBonus(StatisticValueContext context, Statistics statistic)
+        {
+            if (context.Dragonflowers == 0)
+            {
+                return 0;
+            }
+
+            var baseStatisticValues = GetBaseValues(context);
+
+            var statisticValueOrdinal = baseStatisticValues
+                .OrderByDescending(x => x.AdjustedBaseValue)
+                .ThenBy(x => x.Ordinal)
+                .ToList()
+                .FindIndex(x => x.Statistic == statistic);
+
+            var dragonflowerBonus = (int)Math.Floor((context.Dragonflowers - statisticValueOrdinal - 1) / 5.0 + 1);
+
+            return dragonflowerBonus;
+        }
+
+        private static int GetSkillBonus(StatisticValueContext context, Statistics statistic)
+        {
+            if (!context.IncludeSkillBonuses)
+            {
+                return 0;
+            }
+
+            var skillBonus = 0;
+
+            if (context.Weapon != null)
+            {
+                skillBonus += GetSkillBonusHelper(context.Weapon, statistic);
+            }
+
+            if (context.PassiveA != null)
+            {
+                skillBonus += GetSkillBonusHelper(context.PassiveA, statistic);
+            }
+
+            if (context.SacredSeal != null)
+            {
+                skillBonus += GetSkillBonusHelper(context.SacredSeal, statistic);
+            }
+
+            return skillBonus;
+        }
+
+        private static int GetSkillBonusHelper(SkillValues skillValues, Statistics statistic)
+        {
+            switch (statistic)
+            {
+                case Statistics.HIT_POINTS:
+                {
+                    return skillValues.HitPointsModifier;
+                }
+
+                case Statistics.ATTACK:
+                {
+                    return skillValues.AttackModifier;
+                }
+
+                case Statistics.SPEED:
+                {
+                    return skillValues.SpeedModifier;
+                }
+
+                case Statistics.DEFENSE:
+                {
+                    return skillValues.DefenseModifier;
+                }
+
+                case Statistics.RESISTANCE:
+                {
+                    return skillValues.ResistanceModifier;
+                }
+
+                default:
+                {
+                    throw new Exception($"Unexpected statistic encountered: [{statistic}]");
+                }
+            }
         }
     }
 }

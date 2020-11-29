@@ -16,7 +16,7 @@
     <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SqlServerVerification>False</SqlServerVerification>
@@ -24,6 +24,7 @@
     <TargetDatabaseSet>True</TargetDatabaseSet>
     <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
     <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -98,5 +99,7 @@
     <Build Include="dbo\Stored Procedures\Skill_GetById.sql" />
     <Build Include="dbo\Stored Procedures\Skill_GetByIds.sql" />
     <Build Include="dbo\Stored Procedures\HeroVoiceActor_GetByHeroIds.sql" />
+    <Build Include="dbo\Stored Procedures\Hero_QueryByName.sql" />
+    <Build Include="dbo\Stored Procedures\Skill_QueryByName.sql" />
   </ItemGroup>
 </Project>

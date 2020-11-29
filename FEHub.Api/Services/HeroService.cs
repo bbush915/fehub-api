@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -38,6 +39,14 @@ namespace FEHub.Api.Services
             return this._dbContext
                 .Heroes
                 .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
+        }
+
+        public Task<List<Hero>> QueryByNameAsync(string name, CancellationToken cancellationToken = default)
+        {
+            return this._dbContext
+                .Heroes
+                .Where(x => x.Name.Contains(name))
+                .ToListAsync(cancellationToken);
         }
     }
 }

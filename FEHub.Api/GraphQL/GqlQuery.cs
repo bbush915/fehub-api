@@ -7,7 +7,10 @@
 using System;
 using System.Collections.Generic;
 
+using FEHub.Api.GraphQL.Inputs;
+using FEHub.Api.Models;
 using FEHub.Api.Services.Interfaces;
+using FEHub.Entity.Common.Enumerations;
 using FEHub.Entity.Models;
 
 using GraphQL;
@@ -101,6 +104,20 @@ namespace FEHub.Api.GraphQL
                 );
 
             this
+                .Field<ListGraphType<GqlHero>, List<Hero>>()
+                .Name("queryHeroesByName")
+                .Argument<NonNullGraphType<StringGraphType>>("name")
+                .ResolveAsync(
+                    (context) =>
+                    {
+                        var name = context.GetArgument<string>("name");
+
+                        var heroService = context.RequestServices.GetRequiredService<IHeroService>();
+                        return heroService.QueryByNameAsync(name);
+                    }
+                );
+
+            this
                 .Field<ListGraphType<GqlItem>, List<Item>>()
                 .Name("items")
                 .ResolveAsync(
@@ -147,6 +164,52 @@ namespace FEHub.Api.GraphQL
 
                         var skillService = context.RequestServices.GetRequiredService<ISkillService>();
                         return skillService.GetByIdAsync(id);
+                    }
+                );
+
+            this
+                .Field<ListGraphType<GqlSkill>, List<Skill>>()
+                .Name("querySkillsByNameAndSkillType")
+                .Argument<NonNullGraphType<StringGraphType>>("name")
+                .Argument<IntGraphType>("skillType")
+                .ResolveAsync(
+                    (context) =>
+                    {
+                        var name = context.GetArgument<string>("name");
+                        var skillType = context.GetArgument<SkillTypes?>("skillType");
+
+                        var skillService = context.RequestServices.GetRequiredService<ISkillService>();
+                        return skillService.QueryByNameAndSkillTypeAsync(name, skillType);
+                    }
+                );
+
+            this
+                .Field<GqlStatisticValues, StatisticValues>()
+                .Name("calculateHeroStatistics")
+                .Argument<GqlStatisticValueContext>("statisticValueContext")
+                .Resolve(
+                    (context) =>
+                    {
+                        var statisticValueContext = context.GetArgument<StatisticValueContext>("statisticValueContext");
+
+                        var statisticService = context.RequestServices.GetRequiredService<IStatisticService>();
+                        return statisticService.GetValues(statisticValueContext);
+                    }
+                );
+
+            this
+                .Field<IntGraphType, int>()
+                .Name("calculateHeroStatistic")
+                .Argument<GqlStatisticValueContext>("statisticValueContext")
+                .Argument<IntGraphType>("statistic")
+                .Resolve(
+                    (context) =>
+                    {
+                        var statisticValueContext = context.GetArgument<StatisticValueContext>("statisticValueContext");
+                        var statistic = context.GetArgument<Statistics>("statistic");
+
+                        var statisticService = context.RequestServices.GetRequiredService<IStatisticService>();
+                        return statisticService.GetValue(statisticValueContext, statistic);
                     }
                 );
 

@@ -33,6 +33,7 @@ namespace FEHub.Entity.Common
                 {
                     public const string GetAll = "[dbo].[Hero_GetAll]";
                     public const string GetById = "[dbo].[Hero_GetById]";
+                    public const string QueryByName = "[dbo].[Hero_QueryByName]";
                 }
 
                 public static class HeroSkill
@@ -56,6 +57,7 @@ namespace FEHub.Entity.Common
                     public const string GetAll = "[dbo].[Skill_GetAll]";
                     public const string GetByIds = "[dbo].[Skill_GetByIds]";
                     public const string GetById = "[dbo].[Skill_GetById]";
+                    public const string QueryByName = "[dbo].[Skill_QueryByName]";
                 }
 
                 public static class SkillMovementType

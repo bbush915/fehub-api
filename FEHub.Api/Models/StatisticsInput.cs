@@ -1,16 +1,18 @@
 ﻿//-----------------------------------------------------------------------------
-// <copyright file="StatisticValueContext.cs">
+// <copyright file="StatisticsInput.cs">
 //     Copyright (c) 2020 by Bryan Bush. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------------
+
+using System;
 
 using FEHub.Entity.Common.Enumerations;
 
 namespace FEHub.Api.Models
 {
-    public sealed class StatisticValueContext
+    public struct StatisticsInput
     {
-        public HeroValues Hero { get; set; }
+        public Guid HeroId { get; set; }
 
         public SummonerSupportRanks? SummonerSupportRank { get; set; }
 
@@ -23,8 +25,8 @@ namespace FEHub.Api.Models
         public Statistics? Flaw { get; set; }
 
         public bool IncludeSkillBonuses { get; set; }
-        public SkillValues Weapon { get; set; }
-        public SkillValues PassiveA { get; set; }
-        public SkillValues SacredSeal { get; set; }
+        public Guid? WeaponId { get; set; }
+        public Guid? PassiveAId { get; set; }
+        public Guid? SacredSealId { get; set; }
     }
 }

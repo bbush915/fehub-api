@@ -107,6 +107,33 @@ namespace FEHub.Api.Services.Ado
             return skill;
         }
 
+        public async Task<List<Skill>> QueryByNameAndSkillTypeAsync(string name, SkillTypes? skillType = null, CancellationToken cancellationToken = default)
+        {
+            using var connection = new SqlConnection(this._connectionString);
+
+            await connection.OpenAsync(cancellationToken);
+
+            using var command = connection.CreateCommand();
+
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = Constants.Database.StoredProcedures.Skill.QueryByName;
+
+            command.Parameters.Add("Name", SqlDbType.NVarChar).Value = name;
+            command.Parameters.Add("SkillType", SqlDbType.Int).Value = skillType;
+
+            using var reader = await command.ExecuteReaderAsync(cancellationToken);
+
+            var skills = new List<Skill>();
+
+            while (await reader.ReadAsync(cancellationToken))
+            {
+                var skill = BuildSkill(reader);
+                skills.Add(skill);
+            }
+
+            return skills;
+        }
+
         private static Skill BuildSkill(SqlDataReader reader)
         {
             var skill = new Skill()

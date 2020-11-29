@@ -18,5 +18,7 @@ namespace FEHub.Api.Services.Interfaces
         Task<List<Hero>> GetAllAsync(CancellationToken cancellationToken = default);
 
         Task<Hero> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
+
+        Task<List<Hero>> QueryByNameAsync(string name, CancellationToken cancellationToken = default);
     }
 }

@@ -79,6 +79,32 @@ namespace FEHub.Api.Services.Ado
             return hero;
         }
 
+        public async Task<List<Hero>> QueryByNameAsync(string name, CancellationToken cancellationToken = default)
+        {
+            using var connection = new SqlConnection(this._connectionString);
+
+            await connection.OpenAsync(cancellationToken);
+
+            using var command = connection.CreateCommand();
+
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = Constants.Database.StoredProcedures.Hero.QueryByName;
+
+            command.Parameters.Add("Name", SqlDbType.NVarChar).Value = name;
+
+            using var reader = await command.ExecuteReaderAsync(cancellationToken);
+
+            var heroes = new List<Hero>();
+
+            while (await reader.ReadAsync(cancellationToken))
+            {
+                var hero = BuildHero(reader);
+                heroes.Add(hero);
+            }
+
+            return heroes;
+        }
+
         private static Hero BuildHero(SqlDataReader reader)
         {
             var hero = new Hero()
