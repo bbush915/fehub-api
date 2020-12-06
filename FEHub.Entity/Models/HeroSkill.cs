@@ -7,8 +7,11 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
+using FEHub.Entity.Models;
 using FEHub.Entity.Properties;
 
+using Bogus;
+using Bogus.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -85,6 +88,32 @@ namespace FEHub.Entity.Models
                 .HasOne(x => x.Skill)
                 .WithMany()
                 .HasForeignKey(x => x.SkillId);
+        }
+    }
+}
+
+namespace FEHub.Entity.Common.Helpers
+{
+    public static partial class FakeHelpers
+    {
+        public static Faker<HeroSkill> HeroSkill(
+            int? id = null,
+            Guid? heroId = null,
+            Guid? skillId = null,
+            int? skillPosition = null,
+            int? defaultRarity = Constants.Faker.NullableIntDefault,
+            int? unlockRarity = null
+        )
+        {
+            var heroSkillFaker = new Faker<HeroSkill>()
+                .RuleFor(x => x.Id, (faker) => id ?? faker.Random.Int(1))
+                .RuleFor(x => x.HeroId, () => heroId ?? Guid.NewGuid())
+                .RuleFor(x => x.SkillId, () => skillId ?? Guid.NewGuid())
+                .RuleFor(x => x.SkillPosition, (faker) => skillPosition ?? faker.Random.Int(1, 5))
+                .RuleFor(x => x.DefaultRarity, (faker) => (defaultRarity == Constants.Faker.NullableIntDefault) ? faker.Random.Int(1, 5).OrNull(faker) : defaultRarity)
+                .RuleFor(x => x.UnlockRarity, (faker) => unlockRarity ?? faker.Random.Int(1, 5));
+
+            return heroSkillFaker;
         }
     }
 }

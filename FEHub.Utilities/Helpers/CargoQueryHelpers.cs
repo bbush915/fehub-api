@@ -19,13 +19,10 @@ namespace FEHub.Utilities.Helpers
 {
     internal static class CargoQueryHelpers
     {
-        #region Fields
+        private const int BATCH_SIZE = 500;
+
         private static readonly HttpClient _httpClient = new HttpClient() { BaseAddress = new Uri("https://feheroes.gamepedia.com/api.php") };
 
-        private const int BATCH_SIZE = 500;
-        #endregion
-
-        #region Methods
         public static async Task<List<JToken>> GetAsync(Dictionary<string, string> queryParameters)
         {
             var results = new List<JToken>();
@@ -73,6 +70,5 @@ namespace FEHub.Utilities.Helpers
 
             return content.SelectTokens("$.cargoquery[*].title").ToList();
         }
-        #endregion
     }
 }

@@ -22,18 +22,13 @@ namespace FEHub.Utilities.Scripts
 {
     internal sealed class ScrapeSkillsScript : BaseScript
     {
-        #region Fields
         private readonly string _targetDirectory;
-        #endregion
 
-        #region Constructors
         public ScrapeSkillsScript(string targetDirectory)
         {
             this._targetDirectory = targetDirectory;
         }
-        #endregion
 
-        #region Methods
         public override async Task RunAsync()
         {
             var skills = await this.FetchAsync();
@@ -90,12 +85,9 @@ namespace FEHub.Utilities.Scripts
                     .Select(x => new SkillRecord(x))
             );
         }
-        #endregion
 
-        #region Classes
         private sealed class SkillRecord
         {
-            #region Constructors
             public SkillRecord(JToken skill)
             {
                 this.GroupName = skill["GroupName"].Value<string>();
@@ -121,9 +113,7 @@ namespace FEHub.Utilities.Scripts
                 this.SkillBuildCost = skill["SkillBuildCost"].Value<string>();
                 this.Properties = skill["Properties"].Value<string>();
             }
-            #endregion
 
-            #region Properties
             public string GroupName { get; set; }
             public string Name { get; set; }
             public string WikiName { get; set; }
@@ -146,8 +136,6 @@ namespace FEHub.Utilities.Scripts
             public string WeaponEffectiveness { get; set; }
             public string SkillBuildCost { get; set; }
             public string Properties { get; set; }
-            #endregion
         }
-        #endregion
     }
 }

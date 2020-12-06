@@ -10,8 +10,11 @@ using System.ComponentModel.DataAnnotations;
 
 using FEHub.Entity.Common.Enumerations;
 using FEHub.Entity.Interfaces;
+using FEHub.Entity.Models;
 using FEHub.Entity.Properties;
 
+using Bogus;
+using Bogus.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -459,6 +462,91 @@ namespace FEHub.Entity.Models
             entityTypeBuilder
                 .Property(x => x.Weapon)
                 .HasConversion<int>();
+        }
+    }
+}
+
+namespace FEHub.Entity.Common.Helpers
+{
+    public static partial class FakeHelpers
+    {
+        public static Faker<Hero> Hero(
+            Guid? id = null,
+            DateTime? createdAt = null,
+            string createdBy = null,
+            DateTime? modifiedAt = null,
+            string modifiedBy = null,
+            int? version = null,
+            string name = null,
+            string title = null,
+            string description = null,
+            string origin = null,
+            Genders? gender = null,
+            DateTime? additionDate = null,
+            DateTime? releasseDate = null,
+            int? artistId = null,
+            bool? isLegendaryHero = null,
+            bool? isMythicHero = null,
+            Elements? element = (Elements)Constants.Faker.NullableIntDefault,
+            LegendaryHeroBoostTypes? legendaryHeroBoostType = (LegendaryHeroBoostTypes)Constants.Faker.NullableIntDefault,
+            MythicHeroBoostTypes? mythicHeroBoostType = (MythicHeroBoostTypes)Constants.Faker.NullableIntDefault,
+            bool? isDuoHero = null,
+            bool? isResplendentHero = null,
+            Colors? color = null,
+            Weapons? weapon = null,
+            MovementTypes? movementType = null,
+            int? bvid = null,
+            int? baseHitPoints = null,
+            int? hitPointsGrowthRate = null,
+            int? baseAttack = null,
+            int? attackGrowthRate = null,
+            int? baseSpeed = null,
+            int? speedGrowthRate = null,
+            int? baseDefense = null,
+            int? defenseGrowthRate = null,
+            int? baseResistance = null,
+            int? resistanceGrowthRate = null,
+            string tag = null
+        )
+        {
+            var heroFaker = new Faker<Hero>()
+                .RuleFor(x => x.Id, () => id ?? Guid.NewGuid())
+                .RuleFor(x => x.CreatedAt, (faker) => createdAt ?? faker.Date.Past())
+                .RuleFor(x => x.CreatedBy, (faker) => createdBy ?? faker.Random.Utf16String())
+                .RuleFor(x => x.ModifiedAt, (faker) => modifiedAt ?? faker.Date.Past())
+                .RuleFor(x => x.ModifiedBy, (faker) => modifiedBy ?? faker.Random.Utf16String())
+                .RuleFor(x => x.Version, (faker) => version ?? faker.Random.Int(1))
+                .RuleFor(x => x.Name, (faker) => name ?? faker.Random.Utf16String())
+                .RuleFor(x => x.Title, (faker) => title ?? faker.Random.Utf16String())
+                .RuleFor(x => x.Description, (faker) => description ?? faker.Random.Utf16String())
+                .RuleFor(x => x.Origin, (faker) => origin ?? faker.Random.Utf16String())
+                .RuleFor(x => x.Gender, (faker) => gender ?? faker.PickRandom<Genders>())
+                .RuleFor(x => x.AdditionDate, (faker) => additionDate ?? faker.Date.Past())
+                .RuleFor(x => x.ReleaseDate, (faker) => releasseDate ?? faker.Date.Past())
+                .RuleFor(x => x.ArtistId, (faker) => artistId ?? faker.Random.Int(1))
+                .RuleFor(x => x.IsLegendaryHero, (faker) => isLegendaryHero ?? faker.Random.Bool())
+                .RuleFor(x => x.IsMythicHero, (faker) => isMythicHero ?? faker.Random.Bool())
+                .RuleFor(x => x.Element, (faker) => (element == (Elements)Constants.Faker.NullableIntDefault) ? faker.PickRandom<Elements>().OrNull(faker) : element)
+                .RuleFor(x => x.LegendaryHeroBoostType, (faker) => (legendaryHeroBoostType == (LegendaryHeroBoostTypes)Constants.Faker.NullableIntDefault) ? faker.PickRandom<LegendaryHeroBoostTypes>().OrNull(faker) : legendaryHeroBoostType)
+                .RuleFor(x => x.MythicHeroBoostType, (faker) => (mythicHeroBoostType == (MythicHeroBoostTypes)Constants.Faker.NullableIntDefault) ? faker.PickRandom<MythicHeroBoostTypes>().OrNull(faker) : mythicHeroBoostType)
+                .RuleFor(x => x.IsDuoHero, (faker) => isDuoHero ?? faker.Random.Bool())
+                .RuleFor(x => x.IsResplendentHero, (faker) => isResplendentHero ?? faker.Random.Bool())
+                .RuleFor(x => x.Color, (faker) => color ?? faker.PickRandom<Colors>())
+                .RuleFor(x => x.Weapon, (faker) => weapon ?? faker.PickRandom<Weapons>())
+                .RuleFor(x => x.MovementType, (faker) => movementType ?? faker.PickRandom<MovementTypes>())
+                .RuleFor(x => x.BVID, (faker) => bvid ?? faker.Random.Int(0, 255))
+                .RuleFor(x => x.BaseHitPoints, (faker) => baseHitPoints ?? faker.Random.Int(0, 30))
+                .RuleFor(x => x.HitPointsGrowthRate, (faker) => hitPointsGrowthRate ?? faker.Random.Int(0, 100))
+                .RuleFor(x => x.BaseAttack, (faker) => baseAttack ?? faker.Random.Int(0, 30))
+                .RuleFor(x => x.AttackGrowthRate, (faker) => attackGrowthRate ?? faker.Random.Int(0, 100))
+                .RuleFor(x => x.BaseSpeed, (faker) => baseSpeed ?? faker.Random.Int(0, 30))
+                .RuleFor(x => x.SpeedGrowthRate, (faker) => speedGrowthRate ?? faker.Random.Int(0, 100))
+                .RuleFor(x => x.BaseDefense, (faker) => baseDefense ?? faker.Random.Int(0, 30))
+                .RuleFor(x => x.DefenseGrowthRate, (faker) => defenseGrowthRate ?? faker.Random.Int(0, 100))
+                .RuleFor(x => x.BaseResistance, (faker) => baseResistance ?? faker.Random.Int(0, 30))
+                .RuleFor(x => x.ResistanceGrowthRate, (faker) => resistanceGrowthRate ?? faker.Random.Int(0, 100));
+
+            return heroFaker;
         }
     }
 }

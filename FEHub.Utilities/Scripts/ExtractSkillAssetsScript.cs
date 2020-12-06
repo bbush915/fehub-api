@@ -17,16 +17,13 @@ namespace FEHub.Utilities.Scripts
 {
     internal sealed class ExtractSkillAssetsScript : BaseScript, IDisposable
     {
-        #region Fields
         private readonly FehContext _dbContext;
 
         private readonly string _sourceDirectory;
         private readonly string _targetDirectory;
 
         private readonly bool _overwrite;
-        #endregion
 
-        #region Constructors
         public ExtractSkillAssetsScript(FehContext dbContext, string sourceDirectory, string targetDirectory, bool overwrite = false) 
         {
             this._dbContext = dbContext;
@@ -36,9 +33,7 @@ namespace FEHub.Utilities.Scripts
 
             this._overwrite = overwrite;
         }
-        #endregion
 
-        #region Methods
         public override Task RunAsync()
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -90,6 +85,5 @@ namespace FEHub.Utilities.Scripts
         {
             this._dbContext.Dispose();
         }
-        #endregion
     }
 }

@@ -99,7 +99,7 @@ namespace FEHub.Tests.Unit.Api.Controllers
 
             Assert.IsType<OkObjectResult>(response.Result);
 
-            var resultAccessory = (response.Result as OkObjectResult).Value as Accessory;
+            var resultAccessory = (response.Result as OkObjectResult)?.Value as Accessory;
 
             Assert.NotNull(resultAccessory);
             Assert.Equal(accessory.Id, resultAccessory.Id);

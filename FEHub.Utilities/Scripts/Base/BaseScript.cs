@@ -10,8 +10,6 @@ namespace FEHub.Utilities.Scripts.Base
 {
     internal abstract class BaseScript
     {
-        #region Methods
         public abstract Task RunAsync();
-        #endregion
     }
 }

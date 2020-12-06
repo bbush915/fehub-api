@@ -21,16 +21,13 @@ namespace FEHub.Utilities.Scripts
 {
     internal sealed class ImportHeroVoiceActorsScript : BaseScript, IDisposable
     {
-        #region Fields
         private readonly FehContext _dbContext;
 
         private readonly string _sourceFiile;
 
         private readonly Dictionary<string, Hero> _heroMap;
         private readonly Dictionary<string, VoiceActor> _voiceActorMap;
-        #endregion
 
-        #region Constructors
         public ImportHeroVoiceActorsScript(FehContext dbContext, string sourceFile)
         {
             this._dbContext = dbContext;
@@ -53,9 +50,7 @@ namespace FEHub.Utilities.Scripts
                 )
                 .Result;
         }
-        #endregion
 
-        #region Methods
         public override async Task RunAsync()
         {
             var heroVoiceActors = this.Fetch();
@@ -127,6 +122,5 @@ namespace FEHub.Utilities.Scripts
 
             await this._dbContext.SaveChangesAsync();
         }
-        #endregion
     }
 }

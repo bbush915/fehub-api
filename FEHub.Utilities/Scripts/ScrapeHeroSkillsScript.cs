@@ -22,18 +22,13 @@ namespace FEHub.Utilities.Scripts
 {
     internal sealed class ScrapeHeroSkillsScript : BaseScript
     {
-        #region Fields
         private readonly string _targetDirectory;
-        #endregion
 
-        #region Constructors
         public ScrapeHeroSkillsScript(string targetDirectory)
         {
             this._targetDirectory = targetDirectory;
         }
-        #endregion
 
-        #region Methods
         public override async Task RunAsync()
         {
             var heroSkills = await this.FetchAsync();
@@ -79,12 +74,9 @@ namespace FEHub.Utilities.Scripts
                     .Where(x => !x.HeroProperties.Split(',').Contains("enemy"))
             );
         }
-        #endregion
 
-        #region Classes
         private sealed class HeroSkillRecord
         {
-            #region Constructors
             public HeroSkillRecord(JToken heroSkill)
             {
                 this.HeroTagID = heroSkill["TagID"].Value<string>();
@@ -94,17 +86,13 @@ namespace FEHub.Utilities.Scripts
                 this.DefaultRarity = heroSkill["defaultRarity"].Value<string>();
                 this.UnlockRarity = heroSkill["unlockRarity"].Value<string>();
             }
-            #endregion
 
-            #region Properties
             public string HeroTagID { get; set; }
             public string HeroProperties { get; set; }
             public string SkillName { get; set; }
             public string SkillPos { get; set; }
             public string DefaultRarity { get; set; }
             public string UnlockRarity { get; set; }
-            #endregion
         }
-        #endregion
     }
 }

@@ -20,16 +20,13 @@ namespace FEHub.Utilities.Scripts
 {
     internal sealed class ImportHeroSkillsScript : BaseScript, IDisposable
     {
-        #region Fields
         private readonly FehContext _dbContext;
 
         private readonly string _sourceFiile;
 
         private readonly Dictionary<string, Hero> _heroMap;
         private readonly Dictionary<string, Skill> _skillMap;
-        #endregion
 
-        #region Constructors
         public ImportHeroSkillsScript(FehContext dbContext, string sourceFile)
         {
             this._dbContext = dbContext;
@@ -52,9 +49,7 @@ namespace FEHub.Utilities.Scripts
                 )
                 .Result;
         }
-        #endregion
 
-        #region Methods
         public override async Task RunAsync()
         {
             var heroSkills = this.Fetch();
@@ -126,6 +121,5 @@ namespace FEHub.Utilities.Scripts
 
             await this._dbContext.SaveChangesAsync();
         }
-        #endregion
     }
 }

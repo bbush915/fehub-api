@@ -23,11 +23,9 @@ namespace FEHub.Api
                 .CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(
                     (webHostBuilder) =>
-                    {
                         webHostBuilder
                             .UseKestrel()
-                            .UseStartup<Startup>();
-                    }
+                            .UseStartup<Startup>()
                 );
     }
 }

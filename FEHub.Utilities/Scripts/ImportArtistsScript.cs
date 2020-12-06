@@ -20,22 +20,17 @@ namespace FEHub.Utilities.Scripts
 {
     internal sealed class ImportArtistsScript : BaseScript, IDisposable
     {
-        #region Fields
         private readonly FehContext _dbContext;
 
         private readonly string _sourceFiile;
-        #endregion
 
-        #region Constructors
         public ImportArtistsScript(FehContext dbContext, string sourceFile)
         {
             this._dbContext = dbContext;
 
             this._sourceFiile = sourceFile;
         }
-        #endregion
 
-        #region Methods
         public override async Task RunAsync()
         {
             var artists = this.Fetch();
@@ -101,6 +96,5 @@ namespace FEHub.Utilities.Scripts
 
             await this._dbContext.SaveChangesAsync();
         }
-        #endregion
     }
 }

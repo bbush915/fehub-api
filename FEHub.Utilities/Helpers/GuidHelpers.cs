@@ -12,7 +12,6 @@ namespace FEHub.Utilities.Helpers
 {
     internal static class GuidHelpers
     {
-        #region Fields
         /// <summary>
         ///     The default namespace.
         /// </summary>
@@ -32,7 +31,6 @@ namespace FEHub.Utilities.Helpers
         ///     The namespace for ISO OIDs (from RFC 4122, Appendix C).
         /// </summary>
         public static readonly Guid IsoOidNamespace = new Guid("6ba7b812-9dad-11d1-80b4-00c04fd430c8");
-        #endregion
 
         /// <summary>
         ///     Creates a name-based UUID using the algorithm from RFC 4122 §4.3 using the default namespace and the SHA-1 hash algorithm.

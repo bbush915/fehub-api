@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[HeroVoiceActor_GetByHeroIds]
+﻿CREATE PROCEDURE [dbo].[HeroVoiceActor_GetByHeroIdsAndLanguage]
 	@HeroIds [dbo].[GuidList] READONLY,
 	@Language int
 AS

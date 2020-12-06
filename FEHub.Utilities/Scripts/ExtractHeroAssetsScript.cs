@@ -19,16 +19,13 @@ namespace FEHub.Utilities.Scripts
 {
     internal sealed class ExtractHeroAssetsScript : BaseScript, IDisposable
     {
-        #region Fields
         private readonly FehContext _dbContext;
 
         private readonly string _sourceDirectory;
         private readonly string _targetDirectory;
 
         private readonly bool _overwrite;
-        #endregion
 
-        #region Constructors
         public ExtractHeroAssetsScript(FehContext dbContext, string sourceDirectory, string targetDirectory, bool overwrite = false) 
         {
             this._dbContext = dbContext;
@@ -38,9 +35,7 @@ namespace FEHub.Utilities.Scripts
 
             this._overwrite = overwrite;
         }
-        #endregion
 
-        #region Methods
         public override async Task RunAsync()
         {
             var heroes = await this._dbContext
@@ -284,6 +279,5 @@ namespace FEHub.Utilities.Scripts
 
             return true;
         }
-        #endregion
     }
 }

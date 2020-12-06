@@ -8,8 +8,10 @@ using System;
 using System.ComponentModel.DataAnnotations;
 
 using FEHub.Entity.Common.Enumerations;
+using FEHub.Entity.Models;
 using FEHub.Entity.Properties;
 
+using Bogus;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -68,6 +70,28 @@ namespace FEHub.Entity.Models
             entityTypeBuilder
                 .Property(x => x.Weapon)
                 .HasConversion<int>();
+        }
+    }
+}
+
+namespace FEHub.Entity.Common.Helpers
+{
+    public static partial class FakeHelpers
+    {
+        public static Faker<SkillWeaponType> SkillWeaponType(
+            int? id = null,
+            Guid? skillId = null,
+            Colors? color = null,
+            Weapons? weapon = null
+        )
+        {
+            var skillWeaponTypeFaker = new Faker<SkillWeaponType>()
+                .RuleFor(x => x.Id, (faker) => id ?? faker.Random.Int(1))
+                .RuleFor(x => x.SkillId, () => skillId ?? Guid.NewGuid())
+                .RuleFor(x => x.Color, (faker) => color ?? faker.PickRandom<Colors>())
+                .RuleFor(x => x.Weapon, (faker) => weapon ?? faker.PickRandom<Weapons>());
+
+            return skillWeaponTypeFaker;
         }
     }
 }

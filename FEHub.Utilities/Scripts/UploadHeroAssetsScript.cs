@@ -18,21 +18,17 @@ namespace FEHub.Utilities.Scripts
 {
     internal sealed class UploadHeroAssetsScript : BaseScript
     {
-        #region Fields
         private readonly string _sourceDirectory;
-        private readonly IAmazonS3 _s3Client;
-        #endregion
 
-        #region Constructors
+        private readonly IAmazonS3 _s3Client;
+        
         public UploadHeroAssetsScript(string sourceDirectory)
         {
             this._sourceDirectory = sourceDirectory;
 
             this._s3Client = new AmazonS3Client(RegionEndpoint.USEast1);
         }
-        #endregion
 
-        #region Methods
         public override Task RunAsync()
         {
             var fileTransferUtility = new TransferUtility(this._s3Client);
@@ -48,6 +44,5 @@ namespace FEHub.Utilities.Scripts
 
             return Task.CompletedTask;
         }
-        #endregion
     }
 }

@@ -22,18 +22,13 @@ namespace FEHub.Utilities.Scripts
 {
     internal sealed class ScrapeHeroesScript : BaseScript
     {
-        #region Fields
         private readonly string _targetDirectory;
-        #endregion
 
-        #region Constructors
         public ScrapeHeroesScript(string targetDirectory)
         {
             this._targetDirectory = targetDirectory;
         }
-        #endregion
 
-        #region Methods
         public override async Task RunAsync()
         {
             var heroes = await this.FetchAsync();
@@ -104,12 +99,9 @@ namespace FEHub.Utilities.Scripts
                     .Where(x => !x.Properties.Split(',').Contains("enemy"))
             );
         }
-        #endregion
 
-        #region Classes
         private sealed class HeroRecord
         {
-            #region Constructors
             public HeroRecord(JToken hero)
             {
                 this.Name = hero["Name"].Value<string>();
@@ -140,9 +132,7 @@ namespace FEHub.Utilities.Scripts
                 this.DefGR3 = hero["DefGR3"].Value<int>();
                 this.ResGR3 = hero["ResGR3"].Value<int>();
             }
-            #endregion
 
-            #region Properties
             public string Name { get; set; }
             public string Title { get; set; }
             public string Person { get; set; }
@@ -170,8 +160,6 @@ namespace FEHub.Utilities.Scripts
             public int SpdGR3 { get; set; }
             public int DefGR3 { get; set; }
             public int ResGR3 { get; set; }
-            #endregion
         }
-        #endregion
     }
 }

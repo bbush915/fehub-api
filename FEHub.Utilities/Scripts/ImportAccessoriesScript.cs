@@ -22,22 +22,17 @@ namespace FEHub.Utilities.Scripts
 {
     internal sealed class ImportAccessoriesScript : BaseScript, IDisposable
     {
-        #region Fields
         private readonly FehContext _dbContext;
 
         private readonly string _sourceFiile;
-        #endregion
 
-        #region Constructors
         public ImportAccessoriesScript(FehContext dbContext, string sourceFile)
         {
             this._dbContext = dbContext;
 
             this._sourceFiile = sourceFile;
         }
-        #endregion
 
-        #region Methods
         public override async Task RunAsync()
         {
             var accessories = this.Fetch();
@@ -96,6 +91,5 @@ namespace FEHub.Utilities.Scripts
 
             await this._dbContext.SaveChangesAsync();
         }
-        #endregion
     }
 }

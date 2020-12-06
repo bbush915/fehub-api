@@ -41,7 +41,7 @@ namespace FEHub.Api.Services.Ado
             using var command = connection.CreateCommand();
 
             command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = Constants.Database.StoredProcedures.HeroVoiceActor.GetByHeroIds;
+            command.CommandText = Constants.Database.StoredProcedures.HeroVoiceActor.GetByHeroIdsAndLanguage;
 
             var parameter = new SqlParameter("HeroIds", SqlDbType.Structured) { TypeName = Constants.Database.UserDefinedTableTypes.GuidList };
             command.Parameters.Add(parameter).Value = AdoHelpers.BuildDataTable(heroIds);

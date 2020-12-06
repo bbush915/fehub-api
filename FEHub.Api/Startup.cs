@@ -92,10 +92,6 @@ namespace FEHub.Api
             applicationBuilder.UseGraphQL<FehSchema>();
             applicationBuilder.UseGraphQLPlayground();
 
-            if (webHostEnvironment.IsDevelopment())
-            {
-                applicationBuilder.UseGraphQLVoyager();
-            }
 
             applicationBuilder.UseRouting();
 

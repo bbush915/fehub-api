@@ -15,7 +15,6 @@ namespace FEHub.Utilities
 {
     internal static class Program
     {
-        #region Methods
         public static int Main(string[] args)
         {
             var application = new CommandLineApplication()
@@ -38,7 +37,6 @@ namespace FEHub.Utilities
                 CommandOptionType.SingleValue
             );
 
-            #region Import
 
             var importAccessories = application.Option(
                 "--importAccessories",
@@ -88,9 +86,6 @@ namespace FEHub.Utilities
                 CommandOptionType.NoValue
             );
 
-            #endregion
-
-            #region Miscellaneous
 
             var extractHeroAssets = application.Option(
                 "--extractHeroAssets",
@@ -110,9 +105,6 @@ namespace FEHub.Utilities
                 CommandOptionType.NoValue
             );
 
-            #endregion
-
-            #region Scrape
 
             var scrapeAccessories = application.Option(
                 "--scrapeAccessories",
@@ -162,9 +154,6 @@ namespace FEHub.Utilities
                 CommandOptionType.NoValue
             );
 
-            #endregion
-
-            #region Upload
 
             var uploadHeroAssets = application.Option(
                 "--uploadHeroAssets",
@@ -178,7 +167,6 @@ namespace FEHub.Utilities
                 CommandOptionType.NoValue
             );
 
-            #endregion
 
             application.OnExecuteAsync(
                 async (cancellationToken) =>
@@ -192,8 +180,6 @@ namespace FEHub.Utilities
                     var dbContextOptions = dbContextOptionsBuilder.UseSqlServer(connectionString).Options;
 
                     var dbContext = new FehContext(dbContextOptions);
-
-                    #region Import
 
                     if (importAccessories.HasValue())
                     {
@@ -259,9 +245,6 @@ namespace FEHub.Utilities
                         ).RunAsync();
                     }
 
-                    #endregion
-
-                    #region Miscellaneous
 
                     if (extractHeroAssets.HasValue())
                     {
@@ -289,9 +272,6 @@ namespace FEHub.Utilities
                         ).RunAsync();
                     }
 
-                    #endregion
-
-                    #region Scrape
 
                     if (scrapeAccessories.HasValue())
                     {
@@ -349,9 +329,6 @@ namespace FEHub.Utilities
                         ).RunAsync();
                     }
 
-                    #endregion
-
-                    #region Upload
 
                     if (uploadHeroAssets.HasValue())
                     {
@@ -367,14 +344,11 @@ namespace FEHub.Utilities
                         ).RunAsync();
                     }
 
-                    #endregion
-
                     return 0;
                 }
             );
 
             return application.Execute(args);
         }
-        #endregion
     }
 }

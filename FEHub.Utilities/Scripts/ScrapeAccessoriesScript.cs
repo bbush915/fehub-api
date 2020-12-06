@@ -22,18 +22,13 @@ namespace FEHub.Utilities.Scripts
 {
     internal sealed class ScrapeAccessoriesScript : BaseScript
     {
-        #region Fields
         private readonly string _targetDirectory;
-        #endregion
 
-        #region Constructors
         public ScrapeAccessoriesScript(string targetDirectory)
         {
             this._targetDirectory = targetDirectory;
         }
-        #endregion
 
-        #region Methods
         public override async Task RunAsync()
         {
             var accessories = await this.FetchAsync();
@@ -72,12 +67,9 @@ namespace FEHub.Utilities.Scripts
                     .Select(x => new AccessoryRecord(x))
             );
         }
-        #endregion
 
-        #region Classes
         private sealed class AccessoryRecord
         {
-            #region Constructors
             public AccessoryRecord(JToken accessory)
             {
                 this.Name = accessory["Name"].Value<string>();
@@ -85,15 +77,11 @@ namespace FEHub.Utilities.Scripts
                 this.Type = accessory["Type"].Value<string>();
                 this.TagID = accessory["TagID"].Value<string>();
             }
-            #endregion
 
-            #region Properties
             public string Name { get; set; }
             public string Description { get; set; }
             public string Type { get; set; }
             public string TagID { get; set; }
-            #endregion
         }
-        #endregion
     }
 }

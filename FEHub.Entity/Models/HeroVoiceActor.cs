@@ -8,8 +8,10 @@ using System;
 using System.ComponentModel.DataAnnotations;
 
 using FEHub.Entity.Common.Enumerations;
+using FEHub.Entity.Models;
 using FEHub.Entity.Properties;
 
+using Bogus;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -83,6 +85,30 @@ namespace FEHub.Entity.Models
                 .HasOne(x => x.VoiceActor)
                 .WithMany()
                 .HasForeignKey(x => x.VoiceActorId);
+        }
+    }
+}
+
+namespace FEHub.Entity.Common.Helpers
+{
+    public static partial class FakeHelpers
+    {
+        public static Faker<HeroVoiceActor> HeroVoiceActor(
+            int? id = null,
+            Guid? heroId = null,
+            int? voiceActorId = null,
+            Languages? language = null,
+            int? sort = null
+        )
+        {
+            var heroVoiceActorFaker = new Faker<HeroVoiceActor>()
+                .RuleFor(x => x.Id, (faker) => id ?? faker.Random.Int(1))
+                .RuleFor(x => x.HeroId, () => heroId ?? Guid.NewGuid())
+                .RuleFor(x => x.VoiceActorId, (faker) => voiceActorId ?? faker.Random.Int(1))
+                .RuleFor(x => x.Language, (faker) => language ?? faker.PickRandom<Languages>())
+                .RuleFor(x => x.Sort, (faker) => sort ?? faker.Random.Int(1));
+
+            return heroVoiceActorFaker;
         }
     }
 }

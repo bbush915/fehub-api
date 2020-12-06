@@ -22,18 +22,13 @@ namespace FEHub.Utilities.Scripts
 {
     internal sealed class ScrapeArtistsScript : BaseScript
     {
-        #region Fields
         private readonly string _targetDirectory;
-        #endregion
 
-        #region Constructors
         public ScrapeArtistsScript(string targetDirectory)
         {
             this._targetDirectory = targetDirectory;
         }
-        #endregion
 
-        #region Methods
         public override async Task RunAsync()
         {
             var artists = await this.FetchAsync();
@@ -71,26 +66,19 @@ namespace FEHub.Utilities.Scripts
                     .Select(x => new ArtistRecord(x))
             );
         }
-        #endregion
 
-        #region Classes
         private sealed class ArtistRecord
         {
-            #region Constructors
             public ArtistRecord(JToken artist)
             {
                 this.NameUSEN = artist["NameUSEN"].Value<string>();
                 this.Name = artist["Name"].Value<string>();
                 this.Company = artist["Company"].Value<string>();
             }
-            #endregion
 
-            #region Properties
             public string NameUSEN { get; set; }
             public string Name { get; set; }
             public string Company { get; set; }
-            #endregion
         }
-        #endregion
     }
 }

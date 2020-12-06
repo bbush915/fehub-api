@@ -16,23 +16,18 @@ namespace FEHub.Utilities.Scripts
 {
     internal sealed class SplitSkillIconsScript : BaseScript
     {
-        #region Fields
+        private const int ICON_WIDTH = 76;
+        private const int ICON_HEIGHT = 76;
+
         private readonly string _sourceFile;
         private readonly string _targetDirectory;
 
-        private const int ICON_WIDTH = 76;
-        private const int ICON_HEIGHT = 76;
-        #endregion
-
-        #region Constructors
         public SplitSkillIconsScript(string sourceFile, string targetDirectory)
         {
             this._sourceFile = sourceFile;
             this._targetDirectory = targetDirectory;
         }
-        #endregion
 
-        #region Methods
         public override Task RunAsync()
         {
             var source = (Bitmap)Image.FromFile(this._sourceFile);
@@ -55,6 +50,5 @@ namespace FEHub.Utilities.Scripts
 
             return Task.CompletedTask;
         }
-        #endregion
     }
 }

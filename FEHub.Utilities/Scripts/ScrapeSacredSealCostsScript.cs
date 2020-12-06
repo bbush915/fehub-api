@@ -22,18 +22,13 @@ namespace FEHub.Utilities.Scripts
 {
     internal sealed class ScrapeSacredSealCostsScript : BaseScript
     {
-        #region Fields
         private readonly string _targetDirectory;
-        #endregion
 
-        #region Constructors
         public ScrapeSacredSealCostsScript(string targetDirectory)
         {
             this._targetDirectory = targetDirectory;
         }
-        #endregion
 
-        #region Methods
         public override async Task RunAsync()
         {
             var sacredSealCosts = await this.FetchAsync();
@@ -73,12 +68,9 @@ namespace FEHub.Utilities.Scripts
                     .Select(x => new SacredSealCostRecord(x))
             );
         }
-        #endregion
 
-        #region Classes
         private sealed class SacredSealCostRecord
         {
-            #region Constructors
             public SacredSealCostRecord(JToken sacredSealCost)
             {
                 this.Skill = sacredSealCost["Skill"].Value<string>();
@@ -87,16 +79,12 @@ namespace FEHub.Utilities.Scripts
                 this.GreatBadgeCost = string.IsNullOrEmpty(sacredSealCost["GreatBadgeCost"].Value<string>()) ? (int?)null : sacredSealCost["GreatBadgeCost"].Value<int>();
                 this.SacredCoinCost = string.IsNullOrEmpty(sacredSealCost["SacredCoinCost"].Value<string>()) ? (int?)null : sacredSealCost["SacredCoinCost"].Value<int>();
             }
-            #endregion
 
-            #region Properties
             public string Skill { get; set; }
             public string BadgeColor { get; set; }
             public int? BadgeCost { get; set; }
             public int? GreatBadgeCost { get; set; }
             public int? SacredCoinCost { get; set; }
-            #endregion
         }
-        #endregion
     }
 }

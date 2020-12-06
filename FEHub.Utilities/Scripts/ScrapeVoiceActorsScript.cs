@@ -22,18 +22,13 @@ namespace FEHub.Utilities.Scripts
 {
     internal sealed class ScrapeVoiceActorsScript : BaseScript
     {
-        #region Fields
         private readonly string _targetDirectory;
-        #endregion
 
-        #region Constructors
         public ScrapeVoiceActorsScript(string targetDirectory)
         {
             this._targetDirectory = targetDirectory;
         }
-        #endregion
 
-        #region Methods
         public override async Task RunAsync()
         {
             var voiceActors = await this.FetchAsync();
@@ -71,26 +66,19 @@ namespace FEHub.Utilities.Scripts
                     .Select(x => new VoiceActorRecord(x))
             );
         }
-        #endregion
 
-        #region Classes
         private sealed class VoiceActorRecord
         {
-            #region Constructors
             public VoiceActorRecord(JToken voiceActor)
             {
                 this.Name = voiceActor["Name"].Value<string>();
                 this.NameJPJA = voiceActor["NameJPJA"].Value<string>();
                 this.Language = voiceActor["Language"].Value<string>();
             }
-            #endregion
 
-            #region Properties
             public string Name { get; set; }
             public string NameJPJA { get; set; }
             public string Language { get; set; }
-            #endregion
         }
-        #endregion
     }
 }

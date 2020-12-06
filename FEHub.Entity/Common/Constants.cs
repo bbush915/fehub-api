@@ -43,7 +43,7 @@ namespace FEHub.Entity.Common
 
                 public static class HeroVoiceActor
                 {
-                    public const string GetByHeroIds = "[dbo].[HeroVoiceActor_GetByHeroIds]";
+                    public const string GetByHeroIdsAndLanguage = "[dbo].[HeroVoiceActor_GetByHeroIdsAndLanguage]";
                 }
 
                 public static class Item
@@ -88,6 +88,13 @@ namespace FEHub.Entity.Common
                 public const string GuidList = "[dbo].[GuidList]";
                 public const string IntList = "[dbo].[IntList]";
             };
+        }
+
+        public static class Faker
+        {
+            public const int NullableIntDefault = -1;
+
+            public const string NullableStringDefault = "__default";
         }
     }
 }

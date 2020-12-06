@@ -22,18 +22,13 @@ namespace FEHub.Utilities.Scripts
 {
     internal sealed class ScrapeItemsScript : BaseScript
     {
-        #region Fields
         private readonly string _targetDirectory;
-        #endregion
 
-        #region Constructors
         public ScrapeItemsScript(string targetDirectory)
         {
             this._targetDirectory = targetDirectory;
         }
-        #endregion
 
-        #region Methods
         public override async Task RunAsync()
         {
             var items = await this.FetchAsync();
@@ -70,24 +65,17 @@ namespace FEHub.Utilities.Scripts
                     .Select(x => new ItemRecord(x))
             );
         }
-        #endregion
 
-        #region Classes
         private sealed class ItemRecord
         {
-            #region Constructors
             public ItemRecord(JToken item)
             {
                 this.Name = item["Name"].Value<string>();
                 this.Description = WikiHelpers.Sanitize(item["Description"].Value<string>());
             }
-            #endregion
 
-            #region Properties
             public string Name { get; set; }
             public string Description { get; set; }
-            #endregion
         }
-        #endregion
     }
 }
