@@ -62,7 +62,8 @@ namespace FEHub.Tests.Unit.Api.Services
                     Resistance = 0
                 }
             },
-            // Alfonse - Prince of Askr: Lv. 40, Df: 1
+
+            // Alfonse - Prince of Askr: Lvl. 40, Df: 1
             new object[]
             {
                 new StatisticValueContext()
@@ -120,7 +121,8 @@ namespace FEHub.Tests.Unit.Api.Services
                     Resistance = 22
                 }
             },
-            // Robin - High Deliverer: Lv. 10, +Atk, -Spd
+
+            // Robin - High Deliverer: Lvl. 10, +Atk, -Spd
             new object[]
             {
                 new StatisticValueContext()
@@ -171,7 +173,8 @@ namespace FEHub.Tests.Unit.Api.Services
                     Resistance = 7
                 }
             },
-            // Reinhardt - Thunder's Fist: Lv. 40+4, +Atk
+
+            // Reinhardt - Thunder's Fist: Lvl. 40 + 4, +Atk
             new object[]
             {
                 new StatisticValueContext()
@@ -229,7 +232,8 @@ namespace FEHub.Tests.Unit.Api.Services
                     Resistance = 27
                 }
             },
-            // Effie - Army of One: Lv. 40+3, +Def
+
+            // Effie - Army of One: Lvl. 40 + 3, +Def
             new object[]
             {
                 new StatisticValueContext()
@@ -285,6 +289,367 @@ namespace FEHub.Tests.Unit.Api.Services
                     Speed = 23,
                     Defense = 37,
                     Resistance = 24
+                }
+            },
+
+            // Owain - Chosen One: Lvl. 40, SS: C
+            new object[]
+            {
+                new StatisticValueContext()
+                {
+                    Hero = new HeroValues()
+                    {
+                        BVID = 203,
+                        BaseHitPoints = 15,
+                        HitPointsGrowthRate = 55,
+                        BaseAttack = 6,
+                        AttackGrowthRate = 55,
+                        BaseSpeed = 7,
+                        SpeedGrowthRate = 65,
+                        BaseDefense = 5,
+                        DefenseGrowthRate = 55,
+                        BaseResistance = 5,
+                        ResistanceGrowthRate = 35
+                    },
+
+                    SummonerSupportRank = SummonerSupportRanks.C,
+
+                    Rarity = 5,
+                    Level = 40,
+                    Merges = 0,
+                    Dragonflowers = 0,
+
+                    Asset = null,
+                    Flaw = null,
+
+                    IncludeSkillBonuses = true,
+                    Weapon = new SkillValues()
+                    {
+                        HitPointsModifier = 0,
+                        AttackModifier = 16,
+                        SpeedModifier = 0,
+                        DefenseModifier = 0,
+                        ResistanceModifier = 0
+                    },
+                    PassiveA = new SkillValues()
+                    {
+                        HitPointsModifier = 0,
+                        AttackModifier = 0,
+                        SpeedModifier = 0,
+                        DefenseModifier = 0,
+                        ResistanceModifier = 0
+                    },
+                    SacredSeal = null
+                },
+                new StatisticValues()
+                {
+                    HitPoints = 44,
+                    Attack = 48,
+                    Speed = 37,
+                    Defense = 31,
+                    Resistance = 24
+                }
+            },
+
+            // Owain - Chosen One: Lvl. 40, SS: B
+            new object[]
+            {
+                new StatisticValueContext()
+                {
+                    Hero = new HeroValues()
+                    {
+                        BVID = 203,
+                        BaseHitPoints = 15,
+                        HitPointsGrowthRate = 55,
+                        BaseAttack = 6,
+                        AttackGrowthRate = 55,
+                        BaseSpeed = 7,
+                        SpeedGrowthRate = 65,
+                        BaseDefense = 5,
+                        DefenseGrowthRate = 55,
+                        BaseResistance = 5,
+                        ResistanceGrowthRate = 35
+                    },
+
+                    SummonerSupportRank = SummonerSupportRanks.B,
+
+                    Rarity = 5,
+                    Level = 40,
+                    Merges = 0,
+                    Dragonflowers = 0,
+
+                    Asset = null,
+                    Flaw = null,
+
+                    IncludeSkillBonuses = true,
+                    Weapon = new SkillValues()
+                    {
+                        HitPointsModifier = 0,
+                        AttackModifier = 16,
+                        SpeedModifier = 0,
+                        DefenseModifier = 0,
+                        ResistanceModifier = 0
+                    },
+                    PassiveA = new SkillValues()
+                    {
+                        HitPointsModifier = 0,
+                        AttackModifier = 0,
+                        SpeedModifier = 0,
+                        DefenseModifier = 0,
+                        ResistanceModifier = 0
+                    },
+                    SacredSeal = null
+                },
+                new StatisticValues()
+                {
+                    HitPoints = 45,
+                    Attack = 48,
+                    Speed = 37,
+                    Defense = 33,
+                    Resistance = 24
+                }
+            },
+
+            // Owain - Chosen One: Lvl. 40, SS: A
+            new object[]
+            {
+                new StatisticValueContext()
+                {
+                    Hero = new HeroValues()
+                    {
+                        BVID = 203,
+                        BaseHitPoints = 15,
+                        HitPointsGrowthRate = 55,
+                        BaseAttack = 6,
+                        AttackGrowthRate = 55,
+                        BaseSpeed = 7,
+                        SpeedGrowthRate = 65,
+                        BaseDefense = 5,
+                        DefenseGrowthRate = 55,
+                        BaseResistance = 5,
+                        ResistanceGrowthRate = 35
+                    },
+
+                    SummonerSupportRank = SummonerSupportRanks.A,
+
+                    Rarity = 5,
+                    Level = 40,
+                    Merges = 0,
+                    Dragonflowers = 0,
+
+                    Asset = null,
+                    Flaw = null,
+
+                    IncludeSkillBonuses = true,
+                    Weapon = new SkillValues()
+                    {
+                        HitPointsModifier = 0,
+                        AttackModifier = 16,
+                        SpeedModifier = 0,
+                        DefenseModifier = 0,
+                        ResistanceModifier = 0
+                    },
+                    PassiveA = new SkillValues()
+                    {
+                        HitPointsModifier = 0,
+                        AttackModifier = 0,
+                        SpeedModifier = 0,
+                        DefenseModifier = 0,
+                        ResistanceModifier = 0
+                    },
+                    SacredSeal = null
+                },
+                new StatisticValues()
+                {
+                    HitPoints = 45,
+                    Attack = 48,
+                    Speed = 39,
+                    Defense = 33,
+                    Resistance = 24
+                }
+            },
+
+            // Owain - Chosen One: Lvl. 40, SS: S
+            new object[]
+            {
+                new StatisticValueContext()
+                {
+                    Hero = new HeroValues()
+                    {
+                        BVID = 203,
+                        BaseHitPoints = 15,
+                        HitPointsGrowthRate = 55,
+                        BaseAttack = 6,
+                        AttackGrowthRate = 55,
+                        BaseSpeed = 7,
+                        SpeedGrowthRate = 65,
+                        BaseDefense = 5,
+                        DefenseGrowthRate = 55,
+                        BaseResistance = 5,
+                        ResistanceGrowthRate = 35
+                    },
+
+                    SummonerSupportRank = SummonerSupportRanks.S,
+
+                    Rarity = 5,
+                    Level = 40,
+                    Merges = 0,
+                    Dragonflowers = 0,
+
+                    Asset = null,
+                    Flaw = null,
+
+                    IncludeSkillBonuses = true,
+                    Weapon = new SkillValues()
+                    {
+                        HitPointsModifier = 0,
+                        AttackModifier = 16,
+                        SpeedModifier = 0,
+                        DefenseModifier = 0,
+                        ResistanceModifier = 0
+                    },
+                    PassiveA = new SkillValues()
+                    {
+                        HitPointsModifier = 0,
+                        AttackModifier = 0,
+                        SpeedModifier = 0,
+                        DefenseModifier = 0,
+                        ResistanceModifier = 0
+                    },
+                    SacredSeal = null
+                },
+                new StatisticValues()
+                {
+                    HitPoints = 46,
+                    Attack = 50,
+                    Speed = 39,
+                    Defense = 33,
+                    Resistance = 24
+                }
+            },
+
+            // Amelia - Rose of the War: Lvl. 40 + 4
+            new object[]
+            {
+                new StatisticValueContext()
+                {
+                    Hero = new HeroValues()
+                    {
+                        BVID = 175,
+                        BaseHitPoints = 17,
+                        HitPointsGrowthRate = 65,
+                        BaseAttack = 4,
+                        AttackGrowthRate = 65,
+                        BaseSpeed = 6,
+                        SpeedGrowthRate = 60,
+                        BaseDefense = 7,
+                        DefenseGrowthRate = 60,
+                        BaseResistance = 2,
+                        ResistanceGrowthRate = 45
+                    },
+
+                    SummonerSupportRank = null,
+
+                    Rarity = 5,
+                    Level = 40,
+                    Merges = 4,
+                    Dragonflowers = 0,
+
+                    Asset = Statistics.HIT_POINTS,
+                    Flaw = Statistics.DEFENSE,
+
+                    IncludeSkillBonuses = true,
+                    Weapon = new SkillValues()
+                    {
+                        HitPointsModifier = 0,
+                        AttackModifier = 16,
+                        SpeedModifier = 0,
+                        DefenseModifier = 0,
+                        ResistanceModifier = 0
+                    },
+                    PassiveA = new SkillValues()
+                    {
+                        HitPointsModifier = 0,
+                        AttackModifier = 0,
+                        SpeedModifier = 0,
+                        DefenseModifier = 0,
+                        ResistanceModifier = 0
+                    },
+                    SacredSeal = new SkillValues()
+                    {
+                        HitPointsModifier = 0,
+                        AttackModifier = 3,
+                        SpeedModifier = 0,
+                        DefenseModifier = 0,
+                        ResistanceModifier = 0
+                    },
+                },
+                new StatisticValues()
+                {
+                    HitPoints = 52,
+                    Attack = 54,
+                    Speed = 36,
+                    Defense = 37,
+                    Resistance = 24
+                }
+            },
+
+            // Marth - Enigmatic Blade: Lvl. 40 + 2
+            new object[]
+            {
+                new StatisticValueContext()
+                {
+                    Hero = new HeroValues()
+                    {
+                        BVID = 18,
+                        BaseHitPoints = 17,
+                        HitPointsGrowthRate = 55,
+                        BaseAttack = 6,
+                        AttackGrowthRate = 60,
+                        BaseSpeed = 8,
+                        SpeedGrowthRate = 60,
+                        BaseDefense = 4,
+                        DefenseGrowthRate = 45,
+                        BaseResistance = 2,
+                        ResistanceGrowthRate = 35
+                    },
+
+                    SummonerSupportRank = null,
+
+                    Rarity = 5,
+                    Level = 40,
+                    Merges = 2,
+                    Dragonflowers = 0,
+
+                    Asset = null,
+                    Flaw = null,
+
+                    IncludeSkillBonuses = true,
+                    Weapon = new SkillValues()
+                    {
+                        HitPointsModifier = 0,
+                        AttackModifier = 16,
+                        SpeedModifier = 0,
+                        DefenseModifier = 0,
+                        ResistanceModifier = 0
+                    },
+                    PassiveA = new SkillValues()
+                    {
+                        HitPointsModifier = 0,
+                        AttackModifier = 0,
+                        SpeedModifier = 0,
+                        DefenseModifier = 0,
+                        ResistanceModifier = 0
+                    },
+                    SacredSeal = null
+                },
+                new StatisticValues()
+                {
+                    HitPoints = 45,
+                    Attack = 52,
+                    Speed = 38,
+                    Defense = 26,
+                    Resistance = 19
                 }
             },
         };

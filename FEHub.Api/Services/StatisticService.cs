@@ -2634,7 +2634,6 @@ namespace FEHub.Api.Services
             {
                 AdjustedBaseGrowthRate = adjustedBaseGrowthRate,
                 AdjustedBaseValue = adjustedBaseValue,
-                BaseGrowthRate = baseGrowthRate,
                 BaseValue = baseValue,
                 Ordinal = ordinal,
                 Statistic = statistic
@@ -2926,7 +2925,7 @@ namespace FEHub.Api.Services
 
             var mergeBonus = (int)Math.Floor((2 * context.Merges - statisticValueOrdinal - 1) / 5.0) + 1;
 
-            if (!context.Flaw.HasValue && statisticValueOrdinal < 4)
+            if (!context.Flaw.HasValue && statisticValueOrdinal < 3)
             {
                 mergeBonus++;
             }
