@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat code coverage">
+        <Configuration>
+          <Format>cobertura</Format>
+          <Exclude>[FEHub.Api]FEHub.Api.Program,[FEHub.Api]FEHub.Api.Startup,[FEHub.Entity]FEHub.Entity.Common.Helpers.FakeHelpers,[FEHub.Entity]FEHub.Entity.Migrations.*,[FEHub.Entity]FEHub.Entity.Models.*TypeConfiguration,[FEHub.Entity]FEHub.Entity.Properties.Resources</Exclude>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>

@@ -68,7 +68,7 @@ namespace FEHub.Entity.Models
         public Weapons? Weapon { get; set; }
     }
 
-    internal sealed class SkillWeaponEffectivenessEffectivenessConfiguration : IEntityTypeConfiguration<SkillWeaponEffectiveness>
+    internal sealed class SkillWeaponEffectivenessTypeConfiguration : IEntityTypeConfiguration<SkillWeaponEffectiveness>
     {
         private const string TABLE_NAME = "SkillWeaponEffectivenesses";
 

@@ -34,7 +34,7 @@ namespace FEHub.Entity.Common.Helpers
         {
             var description = typeof(T)
                 .GetCustomAttribute<DisplayAttribute>()
-                ?.GetName();
+                ?.GetDescription();
 
             return description;
         }
