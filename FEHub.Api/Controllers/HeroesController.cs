@@ -35,7 +35,7 @@ namespace FEHub.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Accessory>> GetById(Guid id)
+        public async Task<ActionResult<Accessory>> GetByIdAsync(Guid id)
         {
             var hero = await this._heroService.GetByIdAsync(id);
 

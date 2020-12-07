@@ -2648,6 +2648,7 @@ namespace FEHub.Api.Services
             var baseStatisticValues = GetBaseValues(context);
 
             var evenRarityIncrements = baseStatisticValues
+                .Skip(1)
                 .OrderByDescending(x => x.BaseValue)
                 .ThenBy(x => x.Ordinal)
                 .Take(2)
@@ -2686,7 +2687,7 @@ namespace FEHub.Api.Services
                 return growthValue;
             }
 
-            var growthVector = GetGrowthVector(context, statistic, baseStatisticValue.AdjustedBaseValue, baseStatisticValue.AdjustedBaseGrowthRate);
+            var growthVector = GetGrowthVector(context, baseStatisticValue);
 
             var levelBonus = 0;
 
@@ -2698,10 +2699,10 @@ namespace FEHub.Api.Services
             return levelBonus;
         }
 
-        private static bool[] GetGrowthVector(StatisticValueContext context, Statistics statistic, int adjustedBaseValue, int adjustedBaseGrowthRate)
+        private static bool[] GetGrowthVector(StatisticValueContext context, BaseStatisticValue baseStatisticValue)
         {
-            var growthValue = GetGrowthValue(context, adjustedBaseGrowthRate);
-            var growthVectorId = GetGrowthVectorId(context, statistic, adjustedBaseValue, adjustedBaseGrowthRate);
+            var growthValue = GetGrowthValue(context, baseStatisticValue.AdjustedBaseGrowthRate);
+            var growthVectorId = GetGrowthVectorId(context, baseStatisticValue);
 
             if (growthValue < 1 || growthValue >= Constants.MaxLevel)
             {
@@ -2735,12 +2736,12 @@ namespace FEHub.Api.Services
             return (int)Math.Floor(appliedGrowthRate / 100.0 * (newLevel - oldLevel));
         }
 
-        private static int GetGrowthVectorId(StatisticValueContext context, Statistics statistic, int adjustedBaseValue, int adjustedBaseGrowthRate)
+        private static int GetGrowthVectorId(StatisticValueContext context, BaseStatisticValue baseStatisticValue)
         {
-            var appliedGrowthRate = GetAppliedGrowthRate(context, adjustedBaseGrowthRate);
-            var statisticOffset = GetStatisticOffset(statistic);
+            var appliedGrowthRate = GetAppliedGrowthRate(context, baseStatisticValue.AdjustedBaseGrowthRate);
+            var statisticOffset = GetStatisticOffset(baseStatisticValue.Statistic);
 
-            return (3 * (adjustedBaseValue + 2) + appliedGrowthRate + context.Hero.BVID + statisticOffset) % 64;
+            return (3 * (baseStatisticValue.BaseValue + 2) + appliedGrowthRate + context.Hero.BVID + statisticOffset) % 64;
         }
 
         private static int GetAppliedGrowthRate(StatisticValueContext context, int adjustedBaseGrowthRate)
@@ -2923,7 +2924,7 @@ namespace FEHub.Api.Services
                 .ToList()
                 .FindIndex(x => x.Statistic == statistic);
 
-            var mergeBonus = (int)Math.Floor((2 * context.Merges - statisticValueOrdinal) / 5.0) + 1;
+            var mergeBonus = (int)Math.Floor((2 * context.Merges - statisticValueOrdinal - 1) / 5.0) + 1;
 
             if (!context.Flaw.HasValue && statisticValueOrdinal < 4)
             {

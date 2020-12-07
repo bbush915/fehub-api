@@ -6,7 +6,7 @@
 
 using System.Collections.Generic;
 
-using FEHub.Api.Services.Common;
+using FEHub.Api.Models;
 
 namespace FEHub.Api.Services.Interfaces
 {

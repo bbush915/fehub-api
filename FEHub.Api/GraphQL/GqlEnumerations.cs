@@ -6,7 +6,7 @@
 
 using System.Collections.Generic;
 
-using FEHub.Api.Services.Common;
+using FEHub.Api.Models;
 using FEHub.Api.Services.Interfaces;
 using FEHub.Entity.Common.Enumerations;
 using FEHub.Entity.Common.Helpers;

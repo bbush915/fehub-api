@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------------
 
-using FEHub.Api.Services.Common;
+using FEHub.Api.Models;
 
 using GraphQL.Types;
 

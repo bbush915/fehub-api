@@ -8,7 +8,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace FEHub.Api.Services.Common
+namespace FEHub.Api.Models
 {
     public sealed class EnumerationValue
     {
@@ -22,8 +22,8 @@ namespace FEHub.Api.Services.Common
                 .GetMember(value.ToString())[0]
                 .GetCustomAttribute<DisplayAttribute>();
 
-            this.Description = displayInfo.GetDescription();
-            this.DisplayValue = displayInfo.GetName();
+            this.Description = displayInfo?.GetDescription();
+            this.DisplayValue = displayInfo?.GetName();
         }
 
         public string Name { get; }

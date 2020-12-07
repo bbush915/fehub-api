@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using FEHub.Api.Services.Common;
+using FEHub.Api.Models;
 using FEHub.Api.Services.Interfaces;
 
 namespace FEHub.Api.Services

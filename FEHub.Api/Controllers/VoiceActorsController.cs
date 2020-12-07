@@ -33,7 +33,7 @@ namespace FEHub.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<VoiceActor>> GetById(int id)
+        public async Task<ActionResult<VoiceActor>> GetByIdAsync(int id)
         {
             var voiceActor = await this._voiceActorService.GetByIdAsync(id);
 

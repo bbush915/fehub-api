@@ -9,7 +9,7 @@ using System.Data;
 
 namespace FEHub.Api.Utilities
 {
-    internal static class AdoHelpers
+    public static class AdoHelpers
     {
         public static DataTable BuildDataTable<T>(IEnumerable<T> values)
         {

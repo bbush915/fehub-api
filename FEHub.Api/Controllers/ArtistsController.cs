@@ -34,7 +34,7 @@ namespace FEHub.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Artist>> GetById(int id)
+        public async Task<ActionResult<Artist>> GetByIdAsync(int id)
         {
             var artist = await this._artistService.GetByIdAsync(id);
 
