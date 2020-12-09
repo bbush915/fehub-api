@@ -17,10 +17,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FEHub.Utilities", "FEHub.Ut
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3DBDEF70-7737-44DE-B47D-5111A1706084}"
 	ProjectSection(SolutionItems) = preProject
+		coverlet.runsettings = coverlet.runsettings
 		FEHub.bak = FEHub.bak
+		GetCoverageReport.bat = GetCoverageReport.bat
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEHub.Tests.Integration", "FEHub.Tests.Integration\FEHub.Tests.Integration.csproj", "{9A8608FB-52B3-4E68-9433-467301775545}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FEHub.Tests.Integration", "FEHub.Tests.Integration\FEHub.Tests.Integration.csproj", "{9A8608FB-52B3-4E68-9433-467301775545}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

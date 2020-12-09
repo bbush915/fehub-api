@@ -4,6 +4,8 @@
 // </copyright>
 //-----------------------------------------------------------------------------
 
+using FEHub.Api;
+
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
@@ -20,7 +22,7 @@ namespace FEHub.Tests.Integration.Utilities
                         (_, configurationBuilder) =>
                             configurationBuilder.AddJsonFile("appsettings.json")
                     )
-                    .UseStartup<FEHub.Api.Startup>()
+                    .UseStartup<Startup>()
             );
         }
     }

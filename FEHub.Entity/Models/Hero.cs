@@ -521,8 +521,8 @@ namespace FEHub.Entity.Common.Helpers
                 .RuleFor(x => x.Description, (faker) => description ?? faker.Random.Utf16String())
                 .RuleFor(x => x.Origin, (faker) => origin ?? faker.Random.Utf16String())
                 .RuleFor(x => x.Gender, (faker) => gender ?? faker.PickRandom<Genders>())
-                .RuleFor(x => x.AdditionDate, (faker) => additionDate ?? faker.Date.Past())
-                .RuleFor(x => x.ReleaseDate, (faker) => releasseDate ?? faker.Date.Past())
+                .RuleFor(x => x.AdditionDate, (faker) => additionDate ?? faker.Date.Past().Date)
+                .RuleFor(x => x.ReleaseDate, (faker) => releasseDate ?? faker.Date.Past().Date)
                 .RuleFor(x => x.ArtistId, (faker) => artistId ?? faker.Random.Int(1))
                 .RuleFor(x => x.IsLegendaryHero, (faker) => isLegendaryHero ?? faker.Random.Bool())
                 .RuleFor(x => x.IsMythicHero, (faker) => isMythicHero ?? faker.Random.Bool())
@@ -544,7 +544,8 @@ namespace FEHub.Entity.Common.Helpers
                 .RuleFor(x => x.BaseDefense, (faker) => baseDefense ?? faker.Random.Int(0, 30))
                 .RuleFor(x => x.DefenseGrowthRate, (faker) => defenseGrowthRate ?? faker.Random.Int(0, 100))
                 .RuleFor(x => x.BaseResistance, (faker) => baseResistance ?? faker.Random.Int(0, 30))
-                .RuleFor(x => x.ResistanceGrowthRate, (faker) => resistanceGrowthRate ?? faker.Random.Int(0, 100));
+                .RuleFor(x => x.ResistanceGrowthRate, (faker) => resistanceGrowthRate ?? faker.Random.Int(0, 100))
+                .RuleFor(x => x.Tag, (faker) => tag ?? faker.Random.Utf16String());
 
             return heroFaker;
         }
