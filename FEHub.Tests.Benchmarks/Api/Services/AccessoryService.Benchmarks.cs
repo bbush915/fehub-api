@@ -1,9 +1,10 @@
 ﻿//-----------------------------------------------------------------------------
-// <copyright file="GetAll.cs">
+// <copyright file="AccessoryService.Benchmarks.cs">
 //     Copyright (c) 2020 by Bryan Bush. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -18,12 +19,12 @@ using Microsoft.Extensions.Options;
 
 namespace FEHub.Tests.Benchmarks.Api.Services
 {
-    public class GetAll
+    public class AccessoryServiceBenchmarks
     {
         private readonly AccessoryService _efAccessoryService;
         private readonly FEHub.Api.Services.Ado.AccessoryService _adoAccessoryService;
 
-        public GetAll()
+        public AccessoryServiceBenchmarks()
         {
             DatabaseHelpers.Initialize();
 
@@ -36,7 +37,7 @@ namespace FEHub.Tests.Benchmarks.Api.Services
             this._adoAccessoryService = new FEHub.Api.Services.Ado.AccessoryService(databaseOptions);
         }
 
-        [Benchmark(Baseline = true)]
+        [Benchmark]
         public async Task<List<Accessory>> GetAllAsync_Ef()
         {
             var accessories = await GetAllAsync(this._efAccessoryService);
@@ -50,6 +51,22 @@ namespace FEHub.Tests.Benchmarks.Api.Services
             return accessories;
         }
 
+        [Benchmark]
+        public async Task<Accessory> GetByIdAsync_Ef()
+        {
+            var accessory = await GetByIdAsync(this._efAccessoryService, new Guid("9282D7FD-3D68-58BD-A83B-7BB51AD62E2B"));
+            return accessory;
+        }
+
+        [Benchmark]
+        public async Task<Accessory> GetByIdAsync_Ado()
+        {
+            var accessory = await GetByIdAsync(this._adoAccessoryService, new Guid("9282D7FD-3D68-58BD-A83B-7BB51AD62E2B"));
+            return accessory;
+        }
+
         private static Task<List<Accessory>> GetAllAsync(IAccessoryService accessoryService) => accessoryService.GetAllAsync();
+
+        private static Task<Accessory> GetByIdAsync(IAccessoryService accessoryService, Guid id) => accessoryService.GetByIdAsync(id);
     }
 }
