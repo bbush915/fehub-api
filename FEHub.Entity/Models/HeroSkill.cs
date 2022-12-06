@@ -1,14 +1,11 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="HeroSkill.cs">
-//     Copyright (c) 2020 by Bryan Bush. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
+using FEHub.Entity.Models;
 using FEHub.Entity.Properties;
 
+using Bogus;
+using Bogus.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -19,9 +16,8 @@ namespace FEHub.Entity.Models
         Description = nameof(Resources.HeroSkill_Description),
         ResourceType = typeof(Resources)
     )]
-    public class HeroSkill
+    public sealed class HeroSkill
     {
-        #region Properties
         [Display(
             Name = nameof(Resources.HeroSkill_Id_Name),
             Description = nameof(Resources.HeroSkill_Id_Description),
@@ -69,17 +65,13 @@ namespace FEHub.Entity.Models
             Description = nameof(Resources.HeroSkill_Skill_Description),
             ResourceType = typeof(Resources)
         )]
-        public virtual Skill Skill { get; set; }
-        #endregion
+        public Skill Skill { get; set; }
     }
 
     internal sealed class HeroSkillTypeConfiguration : IEntityTypeConfiguration<HeroSkill>
     {
-        #region Fields
         private const string TABLE_NAME = "HeroSkills";
-        #endregion
 
-        #region Methods
         public void Configure(EntityTypeBuilder<HeroSkill> entityTypeBuilder)
         {
             entityTypeBuilder
@@ -91,6 +83,31 @@ namespace FEHub.Entity.Models
                 .WithMany()
                 .HasForeignKey(x => x.SkillId);
         }
-        #endregion
+    }
+}
+
+namespace FEHub.Entity.Common.Helpers
+{
+    public static partial class FakeHelpers
+    {
+        public static Faker<HeroSkill> HeroSkill(
+            int? id = null,
+            Guid? heroId = null,
+            Guid? skillId = null,
+            int? skillPosition = null,
+            int? defaultRarity = Constants.Faker.NullableIntDefault,
+            int? unlockRarity = null
+        )
+        {
+            var heroSkillFaker = new Faker<HeroSkill>()
+                .RuleFor(x => x.Id, (faker) => id ?? faker.Random.Int(1))
+                .RuleFor(x => x.HeroId, () => heroId ?? Guid.NewGuid())
+                .RuleFor(x => x.SkillId, () => skillId ?? Guid.NewGuid())
+                .RuleFor(x => x.SkillPosition, (faker) => skillPosition ?? faker.Random.Int(1, 5))
+                .RuleFor(x => x.DefaultRarity, (faker) => (defaultRarity == Constants.Faker.NullableIntDefault) ? faker.Random.Int(1, 5).OrNull(faker) : defaultRarity)
+                .RuleFor(x => x.UnlockRarity, (faker) => unlockRarity ?? faker.Random.Int(1, 5));
+
+            return heroSkillFaker;
+        }
     }
 }

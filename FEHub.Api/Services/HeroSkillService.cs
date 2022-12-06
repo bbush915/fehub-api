@@ -1,45 +1,33 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="HeroSkillService.cs">
-//     Copyright (c) 2020 by Bryan Bush. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using FEHub.Api.Services.Interfaces;
 using FEHub.Entity;
 using FEHub.Entity.Models;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace FEHub.Api.Services
+namespace FEHub.Api.Services;
+
+public sealed class HeroSkillService : IHeroSkillService
 {
-    internal sealed class HeroSkillService
+    private readonly FehContext _dbContext;
+
+    public HeroSkillService(FehContext dbContext)
     {
-        #region Fields
-        private readonly FehContext _dbContext;
-        #endregion
+        this._dbContext = dbContext;
+    }
 
-        #region Constructors
-        public HeroSkillService(FehContext dbContext)
-        {
-            this._dbContext = dbContext;
-        }
-        #endregion
-
-        #region Methods
-        public Task<ILookup<Guid, HeroSkill>> GetByHeroIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken)
-        {
-            return Task.FromResult(
-                this._dbContext
-                    .HeroSkills
-                    .Where(x => ids.Contains(x.HeroId))
-                    .ToLookup(x => x.HeroId)
-            );
-        }
-        #endregion
+    public Task<ILookup<Guid, HeroSkill>> GetByHeroIdsAsync(IEnumerable<Guid> heroIds, CancellationToken cancellationToken = default)
+    {
+        return Task.FromResult(
+            this._dbContext
+                .HeroSkills
+                .Where(x => heroIds.Contains(x.HeroId))
+                .ToLookup(x => x.HeroId)
+        );
     }
 }

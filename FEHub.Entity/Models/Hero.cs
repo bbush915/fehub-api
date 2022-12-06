@@ -1,17 +1,14 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="Hero.cs">
-//     Copyright (c) 2020 by Bryan Bush. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 using FEHub.Entity.Common.Enumerations;
 using FEHub.Entity.Interfaces;
+using FEHub.Entity.Models;
 using FEHub.Entity.Properties;
 
+using Bogus;
+using Bogus.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -22,17 +19,14 @@ namespace FEHub.Entity.Models
         Description = nameof(Resources.Hero_Description),
         ResourceType = typeof(Resources)
     )]
-    public class Hero : ITrackable
+    public sealed class Hero : ITrackable
     {
-        #region Constructors
         public Hero()
         {
             this.HeroSkills = new List<HeroSkill>();
             this.HeroVoiceActors = new List<HeroVoiceActor>();
         }
-        #endregion
 
-        #region Properties
         [Display(
             Name = nameof(Resources.Hero_Id_Name),
             Description = nameof(Resources.Hero_Id_Description),
@@ -290,24 +284,22 @@ namespace FEHub.Entity.Models
             Description = nameof(Resources.Hero_Artist_Description),
             ResourceType = typeof(Resources)
         )]
-        public virtual Artist Artist { get; set; }
+        public Artist Artist { get; set; }
 
         [Display(
             Name = nameof(Resources.Hero_HeroSkills_Name),
             Description = nameof(Resources.Hero_HeroSkills_Description),
             ResourceType = typeof(Resources)
         )]
-        public virtual List<HeroSkill> HeroSkills { get; set; }
+        public List<HeroSkill> HeroSkills { get; set; }
 
         [Display(
             Name = nameof(Resources.Hero_HeroVoiceActors_Name),
             Description = nameof(Resources.Hero_HeroVoiceActors_Description),
             ResourceType = typeof(Resources)
         )]
-        public virtual List<HeroVoiceActor> HeroVoiceActors { get; set; }
-        #endregion
+        public List<HeroVoiceActor> HeroVoiceActors { get; set; }
 
-        #region Methods
         public DamageTypes GetDamageType()
         {
             switch (this.Weapon)
@@ -318,21 +310,21 @@ namespace FEHub.Entity.Models
                 case Weapons.BOW:
                 case Weapons.DAGGER:
                 case Weapons.BEASTSTONE:
-                {
-                    return DamageTypes.PHYSICAL;
-                }
+                    {
+                        return DamageTypes.PHYSICAL;
+                    }
 
                 case Weapons.TOME:
                 case Weapons.STAFF:
                 case Weapons.DRAGONSTONE:
-                {
-                    return DamageTypes.MAGICAL;
-                }
+                    {
+                        return DamageTypes.MAGICAL;
+                    }
 
                 default:
-                {
-                    throw new Exception($"Unexpected weapon encountered: [{this.Weapon}]");
-                }
+                    {
+                        throw new Exception($"Unexpected weapon encountered: [{this.Weapon}]");
+                    }
             }
         }
 
@@ -345,34 +337,30 @@ namespace FEHub.Entity.Models
                 case Weapons.AXE:
                 case Weapons.DRAGONSTONE:
                 case Weapons.BEASTSTONE:
-                {
-                    return CombatTypes.MELEE;
-                }
+                    {
+                        return CombatTypes.MELEE;
+                    }
 
                 case Weapons.BOW:
                 case Weapons.DAGGER:
                 case Weapons.TOME:
                 case Weapons.STAFF:
-                {
-                    return CombatTypes.RANGED;
-                }
+                    {
+                        return CombatTypes.RANGED;
+                    }
 
                 default:
-                {
-                    throw new Exception($"Unexpected weapon encountered: [{this.Weapon}]");
-                }
+                    {
+                        throw new Exception($"Unexpected weapon encountered: [{this.Weapon}]");
+                    }
             }
         }
-        #endregion
     }
 
     internal sealed class HeroTypeConfiguration : IEntityTypeConfiguration<Hero>
     {
-        #region Fields
         private const string TABLE_NAME = "Heroes";
-        #endregion
 
-        #region Methods
         public void Configure(EntityTypeBuilder<Hero> entityTypeBuilder)
         {
             entityTypeBuilder
@@ -469,6 +457,91 @@ namespace FEHub.Entity.Models
                 .Property(x => x.Weapon)
                 .HasConversion<int>();
         }
-        #endregion
+    }
+}
+
+namespace FEHub.Entity.Common.Helpers
+{
+    public static partial class FakeHelpers
+    {
+        public static Faker<Hero> Hero(
+            Guid? id = null,
+            DateTime? createdAt = null,
+            string createdBy = null,
+            DateTime? modifiedAt = null,
+            string modifiedBy = null,
+            int? version = null,
+            string name = null,
+            string title = null,
+            string description = null,
+            string origin = null,
+            Genders? gender = null,
+            DateTime? additionDate = null,
+            DateTime? releasseDate = null,
+            int? artistId = null,
+            bool? isLegendaryHero = null,
+            bool? isMythicHero = null,
+            Elements? element = (Elements)Constants.Faker.NullableIntDefault,
+            LegendaryHeroBoostTypes? legendaryHeroBoostType = (LegendaryHeroBoostTypes)Constants.Faker.NullableIntDefault,
+            MythicHeroBoostTypes? mythicHeroBoostType = (MythicHeroBoostTypes)Constants.Faker.NullableIntDefault,
+            bool? isDuoHero = null,
+            bool? isResplendentHero = null,
+            Colors? color = null,
+            Weapons? weapon = null,
+            MovementTypes? movementType = null,
+            int? bvid = null,
+            int? baseHitPoints = null,
+            int? hitPointsGrowthRate = null,
+            int? baseAttack = null,
+            int? attackGrowthRate = null,
+            int? baseSpeed = null,
+            int? speedGrowthRate = null,
+            int? baseDefense = null,
+            int? defenseGrowthRate = null,
+            int? baseResistance = null,
+            int? resistanceGrowthRate = null,
+            string tag = null
+        )
+        {
+            var heroFaker = new Faker<Hero>()
+                .RuleFor(x => x.Id, () => id ?? Guid.NewGuid())
+                .RuleFor(x => x.CreatedAt, (faker) => createdAt ?? faker.Date.Past())
+                .RuleFor(x => x.CreatedBy, (faker) => createdBy ?? faker.Random.Utf16String())
+                .RuleFor(x => x.ModifiedAt, (faker) => modifiedAt ?? faker.Date.Past())
+                .RuleFor(x => x.ModifiedBy, (faker) => modifiedBy ?? faker.Random.Utf16String())
+                .RuleFor(x => x.Version, (faker) => version ?? faker.Random.Int(1))
+                .RuleFor(x => x.Name, (faker) => name ?? faker.Random.Utf16String())
+                .RuleFor(x => x.Title, (faker) => title ?? faker.Random.Utf16String())
+                .RuleFor(x => x.Description, (faker) => description ?? faker.Random.Utf16String())
+                .RuleFor(x => x.Origin, (faker) => origin ?? faker.Random.Utf16String())
+                .RuleFor(x => x.Gender, (faker) => gender ?? faker.PickRandom<Genders>())
+                .RuleFor(x => x.AdditionDate, (faker) => additionDate ?? faker.Date.Past().Date)
+                .RuleFor(x => x.ReleaseDate, (faker) => releasseDate ?? faker.Date.Past().Date)
+                .RuleFor(x => x.ArtistId, (faker) => artistId ?? faker.Random.Int(1))
+                .RuleFor(x => x.IsLegendaryHero, (faker) => isLegendaryHero ?? faker.Random.Bool())
+                .RuleFor(x => x.IsMythicHero, (faker) => isMythicHero ?? faker.Random.Bool())
+                .RuleFor(x => x.Element, (faker) => (element == (Elements)Constants.Faker.NullableIntDefault) ? faker.PickRandom<Elements>().OrNull(faker) : element)
+                .RuleFor(x => x.LegendaryHeroBoostType, (faker) => (legendaryHeroBoostType == (LegendaryHeroBoostTypes)Constants.Faker.NullableIntDefault) ? faker.PickRandom<LegendaryHeroBoostTypes>().OrNull(faker) : legendaryHeroBoostType)
+                .RuleFor(x => x.MythicHeroBoostType, (faker) => (mythicHeroBoostType == (MythicHeroBoostTypes)Constants.Faker.NullableIntDefault) ? faker.PickRandom<MythicHeroBoostTypes>().OrNull(faker) : mythicHeroBoostType)
+                .RuleFor(x => x.IsDuoHero, (faker) => isDuoHero ?? faker.Random.Bool())
+                .RuleFor(x => x.IsResplendentHero, (faker) => isResplendentHero ?? faker.Random.Bool())
+                .RuleFor(x => x.Color, (faker) => color ?? faker.PickRandom<Colors>())
+                .RuleFor(x => x.Weapon, (faker) => weapon ?? faker.PickRandom<Weapons>())
+                .RuleFor(x => x.MovementType, (faker) => movementType ?? faker.PickRandom<MovementTypes>())
+                .RuleFor(x => x.BVID, (faker) => bvid ?? faker.Random.Int(0, 255))
+                .RuleFor(x => x.BaseHitPoints, (faker) => baseHitPoints ?? faker.Random.Int(0, 30))
+                .RuleFor(x => x.HitPointsGrowthRate, (faker) => hitPointsGrowthRate ?? faker.Random.Int(0, 100))
+                .RuleFor(x => x.BaseAttack, (faker) => baseAttack ?? faker.Random.Int(0, 30))
+                .RuleFor(x => x.AttackGrowthRate, (faker) => attackGrowthRate ?? faker.Random.Int(0, 100))
+                .RuleFor(x => x.BaseSpeed, (faker) => baseSpeed ?? faker.Random.Int(0, 30))
+                .RuleFor(x => x.SpeedGrowthRate, (faker) => speedGrowthRate ?? faker.Random.Int(0, 100))
+                .RuleFor(x => x.BaseDefense, (faker) => baseDefense ?? faker.Random.Int(0, 30))
+                .RuleFor(x => x.DefenseGrowthRate, (faker) => defenseGrowthRate ?? faker.Random.Int(0, 100))
+                .RuleFor(x => x.BaseResistance, (faker) => baseResistance ?? faker.Random.Int(0, 30))
+                .RuleFor(x => x.ResistanceGrowthRate, (faker) => resistanceGrowthRate ?? faker.Random.Int(0, 100))
+                .RuleFor(x => x.Tag, (faker) => tag ?? faker.Random.Utf16String());
+
+            return heroFaker;
+        }
     }
 }

@@ -1,17 +1,14 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="Skill.cs">
-//     Copyright (c) 2020 by Bryan Bush. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 using FEHub.Entity.Common.Enumerations;
 using FEHub.Entity.Interfaces;
+using FEHub.Entity.Models;
 using FEHub.Entity.Properties;
 
+using Bogus;
+using Bogus.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -22,18 +19,15 @@ namespace FEHub.Entity.Models
         Description = nameof(Resources.Skill_Description),
         ResourceType = typeof(Resources)
     )]
-    public class Skill : ITrackable
+    public sealed class Skill : ITrackable
     {
-        #region Constructors
         public Skill()
         {
             this.SkillMovementTypes = new List<SkillMovementType>();
-            this.SkillWeaponTypes = new List<SkillWeaponType>();
             this.SkillWeaponEffectivenesses = new List<SkillWeaponEffectiveness>();
+            this.SkillWeaponTypes = new List<SkillWeaponType>();
         }
-        #endregion
 
-        #region Properties
         [Display(
             Name = nameof(Resources.Skill_Id_Name),
             Description = nameof(Resources.Skill_Id_Description),
@@ -103,6 +97,13 @@ namespace FEHub.Entity.Models
             ResourceType = typeof(Resources)
         )]
         public bool IsExclusive { get; set; }
+
+        [Display(
+            Name = nameof(Resources.Skill_IsAvailableAsSacredSeal_Name),
+            Description = nameof(Resources.Skill_IsAvailableAsSacredSeal_Description),
+            ResourceType = typeof(Resources)
+        )]
+        public bool IsAvailableAsSacredSeal { get; set; }
 
         [Display(
             Name = nameof(Resources.Skill_SkillPoints_Name),
@@ -193,31 +194,27 @@ namespace FEHub.Entity.Models
             Description = nameof(Resources.Skill_SkillMovementTypes_Description),
             ResourceType = typeof(Resources)
         )]
-        public virtual List<SkillMovementType> SkillMovementTypes { get; set; }
+        public List<SkillMovementType> SkillMovementTypes { get; set; }
 
         [Display(
             Name = nameof(Resources.Skill_SkillWeaponEffectivenesses_Name),
             Description = nameof(Resources.Skill_SkillWeaponEffectivenesses_Description),
             ResourceType = typeof(Resources)
         )]
-        public virtual List<SkillWeaponEffectiveness> SkillWeaponEffectivenesses { get; set; }
+        public List<SkillWeaponEffectiveness> SkillWeaponEffectivenesses { get; set; }
 
         [Display(
             Name = nameof(Resources.Skill_SkillWeaponTypes_Name),
             Description = nameof(Resources.Skill_SkillWeaponTypes_Description),
             ResourceType = typeof(Resources)
         )]
-        public virtual List<SkillWeaponType> SkillWeaponTypes { get; set; }
-        #endregion
+        public List<SkillWeaponType> SkillWeaponTypes { get; set; }
     }
 
     internal sealed class SkillTypeConfiguration : IEntityTypeConfiguration<Skill>
     {
-        #region Fields
         private const string TABLE_NAME = "Skills";
-        #endregion
 
-        #region Methods
         public void Configure(EntityTypeBuilder<Skill> entityTypeBuilder)
         {
             entityTypeBuilder
@@ -258,12 +255,12 @@ namespace FEHub.Entity.Models
                 .HasConversion<int>();
 
             entityTypeBuilder
-                .HasMany(x => x.SkillWeaponTypes)
+                .HasMany(x => x.SkillWeaponEffectivenesses)
                 .WithOne()
                 .HasForeignKey(x => x.SkillId);
 
             entityTypeBuilder
-                .HasMany(x => x.SkillWeaponEffectivenesses)
+                .HasMany(x => x.SkillWeaponTypes)
                 .WithOne()
                 .HasForeignKey(x => x.SkillId);
 
@@ -276,6 +273,65 @@ namespace FEHub.Entity.Models
                 .Property(x => x.WeaponRefineType)
                 .HasConversion<int?>();
         }
-        #endregion
+    }
+}
+
+namespace FEHub.Entity.Common.Helpers
+{
+    public static partial class FakeHelpers
+    {
+        public static Faker<Skill> Skill(
+            Guid? id = null,
+            DateTime? createdAt = null,
+            string createdBy = null,
+            DateTime? modifiedAt = null,
+            string modifiedBy = null,
+            int? version = null,
+            string name = null,
+            string groupName = null,
+            string description = Constants.Faker.NullableStringDefault,
+            bool? isExclusive = null,
+            bool? isAvailableAsSacredSeal = null,
+            int? skillPoints = null,
+            SkillTypes? skillType = null,
+            WeaponRefineTypes? weaponRefineType = (WeaponRefineTypes)Constants.Faker.NullableIntDefault,
+            int? might = Constants.Faker.NullableIntDefault,
+            int? range = Constants.Faker.NullableIntDefault,
+            int? cooldown = Constants.Faker.NullableIntDefault,
+            int? hitPointsModifier = Constants.Faker.NullableIntDefault,
+            int? attackModifier = Constants.Faker.NullableIntDefault,
+            int? speedModifier = Constants.Faker.NullableIntDefault,
+            int? defenseModifier = Constants.Faker.NullableIntDefault,
+            int? resistanceModifier = Constants.Faker.NullableIntDefault,
+            string tag = null
+        )
+        {
+            var skillFaker = new Faker<Skill>()
+                .RuleFor(x => x.Id, () => id ?? Guid.NewGuid())
+                .RuleFor(x => x.CreatedAt, (faker) => createdAt ?? faker.Date.Past())
+                .RuleFor(x => x.CreatedBy, (faker) => createdBy ?? faker.Random.Utf16String())
+                .RuleFor(x => x.ModifiedAt, (faker) => modifiedAt ?? faker.Date.Past())
+                .RuleFor(x => x.ModifiedBy, (faker) => modifiedBy ?? faker.Random.Utf16String())
+                .RuleFor(x => x.Version, (faker) => version ?? faker.Random.Int(1))
+                .RuleFor(x => x.Name, (faker) => name ?? faker.Random.Utf16String())
+                .RuleFor(x => x.GroupName, (faker) => groupName ?? faker.Random.Utf16String())
+                .RuleFor(x => x.Description, (faker) => (description == Constants.Faker.NullableStringDefault) ? faker.Random.Utf16String().OrNull(faker) : description)
+                .RuleFor(x => x.IsExclusive, (faker) => isExclusive ?? faker.Random.Bool())
+                .RuleFor(x => x.IsAvailableAsSacredSeal, (faker) => isAvailableAsSacredSeal ?? faker.Random.Bool())
+                .RuleFor(x => x.SkillPoints, (faker) => version ?? faker.Random.Int(0, 500))
+                .RuleFor(x => x.SkillType, (faker) => skillType ?? faker.PickRandom<SkillTypes>())
+                .RuleFor(x => x.WeaponRefineType, (faker) => (weaponRefineType == (WeaponRefineTypes)Constants.Faker.NullableIntDefault) ? faker.PickRandom<WeaponRefineTypes>().OrNull(faker) : weaponRefineType)
+                .RuleFor(x => x.Might, (faker) => (might == Constants.Faker.NullableIntDefault) ? faker.Random.Int(0, 20).OrNull(faker) : might)
+                .RuleFor(x => x.Range, (faker) => (range == Constants.Faker.NullableIntDefault) ? faker.Random.Int(1, 2).OrNull(faker) : range)
+                .RuleFor(x => x.Cooldown, (faker) => (cooldown == Constants.Faker.NullableIntDefault) ? faker.Random.Int(-1, 10).OrNull(faker) : might)
+                .RuleFor(x => x.HitPointsModifier, (faker) => (hitPointsModifier == Constants.Faker.NullableIntDefault) ? faker.Random.Int(0, 20).OrNull(faker) : hitPointsModifier)
+                .RuleFor(x => x.AttackModifier, (faker) => (attackModifier == Constants.Faker.NullableIntDefault) ? faker.Random.Int(0, 20).OrNull(faker) : attackModifier)
+                .RuleFor(x => x.SpeedModifier, (faker) => (speedModifier == Constants.Faker.NullableIntDefault) ? faker.Random.Int(0, 20).OrNull(faker) : speedModifier)
+                .RuleFor(x => x.DefenseModifier, (faker) => (defenseModifier == Constants.Faker.NullableIntDefault) ? faker.Random.Int(0, 20).OrNull(faker) : defenseModifier)
+                .RuleFor(x => x.ResistanceModifier, (faker) => (resistanceModifier == Constants.Faker.NullableIntDefault) ? faker.Random.Int(0, 20).OrNull(faker) : resistanceModifier)
+                .RuleFor(x => x.Tag, (faker) => tag ?? faker.Random.Utf16String());
+
+            return skillFaker;
+        }
     }
 }

@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>FEHub.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{db9d169f-5440-4c00-b4ee-557a8b757d98}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>FEHub.Database</RootNamespace>
+    <AssemblyName>FEHub.Database</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures" />
+    <Folder Include="dbo\User-Defined Types" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\__EFMigrationsHistory.sql" />
+    <Build Include="dbo\Tables\Accessories.sql" />
+    <Build Include="dbo\Tables\Artists.sql" />
+    <Build Include="dbo\Tables\Items.sql" />
+    <Build Include="dbo\Tables\Skills.sql" />
+    <Build Include="dbo\Tables\VoiceActors.sql" />
+    <Build Include="dbo\Tables\Heroes.sql" />
+    <Build Include="dbo\Tables\SkillMovementTypes.sql" />
+    <Build Include="dbo\Tables\SkillWeaponEffectivenesses.sql" />
+    <Build Include="dbo\Tables\SkillWeaponTypes.sql" />
+    <Build Include="dbo\Tables\HeroSkills.sql" />
+    <Build Include="dbo\Tables\HeroVoiceActors.sql" />
+    <Build Include="dbo\Stored Procedures\Accessory_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Accessory_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\Artist_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Artist_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\Artist_GetByIds.sql" />
+    <Build Include="dbo\User-Defined Types\IntList.sql" />
+    <Build Include="dbo\Stored Procedures\Item_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Item_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\Hero_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Hero_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\HeroSkill_GetByHeroIds.sql" />
+    <Build Include="dbo\User-Defined Types\GuidList.sql" />
+    <Build Include="dbo\Stored Procedures\SkillMovementType_GetBySkillIds.sql" />
+    <Build Include="dbo\Stored Procedures\VoiceActor_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\VoiceActor_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\VoiceActor_GetByIds.sql" />
+    <Build Include="dbo\Stored Procedures\SkillWeaponType_GetBySkillIds.sql" />
+    <Build Include="dbo\Stored Procedures\SkillWeaponEffectiveness_GetBySkillIds.sql" />
+    <Build Include="dbo\Stored Procedures\Skill_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Skill_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\Skill_GetByIds.sql" />
+    <Build Include="dbo\Stored Procedures\Hero_QueryByName.sql" />
+    <Build Include="dbo\Stored Procedures\Skill_QueryByNameAndSkillType.sql" />
+    <Build Include="dbo\Stored Procedures\HeroVoiceActor_GetByHeroIdsAndLanguage.sql" />
+  </ItemGroup>
+</Project>

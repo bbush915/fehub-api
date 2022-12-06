@@ -1,10 +1,4 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="ImportVoiceActorsScript.cs">
-//     Copyright (c) 2020 by Bryan Bush. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -16,85 +10,78 @@ using FEHub.Utilities.Scripts.Base;
 using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 
-namespace FEHub.Utilities.Scripts
+namespace FEHub.Utilities.Scripts;
+
+internal sealed class ImportVoiceActorsScript : BaseScript, IDisposable
 {
-    internal sealed class ImportVoiceActorsScript : BaseScript, IDisposable
+    private readonly FehContext _dbContext;
+
+    private readonly string _sourceFiile;
+
+    public ImportVoiceActorsScript(FehContext dbContext, string sourceFile)
     {
-        #region Fields
-        private readonly FehContext _dbContext;
+        this._dbContext = dbContext;
 
-        private readonly string _sourceFiile;
-        #endregion
+        this._sourceFiile = sourceFile;
+    }
 
-        #region Constructors
-        public ImportVoiceActorsScript(FehContextFactory dbContextFactory, string sourceFile)
+    public override async Task RunAsync()
+    {
+        var voiceActors = this.Fetch();
+        await this.ImportAsync(voiceActors);
+    }
+
+    public void Dispose()
+    {
+        this._dbContext.Dispose();
+    }
+
+    private List<VoiceActor> Fetch()
+    {
+        var voiceActors = new List<VoiceActor>();
+
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+        using (var excelPackage = new ExcelPackage(new FileInfo(this._sourceFiile)))
         {
-            this._dbContext = dbContextFactory.CreateDbContext();
+            var worksheet = excelPackage.Workbook.Worksheets["VoiceActors"];
 
-            this._sourceFiile = sourceFile;
-        }
-        #endregion
-
-        #region Methods
-        public override async Task RunAsync()
-        {
-            var voiceActors = this.Fetch();
-            await this.ImportAsync(voiceActors);
-        }
-
-        public void Dispose()
-        {
-            this._dbContext.Dispose();
-        }
-
-        private List<VoiceActor> Fetch()
-        {
-            var voiceActors = new List<VoiceActor>();
-
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-
-            using (var excelPackage = new ExcelPackage(new FileInfo(this._sourceFiile)))
+            for (var i = 2; i <= worksheet.Dimension.End.Row; ++i)
             {
-                var worksheet = excelPackage.Workbook.Worksheets["VoiceActors"];
-
-                for (var i = 2; i <= worksheet.Dimension.End.Row; ++i)
+                var voiceActor = new VoiceActor()
                 {
-                    var voiceActor = new VoiceActor()
-                    {
-                        Name = worksheet.Cells[i, 1].GetValue<string>(),
-                        NameKanji = worksheet.Cells[i, 2].GetValue<string>(),
-                    };
+                    Name = worksheet.Cells[i, 1].GetValue<string>(),
+                    NameKanji = worksheet.Cells[i, 2].GetValue<string>(),
+                };
 
-                    if (string.IsNullOrEmpty(voiceActor.NameKanji))
-                    {
-                        voiceActor.NameKanji = null;
-                    }
-
-                    voiceActors.Add(voiceActor);
+                if (string.IsNullOrEmpty(voiceActor.NameKanji))
+                {
+                    voiceActor.NameKanji = null;
                 }
-            }
 
-            return voiceActors;
+                voiceActors.Add(voiceActor);
+            }
         }
 
-        private async Task ImportAsync(List<VoiceActor> voiceActors)
+        return voiceActors;
+    }
+
+    private async Task ImportAsync(List<VoiceActor> voiceActors)
+    {
+        foreach (var voiceActor in voiceActors)
         {
-            foreach (var voiceActor in voiceActors)
+            var existingVoiceActor = await this._dbContext
+                .VoiceActors
+                .SingleOrDefaultAsync(x => x.Name == voiceActor.Name);
+
+            if (existingVoiceActor == null)
             {
-                var existingVoiceActor = await this._dbContext
+                await this._dbContext
                     .VoiceActors
-                    .SingleOrDefaultAsync(x => x.Name == voiceActor.Name);
-
-                if (existingVoiceActor == null)
-                {
-                    await this._dbContext
-                        .VoiceActors
-                        .AddAsync(voiceActor);
-                }
+                    .AddAsync(voiceActor);
             }
-
-            await this._dbContext.SaveChangesAsync();
         }
-        #endregion
+
+        await this._dbContext.SaveChangesAsync();
     }
 }

@@ -2662,6 +2662,24 @@ namespace FEHub.Entity.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A value indicating whether the skill is available as a sacred seal..
+        /// </summary>
+        public static string Skill_IsAvailableAsSacredSeal_Description {
+            get {
+                return ResourceManager.GetString("Skill_IsAvailableAsSacredSeal_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is Available As Sacred Seal.
+        /// </summary>
+        public static string Skill_IsAvailableAsSacredSeal_Name {
+            get {
+                return ResourceManager.GetString("Skill_IsAvailableAsSacredSeal_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A value indicating whether the skill is exclusive to a single hero..
         /// </summary>
         public static string Skill_IsExclusive_Description {

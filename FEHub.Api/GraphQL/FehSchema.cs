@@ -1,23 +1,15 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="FehSchema.cs">
-//     Copyright (c) 2020 by Bryan Bush. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------------
-
-using System;
+﻿using System;
 
 using GraphQL.Types;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace FEHub.Api.GraphQL
+namespace FEHub.Api.GraphQL;
+
+internal sealed class FehSchema : Schema
 {
-    internal sealed class FehSchema : Schema
+    public FehSchema(IServiceProvider serviceProvider)
+    : base(serviceProvider)
     {
-        #region Constructors
-        public FehSchema(IServiceProvider serviceProvider)
-        : base(serviceProvider)
-        {
-            this.Query = (IObjectGraphType)serviceProvider.GetService(typeof(FehQuery));
-        }
-        #endregion
+        this.Query = (IObjectGraphType)serviceProvider.GetRequiredService<GqlQuery>();
     }
 }

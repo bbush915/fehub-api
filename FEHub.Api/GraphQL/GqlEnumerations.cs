@@ -1,224 +1,219 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="GqlEnumerations.cs">
-//     Copyright (c) 2020 by Bryan Bush. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------------
+﻿using System.Collections.Generic;
 
-using System.Collections.Generic;
-
-using FEHub.Api.Services;
-using FEHub.Api.Services.Common;
+using FEHub.Api.Models;
+using FEHub.Api.Services.Interfaces;
 using FEHub.Entity.Common.Enumerations;
+using FEHub.Entity.Common.Helpers;
 
 using GraphQL.Types;
+using GraphQL.Utilities;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace FEHub.Api.GraphQL
+namespace FEHub.Api.GraphQL;
+
+internal sealed class GqlEnumerations : ObjectGraphType
 {
-    internal sealed class GqlEnumerations : ObjectGraphType
+    public GqlEnumerations()
     {
-        #region Constructors
-        public GqlEnumerations()
-        {
-            this.Name = "Enumerations";
+        this.Name = "Enumerations";
+        this.Description = "The constants representing various enumerable types.";
 
-            this
-                .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>()
-                .Name(nameof(AccessoryTypes))
-                .Resolve(
-                    (context) =>
-                    {
-                        var service = new EnumerationService<AccessoryTypes>();
-                        return service.GetAll();
-                    }
-                );
+        this
+            .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>(nameof(AccessoryTypes))
+            .Description(DisplayHelpers.GetDescription<AccessoryTypes>())
+            .Resolve(
+                (context) =>
+                {
+                    var enumerationService = context.RequestServices.GetRequiredService<IEnumerationService<AccessoryTypes>>();
+                    return enumerationService.GetAll();
+                }
+            );
 
-            this
-                .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>()
-                .Name(nameof(AllySupportRanks))
-                .Resolve(
-                    (context) =>
-                    {
-                        var service = new EnumerationService<AllySupportRanks>();
-                        return service.GetAll();
-                    }
-                );
+        this
+            .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>(nameof(AllySupportRanks))
+            .Description(DisplayHelpers.GetDescription<AllySupportRanks>())
+            .Resolve(
+                (context) =>
+                {
+                    var enumerationService = context.RequestServices.GetRequiredService<IEnumerationService<AllySupportRanks>>();
+                    return enumerationService.GetAll();
+                }
+            );
 
-            this
-                .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>()
-                .Name(nameof(Colors))
-                .Resolve(
-                    (context) =>
-                    {
-                        var service = new EnumerationService<Colors>();
-                        return service.GetAll();
-                    }
-                );
+        this
+            .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>(nameof(Colors))
+            .Description(DisplayHelpers.GetDescription<Colors>())
+            .Resolve(
+                (context) =>
+                {
+                    var enumerationService = context.RequestServices.GetRequiredService<IEnumerationService<Colors>>();
+                    return enumerationService.GetAll();
+                }
+            );
 
-            this
-                .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>()
-                .Name(nameof(CombatTypes))
-                .Resolve(
-                    (context) =>
-                    {
-                        var service = new EnumerationService<CombatTypes>();
-                        return service.GetAll();
-                    }
-                );
+        this
+            .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>(nameof(CombatTypes))
+            .Description(DisplayHelpers.GetDescription<CombatTypes>())
+            .Resolve(
+                (context) =>
+                {
+                    var enumerationService = context.RequestServices.GetRequiredService<IEnumerationService<CombatTypes>>();
+                    return enumerationService.GetAll();
+                }
+            );
 
-            this
-                .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>()
-                .Name(nameof(DamageTypes))
-                .Resolve(
-                    (context) =>
-                    {
-                        var service = new EnumerationService<DamageTypes>();
-                        return service.GetAll();
-                    }
-                );
+        this
+            .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>(nameof(DamageTypes))
+            .Description(DisplayHelpers.GetDescription<DamageTypes>())
+            .Resolve(
+                (context) =>
+                {
+                    var enumerationService = context.RequestServices.GetRequiredService<IEnumerationService<DamageTypes>>();
+                    return enumerationService.GetAll();
+                }
+            );
 
-            this
-                .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>()
-                .Name(nameof(Elements))
-                .Resolve(
-                    (context) =>
-                    {
-                        var service = new EnumerationService<Elements>();
-                        return service.GetAll();
-                    }
-                );
+        this
+            .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>(nameof(Elements))
+            .Description(DisplayHelpers.GetDescription<Elements>())
+            .Resolve(
+                (context) =>
+                {
+                    var enumerationService = context.RequestServices.GetRequiredService<IEnumerationService<Elements>>();
+                    return enumerationService.GetAll();
+                }
+            );
 
-            this
-                .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>()
-                .Name(nameof(FavoriteMarks))
-                .Resolve(
-                    (context) =>
-                    {
-                        var service = new EnumerationService<FavoriteMarks>();
-                        return service.GetAll();
-                    }
-                );
+        this
+            .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>(nameof(FavoriteMarks))
+            .Description(DisplayHelpers.GetDescription<FavoriteMarks>())
+            .Resolve(
+                (context) =>
+                {
+                    var enumerationService = context.RequestServices.GetRequiredService<IEnumerationService<FavoriteMarks>>();
+                    return enumerationService.GetAll();
+                }
+            );
 
-            this
-                .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>()
-                .Name(nameof(Genders))
-                .Resolve(
-                    (context) =>
-                    {
-                        var service = new EnumerationService<Genders>();
-                        return service.GetAll();
-                    }
-                );
+        this
+            .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>(nameof(Genders))
+            .Description(DisplayHelpers.GetDescription<Genders>())
+            .Resolve(
+                (context) =>
+                {
+                    var enumerationService = context.RequestServices.GetRequiredService<IEnumerationService<Genders>>();
+                    return enumerationService.GetAll();
+                }
+            );
 
-            this
-                .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>()
-                .Name(nameof(Languages))
-                .Resolve(
-                    (context) =>
-                    {
-                        var service = new EnumerationService<Languages>();
-                        return service.GetAll();
-                    }
-                );
+        this
+            .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>(nameof(Languages))
+            .Description(DisplayHelpers.GetDescription<Languages>())
+            .Resolve(
+                (context) =>
+                {
+                    var enumerationService = context.RequestServices.GetRequiredService<IEnumerationService<Languages>>();
+                    return enumerationService.GetAll();
+                }
+            );
 
-            this
-                .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>()
-                .Name(nameof(LegendaryHeroBoostTypes))
-                .Resolve(
-                    (context) =>
-                    {
-                        var service = new EnumerationService<LegendaryHeroBoostTypes>();
-                        return service.GetAll();
-                    }
-                );
+        this
+            .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>(nameof(LegendaryHeroBoostTypes))
+            .Description(DisplayHelpers.GetDescription<LegendaryHeroBoostTypes>())
+            .Resolve(
+                (context) =>
+                {
+                    var enumerationService = context.RequestServices.GetRequiredService<IEnumerationService<LegendaryHeroBoostTypes>>();
+                    return enumerationService.GetAll();
+                }
+            );
 
-            this
-                .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>()
-                .Name(nameof(MovementTypes))
-                .Resolve(
-                    (context) =>
-                    {
-                        var service = new EnumerationService<MovementTypes>();
-                        return service.GetAll();
-                    }
-                );
+        this
+            .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>(nameof(MovementTypes))
+            .Description(DisplayHelpers.GetDescription<MovementTypes>())
+            .Resolve(
+                (context) =>
+                {
+                    var enumerationService = context.RequestServices.GetRequiredService<IEnumerationService<MovementTypes>>();
+                    return enumerationService.GetAll();
+                }
+            );
 
-            this
-                .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>()
-                .Name(nameof(MythicHeroBoostTypes))
-                .Resolve(
-                    (context) =>
-                    {
-                        var service = new EnumerationService<MythicHeroBoostTypes>();
-                        return service.GetAll();
-                    }
-                );
+        this
+            .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>(nameof(MythicHeroBoostTypes))
+            .Description(DisplayHelpers.GetDescription<MythicHeroBoostTypes>())
+            .Resolve(
+                (context) =>
+                {
+                    var enumerationService = context.RequestServices.GetRequiredService<IEnumerationService<MythicHeroBoostTypes>>();
+                    return enumerationService.GetAll();
+                }
+            );
 
-            this
-                .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>()
-                .Name(nameof(SkillTypes))
-                .Resolve(
-                    (context) =>
-                    {
-                        var service = new EnumerationService<SkillTypes>();
-                        return service.GetAll();
-                    }
-                );
+        this
+            .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>(nameof(SkillTypes))
+            .Description(DisplayHelpers.GetDescription<SkillTypes>())
+            .Resolve(
+                (context) =>
+                {
+                    var enumerationService = context.RequestServices.GetRequiredService<IEnumerationService<SkillTypes>>();
+                    return enumerationService.GetAll();
+                }
+            );
 
-            this
-                .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>()
-                .Name(nameof(Statistics))
-                .Resolve(
-                    (context) =>
-                    {
-                        var service = new EnumerationService<Statistics>();
-                        return service.GetAll();
-                    }
-                );
+        this
+            .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>(nameof(Statistics))
+            .Description(DisplayHelpers.GetDescription<Statistics>())
+            .Resolve(
+                (context) =>
+                {
+                    var enumerationService = context.RequestServices.GetRequiredService<IEnumerationService<Statistics>>();
+                    return enumerationService.GetAll();
+                }
+            );
 
-            this
-                .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>()
-                .Name(nameof(SummonerSupportRanks))
-                .Resolve(
-                    (context) =>
-                    {
-                        var service = new SummonerSupportRankService();
-                        return service.GetAll();
-                    }
-                );
+        this
+            .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>(nameof(SummonerSupportRanks))
+            .Description(DisplayHelpers.GetDescription<SummonerSupportRanks>())
+            .Resolve(
+                (context) =>
+                {
+                    var enumerationService = context.RequestServices.GetRequiredService<IEnumerationService<SummonerSupportRanks>>();
+                    return enumerationService.GetAll();
+                }
+            );
 
-            this
-                .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>()
-                .Name(nameof(WeaponEffectivenessTypes))
-                .Resolve(
-                    (context) =>
-                    {
-                        var service = new EnumerationService<WeaponEffectivenessTypes>();
-                        return service.GetAll();
-                    }
-                );
+        this
+            .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>(nameof(WeaponEffectivenessTypes))
+            .Description(DisplayHelpers.GetDescription<WeaponEffectivenessTypes>())
+            .Resolve(
+                (context) =>
+                {
+                    var enumerationService = context.RequestServices.GetRequiredService<IEnumerationService<WeaponEffectivenessTypes>>();
+                    return enumerationService.GetAll();
+                }
+            );
 
-            this
-                .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>()
-                .Name(nameof(WeaponRefineTypes))
-                .Resolve(
-                    (context) =>
-                    {
-                        var service = new EnumerationService<WeaponRefineTypes>();
-                        return service.GetAll();
-                    }
-                );
+        this
+            .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>(nameof(WeaponRefineTypes))
+            .Description(DisplayHelpers.GetDescription<WeaponRefineTypes>())
+            .Resolve(
+                (context) =>
+                {
+                    var enumerationService = context.RequestServices.GetRequiredService<IEnumerationService<WeaponRefineTypes>>();
+                    return enumerationService.GetAll();
+                }
+            );
 
-            this
-                .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>()
-                .Name(nameof(Weapons))
-                .Resolve(
-                    (context) =>
-                    {
-                        var service = new EnumerationService<Weapons>();
-                        return service.GetAll();
-                    }
-                );
-        }
-        #endregion
+        this
+            .Field<ListGraphType<GqlEnumerationValue>, List<EnumerationValue>>(nameof(Weapons))
+            .Description(DisplayHelpers.GetDescription<Weapons>())
+            .Resolve(
+                (context) =>
+                {
+                    var enumerationService = context.RequestServices.GetRequiredService<IEnumerationService<Weapons>>();
+                    return enumerationService.GetAll();
+                }
+            );
     }
 }

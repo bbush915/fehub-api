@@ -1,17 +1,8 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="BaseScript.cs">
-//     Copyright (c) 2020 by Bryan Bush. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------------
+﻿using System.Threading.Tasks;
 
-using System.Threading.Tasks;
+namespace FEHub.Utilities.Scripts.Base;
 
-namespace FEHub.Utilities.Scripts.Base
+internal abstract class BaseScript
 {
-    internal abstract class BaseScript
-    {
-        #region Methods
-        public abstract Task RunAsync();
-        #endregion
-    }
+    public abstract Task RunAsync();
 }

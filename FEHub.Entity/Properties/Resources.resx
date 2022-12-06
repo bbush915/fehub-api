@@ -1122,6 +1122,12 @@
   <data name="Skill_Id_Name" xml:space="preserve">
     <value>ID</value>
   </data>
+  <data name="Skill_IsAvailableAsSacredSeal_Description" xml:space="preserve">
+    <value>A value indicating whether the skill is available as a sacred seal.</value>
+  </data>
+  <data name="Skill_IsAvailableAsSacredSeal_Name" xml:space="preserve">
+    <value>Is Available As Sacred Seal</value>
+  </data>
   <data name="Skill_IsExclusive_Description" xml:space="preserve">
     <value>A value indicating whether the skill is exclusive to a single hero.</value>
   </data>

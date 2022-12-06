@@ -1,0 +1,50 @@
+﻿CREATE TABLE [dbo].[Heroes] (
+    [Id]                     UNIQUEIDENTIFIER NOT NULL,
+    [CreatedAt]              DATETIME2 (7)    NOT NULL,
+    [CreatedBy]              NVARCHAR (100)   NOT NULL,
+    [ModifiedAt]             DATETIME2 (7)    NOT NULL,
+    [ModifiedBy]             NVARCHAR (100)   NOT NULL,
+    [Version]                INT              NOT NULL,
+    [Name]                   NVARCHAR (100)   NOT NULL,
+    [Title]                  NVARCHAR (100)   NOT NULL,
+    [Description]            NVARCHAR (250)   NOT NULL,
+    [Origin]                 NVARCHAR (100)   NOT NULL,
+    [Gender]                 INT              NOT NULL,
+    [AdditionDate]           DATE             NOT NULL,
+    [ReleaseDate]            DATE             NOT NULL,
+    [ArtistId]               INT              NOT NULL,
+    [IsLegendaryHero]        BIT              NOT NULL,
+    [IsMythicHero]           BIT              NOT NULL,
+    [Element]                INT              NULL,
+    [LegendaryHeroBoostType] INT              NULL,
+    [MythicHeroBoostType]    INT              NULL,
+    [IsDuoHero]              BIT              NOT NULL,
+    [IsResplendentHero]      BIT              NOT NULL,
+    [Color]                  INT              NOT NULL,
+    [Weapon]                 INT              NOT NULL,
+    [MovementType]           INT              NOT NULL,
+    [BVID]                   INT              NOT NULL,
+    [BaseHitPoints]          INT              NOT NULL,
+    [HitPointsGrowthRate]    INT              NOT NULL,
+    [BaseAttack]             INT              NOT NULL,
+    [AttackGrowthRate]       INT              NOT NULL,
+    [BaseSpeed]              INT              NOT NULL,
+    [SpeedGrowthRate]        INT              NOT NULL,
+    [BaseDefense]            INT              NOT NULL,
+    [DefenseGrowthRate]      INT              NOT NULL,
+    [BaseResistance]         INT              NOT NULL,
+    [ResistanceGrowthRate]   INT              NOT NULL,
+    [Tag]                    NVARCHAR (100)   NOT NULL,
+    CONSTRAINT [PK_Heroes] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [CK_Heroes_Color_Enum_Constraint] CHECK ([Color]=(4) OR [Color]=(3) OR [Color]=(2) OR [Color]=(1)),
+    CONSTRAINT [CK_Heroes_Gender_Enum_Constraint] CHECK ([Gender]=(3) OR [Gender]=(2) OR [Gender]=(1)),
+    CONSTRAINT [CK_Heroes_MovementType_Enum_Constraint] CHECK ([MovementType]=(4) OR [MovementType]=(3) OR [MovementType]=(2) OR [MovementType]=(1)),
+    CONSTRAINT [CK_Heroes_Weapon_Enum_Constraint] CHECK ([Weapon]=(9) OR [Weapon]=(8) OR [Weapon]=(7) OR [Weapon]=(6) OR [Weapon]=(5) OR [Weapon]=(4) OR [Weapon]=(3) OR [Weapon]=(2) OR [Weapon]=(1)),
+    CONSTRAINT [FK_Heroes_Artists_ArtistId] FOREIGN KEY ([ArtistId]) REFERENCES [dbo].[Artists] ([Id]) ON DELETE CASCADE
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_Heroes_ArtistId]
+    ON [dbo].[Heroes]([ArtistId] ASC);
+

@@ -15,7 +15,7 @@ namespace FEHub.Entity.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.0-preview.4.20220.10")
+                .HasAnnotation("ProductVersion", "5.0.0-preview.5.20278.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -65,8 +65,6 @@ namespace FEHub.Entity.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Accessories");
-
-                    b.HasCheckConstraint("CK_Accessories_AccessoryType_Enum_Constraint", "[AccessoryType] IN(1, 2, 3, 4)");
                 });
 
             modelBuilder.Entity("FEHub.Entity.Models.Artist", b =>
@@ -243,14 +241,6 @@ namespace FEHub.Entity.Migrations
                     b.HasIndex("ArtistId");
 
                     b.ToTable("Heroes");
-
-                    b.HasCheckConstraint("CK_Heroes_Color_Enum_Constraint", "[Color] IN(1, 2, 3, 4)");
-
-                    b.HasCheckConstraint("CK_Heroes_Gender_Enum_Constraint", "[Gender] IN(1, 2, 3)");
-
-                    b.HasCheckConstraint("CK_Heroes_MovementType_Enum_Constraint", "[MovementType] IN(1, 2, 3, 4)");
-
-                    b.HasCheckConstraint("CK_Heroes_Weapon_Enum_Constraint", "[Weapon] IN(1, 2, 3, 4, 5, 6, 7, 8, 9)");
                 });
 
             modelBuilder.Entity("FEHub.Entity.Models.HeroSkill", b =>
@@ -310,8 +300,6 @@ namespace FEHub.Entity.Migrations
                     b.HasIndex("VoiceActorId");
 
                     b.ToTable("HeroVoiceActors");
-
-                    b.HasCheckConstraint("CK_HeroVoiceActors_Language_Enum_Constraint", "[Language] IN(1, 2)");
                 });
 
             modelBuilder.Entity("FEHub.Entity.Models.Item", b =>
@@ -389,6 +377,9 @@ namespace FEHub.Entity.Migrations
                     b.Property<int?>("HitPointsModifier")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsAvailableAsSacredSeal")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsExclusive")
                         .HasColumnType("bit");
 
@@ -437,8 +428,6 @@ namespace FEHub.Entity.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Skills");
-
-                    b.HasCheckConstraint("CK_Skills_SkillType_Enum_Constraint", "[SkillType] IN(1, 2, 3, 4, 5, 6, 7)");
                 });
 
             modelBuilder.Entity("FEHub.Entity.Models.SkillMovementType", b =>
@@ -459,8 +448,6 @@ namespace FEHub.Entity.Migrations
                     b.HasIndex("SkillId");
 
                     b.ToTable("SkillMovementTypes");
-
-                    b.HasCheckConstraint("CK_SkillMovementTypes_MovementType_Enum_Constraint", "[MovementType] IN(1, 2, 3, 4)");
                 });
 
             modelBuilder.Entity("FEHub.Entity.Models.SkillWeaponEffectiveness", b =>
@@ -490,8 +477,6 @@ namespace FEHub.Entity.Migrations
                     b.HasIndex("SkillId");
 
                     b.ToTable("SkillWeaponEffectivenesses");
-
-                    b.HasCheckConstraint("CK_SkillWeaponEffectivenesses_WeaponEffectivenessType_Enum_Constraint", "[WeaponEffectivenessType] IN(1, 2, 3)");
                 });
 
             modelBuilder.Entity("FEHub.Entity.Models.SkillWeaponType", b =>
@@ -515,10 +500,6 @@ namespace FEHub.Entity.Migrations
                     b.HasIndex("SkillId");
 
                     b.ToTable("SkillWeaponTypes");
-
-                    b.HasCheckConstraint("CK_SkillWeaponTypes_Color_Enum_Constraint", "[Color] IN(1, 2, 3, 4)");
-
-                    b.HasCheckConstraint("CK_SkillWeaponTypes_Weapon_Enum_Constraint", "[Weapon] IN(1, 2, 3, 4, 5, 6, 7, 8, 9)");
                 });
 
             modelBuilder.Entity("FEHub.Entity.Models.VoiceActor", b =>

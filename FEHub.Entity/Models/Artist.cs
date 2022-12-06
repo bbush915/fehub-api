@@ -1,15 +1,12 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="Artist.cs">
-//     Copyright (c) 2020 by Bryan Bush. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 using FEHub.Entity.Interfaces;
+using FEHub.Entity.Models;
 using FEHub.Entity.Properties;
 
+using Bogus;
+using Bogus.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -20,9 +17,8 @@ namespace FEHub.Entity.Models
         Description = nameof(Resources.Artist_Description),
         ResourceType = typeof(Resources)
     )]
-    public class Artist : ITrackable
+    public sealed class Artist : ITrackable
     {
-        #region Properties
         [Display(
             Name = nameof(Resources.Artist_Id_Name),
             Description = nameof(Resources.Artist_Id_Description),
@@ -85,16 +81,12 @@ namespace FEHub.Entity.Models
             ResourceType = typeof(Resources)
         )]
         public string Company { get; set; }
-        #endregion
     }
 
     internal sealed class ArtistTypeConfiguration : IEntityTypeConfiguration<Artist>
     {
-        #region Fields
         private const string TABLE_NAME = "Artists";
-        #endregion
 
-        #region Methods
         public void Configure(EntityTypeBuilder<Artist> entityTypeBuilder)
         {
             entityTypeBuilder
@@ -124,6 +116,37 @@ namespace FEHub.Entity.Models
                 .Property(x => x.NameKanji)
                 .HasMaxLength(100);
         }
-        #endregion
+    }
+}
+
+namespace FEHub.Entity.Common.Helpers
+{
+    public static partial class FakeHelpers
+    {
+        public static Faker<Artist> Artist(
+            int? id = null,
+            DateTime? createdAt = null,
+            string createdBy = null,
+            DateTime? modifiedAt = null,
+            string modifiedBy = null,
+            int? version = null,
+            string name = null,
+            string nameKanji = Constants.Faker.NullableStringDefault,
+            string company = Constants.Faker.NullableStringDefault
+        )
+        {
+            var artistFaker = new Faker<Artist>()
+                .RuleFor(x => x.Id, (faker) => id ?? faker.Random.Int(1))
+                .RuleFor(x => x.CreatedAt, (faker) => createdAt ?? faker.Date.Past())
+                .RuleFor(x => x.CreatedBy, (faker) => createdBy ?? faker.Random.Utf16String())
+                .RuleFor(x => x.ModifiedAt, (faker) => modifiedAt ?? faker.Date.Past())
+                .RuleFor(x => x.ModifiedBy, (faker) => modifiedBy ?? faker.Random.Utf16String())
+                .RuleFor(x => x.Version, (faker) => version ?? faker.Random.Int(1))
+                .RuleFor(x => x.Name, (faker) => name ?? faker.Random.Utf16String())
+                .RuleFor(x => x.NameKanji, (faker) => (nameKanji == Constants.Faker.NullableStringDefault) ? faker.Random.Utf16String().OrNull(faker) : nameKanji)
+                .RuleFor(x => x.Company, (faker) => (company == Constants.Faker.NullableStringDefault) ? faker.Random.Utf16String().OrNull(faker) : company);
+
+            return artistFaker;
+        }
     }
 }

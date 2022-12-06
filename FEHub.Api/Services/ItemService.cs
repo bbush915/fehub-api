@@ -1,47 +1,36 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="ItemService.cs">
-//     Copyright (c) 2020 by Bryan Bush. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
+using FEHub.Api.Services.Interfaces;
 using FEHub.Entity;
 using FEHub.Entity.Models;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace FEHub.Api.Services
+namespace FEHub.Api.Services;
+
+public sealed class ItemService : IItemService
 {
-    internal sealed class ItemService
+    private readonly FehContext _dbContext;
+
+    public ItemService(FehContext dbContext)
     {
-        #region Fields
-        private readonly FehContext _dbContext;
-        #endregion
+        this._dbContext = dbContext;
+    }
 
-        #region Constructors
-        public ItemService(FehContext dbContext)
-        {
-            this._dbContext = dbContext;
-        }
-        #endregion
+    public Task<List<Item>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        return this._dbContext
+            .Items
+            .ToListAsync(cancellationToken);
+    }
 
-        #region Methods
-        public async Task<List<Item>> GetAllAsync()
-        {
-            return await this._dbContext
-                .Items
-                .ToListAsync();
-        }
-
-        public async Task<Item> GetByIdAsync(Guid id)
-        {
-            return await this._dbContext
-                .Items
-                .SingleOrDefaultAsync(x => x.Id == id);
-        }
-        #endregion
+    public Task<Item> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        return this._dbContext
+            .Items
+            .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 }

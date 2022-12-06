@@ -1,50 +1,58 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="GqlHeroVoiceActor.cs">
-//     Copyright (c) 2020 by Bryan Bush. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------------
-
-using FEHub.Api.Services;
-using FEHub.Entity;
+﻿using FEHub.Api.Services.Interfaces;
+using FEHub.Entity.Common.Helpers;
 using FEHub.Entity.Models;
 
 using GraphQL.DataLoader;
 using GraphQL.Types;
+using GraphQL.Utilities;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace FEHub.Api.GraphQL
+namespace FEHub.Api.GraphQL;
+
+internal sealed class GqlHeroVoiceActor : ObjectGraphType<HeroVoiceActor>
 {
-    internal sealed class GqlHeroVoiceActor : ObjectGraphType<HeroVoiceActor>
+    public GqlHeroVoiceActor(IDataLoaderContextAccessor accessor)
     {
-        #region Constructors
-        public GqlHeroVoiceActor(FehContextFactory dbContextFactory, IDataLoaderContextAccessor accessor)
-        {
-            this.Name = nameof(HeroVoiceActor);
+        this.Name = nameof(HeroVoiceActor);
+        this.Description = DisplayHelpers.GetDescription<HeroVoiceActor>();
 
-            this.Field(nameof(HeroVoiceActor.HeroId), x => x.HeroId);
-            this.Field(nameof(HeroVoiceActor.Id), x => x.Id);
-            this.Field(nameof(HeroVoiceActor.Language), x => (int)x.Language);
-            this.Field(nameof(HeroVoiceActor.Sort), x => x.Sort);
-            this.Field(nameof(HeroVoiceActor.VoiceActorId), x => x.VoiceActorId);
+        this
+            .Field(nameof(HeroVoiceActor.HeroId), x => x.HeroId)
+            .Description(DisplayHelpers.GetDescription<HeroVoiceActor>(nameof(HeroVoiceActor.HeroId)));
 
-            /* Data Loader */
+        this
+            .Field(nameof(HeroVoiceActor.Id), x => x.Id)
+            .Description(DisplayHelpers.GetDescription<HeroVoiceActor>(nameof(HeroVoiceActor.Id)));
 
-            this
-                .Field<GqlVoiceActor, VoiceActor>()
-                .Name(nameof(HeroVoiceActor.VoiceActor))
-                .ResolveAsync(
-                    (context) =>
-                    {
-                        var service = new VoiceActorService(dbContextFactory.CreateDbContext());
+        this
+            .Field(nameof(HeroVoiceActor.Language), x => (int)x.Language)
+            .Description(DisplayHelpers.GetDescription<HeroVoiceActor>(nameof(HeroVoiceActor.Language)));
 
-                        var loader = accessor.Context.GetOrAddBatchLoader<int, VoiceActor>(
-                            nameof(VoiceActorService.GetByIdsAsync),
-                            service.GetByIdsAsync
-                        );
+        this
+            .Field(nameof(HeroVoiceActor.Sort), x => x.Sort)
+            .Description(DisplayHelpers.GetDescription<HeroVoiceActor>(nameof(HeroVoiceActor.Sort)));
 
-                        return loader.LoadAsync(context.Source.VoiceActorId);
-                    }
-                );
-        }
-        #endregion
+        this
+            .Field(nameof(HeroVoiceActor.VoiceActorId), x => x.VoiceActorId)
+            .Description(DisplayHelpers.GetDescription<HeroVoiceActor>(nameof(HeroVoiceActor.VoiceActorId)));
+
+        /* Data Loader */
+
+        this
+            .Field<GqlVoiceActor, VoiceActor>(nameof(HeroVoiceActor.VoiceActor))
+            .Description(DisplayHelpers.GetDescription<HeroVoiceActor>(nameof(HeroVoiceActor.VoiceActor)))
+            .ResolveAsync(
+                (context) =>
+                {
+                    var voiceActorService = context.RequestServices.GetRequiredService<IVoiceActorService>();
+
+                    var dataLoader = accessor.Context.GetOrAddBatchLoader<int, VoiceActor>(
+                        $"{nameof(VoiceActor)}_{nameof(IVoiceActorService.GetByIdsAsync)}",
+                        voiceActorService.GetByIdsAsync
+                    );
+
+                    return dataLoader.LoadAsync(context.Source.VoiceActorId);
+                }
+            );
     }
 }

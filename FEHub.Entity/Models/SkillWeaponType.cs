@@ -1,15 +1,11 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="SkillWeaponType.cs">
-//     Copyright (c) 2020 by Bryan Bush. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 using FEHub.Entity.Common.Enumerations;
+using FEHub.Entity.Models;
 using FEHub.Entity.Properties;
 
+using Bogus;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -20,7 +16,7 @@ namespace FEHub.Entity.Models
         Description = nameof(Resources.SkillWeaponType_Description),
         ResourceType = typeof(Resources)
     )]
-    public class SkillWeaponType
+    public sealed class SkillWeaponType
     {
         [Display(
             Name = nameof(Resources.SkillWeaponType_Id_Name),
@@ -53,11 +49,8 @@ namespace FEHub.Entity.Models
 
     internal sealed class SkillWeaponTypeTypeConfiguration : IEntityTypeConfiguration<SkillWeaponType>
     {
-        #region Fields
         private const string TABLE_NAME = "SkillWeaponTypes";
-        #endregion
 
-        #region Methods
         public void Configure(EntityTypeBuilder<SkillWeaponType> entityTypeBuilder)
         {
             entityTypeBuilder
@@ -72,6 +65,27 @@ namespace FEHub.Entity.Models
                 .Property(x => x.Weapon)
                 .HasConversion<int>();
         }
-        #endregion
+    }
+}
+
+namespace FEHub.Entity.Common.Helpers
+{
+    public static partial class FakeHelpers
+    {
+        public static Faker<SkillWeaponType> SkillWeaponType(
+            int? id = null,
+            Guid? skillId = null,
+            Colors? color = null,
+            Weapons? weapon = null
+        )
+        {
+            var skillWeaponTypeFaker = new Faker<SkillWeaponType>()
+                .RuleFor(x => x.Id, (faker) => id ?? faker.Random.Int(1))
+                .RuleFor(x => x.SkillId, () => skillId ?? Guid.NewGuid())
+                .RuleFor(x => x.Color, (faker) => color ?? faker.PickRandom<Colors>())
+                .RuleFor(x => x.Weapon, (faker) => weapon ?? faker.PickRandom<Weapons>());
+
+            return skillWeaponTypeFaker;
+        }
     }
 }

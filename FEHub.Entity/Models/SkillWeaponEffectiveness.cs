@@ -1,15 +1,12 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="SkillWeaponEffectiveness.cs">
-//     Copyright (c) 2020 by Bryan Bush. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 using FEHub.Entity.Common.Enumerations;
+using FEHub.Entity.Models;
 using FEHub.Entity.Properties;
 
+using Bogus;
+using Bogus.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -20,7 +17,7 @@ namespace FEHub.Entity.Models
         Description = nameof(Resources.SkillWeaponEffectiveness_Description),
         ResourceType = typeof(Resources)
     )]
-    public class SkillWeaponEffectiveness
+    public sealed class SkillWeaponEffectiveness
     {
         [Display(
             Name = nameof(Resources.SkillWeaponEffectiveness_Id_Name),
@@ -65,13 +62,10 @@ namespace FEHub.Entity.Models
         public Weapons? Weapon { get; set; }
     }
 
-    internal sealed class SkillWeaponEffectivenessEffectivenessConfiguration : IEntityTypeConfiguration<SkillWeaponEffectiveness>
+    internal sealed class SkillWeaponEffectivenessTypeConfiguration : IEntityTypeConfiguration<SkillWeaponEffectiveness>
     {
-        #region Fields
         private const string TABLE_NAME = "SkillWeaponEffectivenesses";
-        #endregion
 
-        #region Methods
         public void Configure(EntityTypeBuilder<SkillWeaponEffectiveness> entityTypeBuilder)
         {
             entityTypeBuilder
@@ -94,6 +88,31 @@ namespace FEHub.Entity.Models
                 .Property(x => x.WeaponEffectivenessType)
                 .HasConversion<int>();
         }
-        #endregion
+    }
+}
+
+namespace FEHub.Entity.Common.Helpers
+{
+    public static partial class FakeHelpers
+    {
+        public static Faker<SkillWeaponEffectiveness> SkillWeaponEffectiveness(
+            int? id = null,
+            Guid? skillId = null,
+            WeaponEffectivenessTypes? weaponEffectivenessType = null,
+            DamageTypes? damageType = (DamageTypes)Constants.Faker.NullableIntDefault,
+            MovementTypes? movementType = (MovementTypes)Constants.Faker.NullableIntDefault,
+            Weapons? weapon = (Weapons)Constants.Faker.NullableIntDefault
+        )
+        {
+            var skillWeaponeffectivenessFaker = new Faker<SkillWeaponEffectiveness>()
+                .RuleFor(x => x.Id, (faker) => id ?? faker.Random.Int(1))
+                .RuleFor(x => x.SkillId, () => skillId ?? Guid.NewGuid())
+                .RuleFor(x => x.WeaponEffectivenessType, (faker) => weaponEffectivenessType ?? faker.PickRandom<WeaponEffectivenessTypes>())
+                .RuleFor(x => x.DamageType, (faker) => (damageType == (DamageTypes)Constants.Faker.NullableIntDefault) ? faker.PickRandom<DamageTypes>().OrNull(faker) : damageType)
+                .RuleFor(x => x.MovementType, (faker) => (movementType == (MovementTypes)Constants.Faker.NullableIntDefault) ? faker.PickRandom<MovementTypes>().OrNull(faker) : movementType)
+                .RuleFor(x => x.Weapon, (faker) => (weapon == (Weapons)Constants.Faker.NullableIntDefault) ? faker.PickRandom<Weapons>().OrNull(faker) : weapon);
+
+            return skillWeaponeffectivenessFaker;
+        }
     }
 }

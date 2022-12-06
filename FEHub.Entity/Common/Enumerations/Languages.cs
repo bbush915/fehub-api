@@ -1,32 +1,25 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="Languages.cs">
-//     Copyright (c) 2020 by Bryan Bush. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------------
-
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 using FEHub.Entity.Properties;
 
-namespace FEHub.Entity.Common.Enumerations
-{
-    /// <summary>
-    ///     Defines constants representing the different languages.
-    /// </summary>
-    public enum Languages
-    {
-        [Display(
-            Name = nameof(Resources.Language_English_Name),
-            Description = nameof(Resources.Language_English_Description),
-            ResourceType = typeof(Resources)
-        )]
-        ENGLISH = 1,
+namespace FEHub.Entity.Common.Enumerations;
 
-        [Display(
-            Name = nameof(Resources.Language_Japanese_Name),
-            Description = nameof(Resources.Language_Japanese_Description),
-            ResourceType = typeof(Resources)
-        )]
-        JAPANESE = 2,
-    };
-}
+/// <summary>
+///     Defines constants representing the different languages.
+/// </summary>
+public enum Languages
+{
+    [Display(
+        Name = nameof(Resources.Language_English_Name),
+        Description = nameof(Resources.Language_English_Description),
+        ResourceType = typeof(Resources)
+    )]
+    ENGLISH = 1,
+
+    [Display(
+        Name = nameof(Resources.Language_Japanese_Name),
+        Description = nameof(Resources.Language_Japanese_Description),
+        ResourceType = typeof(Resources)
+    )]
+    JAPANESE = 2,
+};

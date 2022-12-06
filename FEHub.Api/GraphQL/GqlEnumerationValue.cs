@@ -1,27 +1,19 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="GqlEnumerationValue.cs">
-//     Copyright (c) 2020 by Bryan Bush. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------------
-
-using FEHub.Api.Services.Common;
+﻿using FEHub.Api.Models;
 
 using GraphQL.Types;
 
-namespace FEHub.Api.GraphQL
-{
-    internal sealed class GqlEnumerationValue : ObjectGraphType<EnumerationValue>
-    {
-        #region Constructors
-        public GqlEnumerationValue()
-        {
-            this.Name = nameof(EnumerationValue);
+namespace FEHub.Api.GraphQL;
 
-            this.Field(nameof(EnumerationValue.Description), x => x.Description);
-            this.Field(nameof(EnumerationValue.DisplayValue), x => x.DisplayValue);
-            this.Field(nameof(EnumerationValue.Name), x => x.Name);
-            this.Field(nameof(EnumerationValue.Value), x => x.Value);
-        }
-        #endregion
+internal sealed class GqlEnumerationValue : ObjectGraphType<EnumerationValue>
+{
+    public GqlEnumerationValue()
+    {
+        this.Name = nameof(EnumerationValue);
+        this.Description = "An enumerable value.";
+
+        this.Field(nameof(EnumerationValue.Description), x => x.Description);
+        this.Field(nameof(EnumerationValue.DisplayValue), x => x.DisplayValue);
+        this.Field(nameof(EnumerationValue.Name), x => x.Name);
+        this.Field(nameof(EnumerationValue.Value), x => x.Value);
     }
 }

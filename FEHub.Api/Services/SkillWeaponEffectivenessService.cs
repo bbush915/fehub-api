@@ -1,45 +1,33 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="SkillWeaponEffectivenessService.cs">
-//     Copyright (c) 2020 by Bryan Bush. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using FEHub.Api.Services.Interfaces;
 using FEHub.Entity;
 using FEHub.Entity.Models;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace FEHub.Api.Services
+namespace FEHub.Api.Services;
+
+public sealed class SkillWeaponEffectivenessService : ISkillWeaponEffectivenessService
 {
-    internal sealed class SkillWeaponEffectivenessService
+    private readonly FehContext _dbContext;
+
+    public SkillWeaponEffectivenessService(FehContext dbContext)
     {
-        #region Fields
-        private readonly FehContext _dbContext;
-        #endregion
+        this._dbContext = dbContext;
+    }
 
-        #region Constructors
-        public SkillWeaponEffectivenessService(FehContext dbContext)
-        {
-            this._dbContext = dbContext;
-        }
-        #endregion
-
-        #region Methods
-        public Task<ILookup<Guid, SkillWeaponEffectiveness>> GetBySkillIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken)
-        {
-            return Task.FromResult(
-                this._dbContext
-                    .SkillWeaponEffectivenesses
-                    .Where(x => ids.Contains(x.SkillId))
-                    .ToLookup(x => x.SkillId)
-            );
-        }
-        #endregion
+    public Task<ILookup<Guid, SkillWeaponEffectiveness>> GetBySkillIdsAsync(IEnumerable<Guid> skillIds, CancellationToken cancellationToken = default)
+    {
+        return Task.FromResult(
+            this._dbContext
+                .SkillWeaponEffectivenesses
+                .Where(x => skillIds.Contains(x.SkillId))
+                .ToLookup(x => x.SkillId)
+        );
     }
 }

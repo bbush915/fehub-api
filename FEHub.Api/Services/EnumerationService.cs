@@ -1,28 +1,22 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="EnumerationService.cs">
-//     Copyright (c) 2020 by Bryan Bush. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using FEHub.Api.Services.Common;
+using FEHub.Api.Models;
+using FEHub.Api.Services.Interfaces;
 
-namespace FEHub.Api.Services
+namespace FEHub.Api.Services;
+
+public sealed class EnumerationService<T> : IEnumerationService<T>
 {
-    internal sealed class EnumerationService<T>
+    public List<EnumerationValue> GetAll()
     {
-        #region Methods
-        public List<EnumerationValue> GetAll()
-        {
-            return Enum
-                .GetValues(typeof(T))
-                .Cast<Enum>()
-                .Select(x => new EnumerationValue(x))
-                .ToList();
-        }
-        #endregion
+        var enumerationValues = Enum
+            .GetValues(typeof(T))
+            .Cast<Enum>()
+            .Select(x => new EnumerationValue(x))
+            .ToList();
+
+        return enumerationValues;
     }
 }

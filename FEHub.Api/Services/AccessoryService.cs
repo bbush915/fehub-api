@@ -1,47 +1,36 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="AccessoryService.cs">
-//     Copyright (c) 2020 by Bryan Bush. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
+using FEHub.Api.Services.Interfaces;
 using FEHub.Entity;
 using FEHub.Entity.Models;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace FEHub.Api.Services
+namespace FEHub.Api.Services;
+
+public sealed class AccessoryService : IAccessoryService
 {
-    internal sealed class AccessoryService
+    private readonly FehContext _dbContext;
+
+    public AccessoryService(FehContext dbContext)
     {
-        #region Fields
-        private readonly FehContext _dbContext;
-        #endregion
+        this._dbContext = dbContext;
+    }
 
-        #region Constructors
-        public AccessoryService(FehContext dbContext)
-        {
-            this._dbContext = dbContext;
-        }
-        #endregion
+    public Task<List<Accessory>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        return this._dbContext
+            .Accessories
+            .ToListAsync(cancellationToken);
+    }
 
-        #region Methods
-        public async Task<List<Accessory>> GetAllAsync()
-        {
-            return await this._dbContext
-                .Accessories
-                .ToListAsync();
-        }
-
-        public async Task<Accessory> GetByIdAsync(Guid id)
-        {
-            return await this._dbContext
-                .Accessories
-                .SingleOrDefaultAsync(x => x.Id == id);
-        }
-        #endregion
+    public Task<Accessory> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        return this._dbContext
+            .Accessories
+            .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 }

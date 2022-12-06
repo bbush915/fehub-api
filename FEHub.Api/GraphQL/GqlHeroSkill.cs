@@ -1,53 +1,64 @@
-﻿//-----------------------------------------------------------------------------
-// <copyright file="GqlHeroSkill.cs">
-//     Copyright (c) 2020 by Bryan Bush. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------------
+﻿using System;
 
-using System;
-
-using FEHub.Api.Services;
-using FEHub.Entity;
+using FEHub.Api.Services.Interfaces;
+using FEHub.Entity.Common.Helpers;
 using FEHub.Entity.Models;
 
 using GraphQL.DataLoader;
 using GraphQL.Types;
+using GraphQL.Utilities;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace FEHub.Api.GraphQL
+namespace FEHub.Api.GraphQL;
+
+internal sealed class GqlHeroSkill : ObjectGraphType<HeroSkill>
 {
-    internal sealed class GqlHeroSkill : ObjectGraphType<HeroSkill>
+    public GqlHeroSkill(IDataLoaderContextAccessor accessor)
     {
-        #region Constructors
-        public GqlHeroSkill(FehContextFactory dbContextFactory, IDataLoaderContextAccessor accessor)
-        {
-            this.Name = nameof(HeroSkill);
+        this.Name = nameof(HeroSkill);
+        this.Description = DisplayHelpers.GetDescription<HeroSkill>();
 
-            this.Field(nameof(HeroSkill.DefaultRarity), x => x.DefaultRarity, nullable: true);
-            this.Field(nameof(HeroSkill.HeroId), x => x.HeroId);
-            this.Field(nameof(HeroSkill.Id), x => x.Id);
-            this.Field(nameof(HeroSkill.SkillId), x => x.SkillId);
-            this.Field(nameof(HeroSkill.SkillPosition), x => x.SkillPosition);
-            this.Field(nameof(HeroSkill.UnlockRarity), x => x.UnlockRarity);
+        this
+            .Field(nameof(HeroSkill.DefaultRarity), x => x.DefaultRarity, nullable: true)
+            .Description(DisplayHelpers.GetDescription<HeroSkill>(nameof(HeroSkill.DefaultRarity)));
 
-            /* Data Loader */
+        this
+            .Field(nameof(HeroSkill.HeroId), x => x.HeroId)
+            .Description(DisplayHelpers.GetDescription<HeroSkill>(nameof(HeroSkill.HeroId)));
 
-            this
-                .Field<GqlSkill, Skill>()
-                .Name(nameof(HeroSkill.Skill))
-                .ResolveAsync(
-                    (context) =>
-                    {
-                        var service = new SkillService(dbContextFactory.CreateDbContext());
+        this
+            .Field(nameof(HeroSkill.Id), x => x.Id)
+            .Description(DisplayHelpers.GetDescription<HeroSkill>(nameof(HeroSkill.Id)));
 
-                        var loader = accessor.Context.GetOrAddBatchLoader<Guid, Skill>(
-                            nameof(SkillService.GetByIdsAsync),
-                            service.GetByIdsAsync
-                        );
+        this
+            .Field(nameof(HeroSkill.SkillId), x => x.SkillId)
+            .Description(DisplayHelpers.GetDescription<HeroSkill>(nameof(HeroSkill.SkillId)));
 
-                        return loader.LoadAsync(context.Source.SkillId);
-                    }
-                );
-        }
-        #endregion
+        this
+            .Field(nameof(HeroSkill.SkillPosition), x => x.SkillPosition)
+            .Description(DisplayHelpers.GetDescription<HeroSkill>(nameof(HeroSkill.SkillPosition)));
+
+        this
+            .Field(nameof(HeroSkill.UnlockRarity), x => x.UnlockRarity)
+            .Description(DisplayHelpers.GetDescription<HeroSkill>(nameof(HeroSkill.UnlockRarity)));
+
+        /* Data Loader */
+
+        this
+            .Field<GqlSkill, Skill>(nameof(HeroSkill.Skill))
+            .Description(DisplayHelpers.GetDescription<HeroSkill>(nameof(HeroSkill.Skill)))
+            .ResolveAsync(
+                (context) =>
+                {
+                    var skillService = context.RequestServices.GetRequiredService<ISkillService>();
+
+                    var dataLoader = accessor.Context.GetOrAddBatchLoader<Guid, Skill>(
+                        $"{nameof(Skill)}_{nameof(ISkillService.GetByIdsAsync)}",
+                        skillService.GetByIdsAsync
+                    );
+
+                    return dataLoader.LoadAsync(context.Source.SkillId);
+                }
+            );
     }
 }
