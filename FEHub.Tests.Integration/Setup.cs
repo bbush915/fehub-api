@@ -14,7 +14,7 @@ namespace FEHub.Tests.Integration;
 public sealed class Setup
 {
     [AssemblyInitialize]
-    public static void BeforeAllAsync(TestContext _)
+    public static void BeforeAll(TestContext _)
     {
         // NOTE - Load configuration.
 
@@ -43,12 +43,12 @@ public sealed class Setup
     }
 
     [AssemblyCleanup]
-    public async static Task AfterAllAsync()
+    public static void AfterAll()
     {
         // NOTE - Delete database.
 
         using var dbContext = Globals.CreateContext();
 
-        await dbContext.Database.EnsureDeletedAsync();
+        dbContext.Database.EnsureDeleted();
     }
 }
